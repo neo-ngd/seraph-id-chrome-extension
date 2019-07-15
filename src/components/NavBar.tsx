@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
-import logo from "../assets/logo.png"
+import logo from "../assets/fingerprint.svg"
 
 const useStyles = makeStyles({
   root: {
@@ -12,9 +12,7 @@ const useStyles = makeStyles({
   barStyle:{
     background:"black"
   },
-  imageStyle:{
-    height:"7vh"
-  }
+
 });
 
 export default function NavBar() {
@@ -28,7 +26,7 @@ export default function NavBar() {
         <Grid item xs>
         </Grid>
         <Grid item xs>
-        <img className={classes.imageStyle} src={logo} alt="Logo" />
+        <img  src={logo} alt="Logo" />
         </Grid>
         <Grid item xs>
         </Grid>
