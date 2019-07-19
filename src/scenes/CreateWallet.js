@@ -1,6 +1,18 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import BaseButton from "../components/Buttons/BaseButton";
+import { setWallet } from "../utils/storage";
+import { createWallet } from "../utils/seraphUtils";
 
 export default function CreateWallet() {
-  return <Button variant="contained">Create a Wallet</Button>;
+  async function createAndSetWallet() {
+    setWallet(createWallet());
+  }
+
+  return (
+    <BaseButton
+      handleClick={createAndSetWallet}
+      text={"Create a Wallet"}
+      variant="contained"
+    />
+  );
 }

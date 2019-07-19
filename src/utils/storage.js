@@ -1,5 +1,5 @@
 export function checkWallet() {
-  if (localStorage.getItem("wallet") === null) {
+  if (localStorage.getItem("wallet") === "null") {
     return false;
   } else return true;
 }
