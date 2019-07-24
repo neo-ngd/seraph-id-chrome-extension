@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1.50001in"
+   height="1.5in"
+   viewBox="0 0 38.100252 38.1"
+   version="1.1"
+   id="svg4172"
+   inkscape:version="0.92.4 (33fec40, 2019-01-16)"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs4166">
+    <filter
+       inkscape:label="Black Light"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Light areas turn to black"
+       style="color-interpolation-filters:sRGB"
+       id="filter4126">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="result2"
+         id="feColorMatrix4118" />
+      <feComposite
+         k4="0"
+         k2="0"
+         k1="0"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         in="result2"
+         k3="2"
+         result="result4"
+         id="feComposite4120" />
+      <feBlend
+         in="result4"
+         mode="multiply"
+         result="result3"
+         in2="result2"
+         id="feBlend4122" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         in="result3"
+         id="feComposite4124" />
+    </filter>
+    <filter
+       inkscape:label="Black Light"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Light areas turn to black"
+       style="color-interpolation-filters:sRGB"
+       id="filter4116">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="result2"
+         id="feColorMatrix4108" />
+      <feComposite
+         k4="0"
+         k2="0"
+         k1="0"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         in="result2"
+         k3="2"
+         result="result4"
+         id="feComposite4110" />
+      <feBlend
+         in="result4"
+         mode="multiply"
+         result="result3"
+         in2="result2"
+         id="feBlend4112" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         in="result3"
+         id="feComposite4114" />
+    </filter>
+    <filter
+       inkscape:label="Black Light"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Light areas turn to black"
+       style="color-interpolation-filters:sRGB"
+       id="filter4106">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="result2"
+         id="feColorMatrix4098" />
+      <feComposite
+         k4="0"
+         k2="0"
+         k1="0"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         in="result2"
+         k3="2"
+         result="result4"
+         id="feComposite4100" />
+      <feBlend
+         in="result4"
+         mode="multiply"
+         result="result3"
+         in2="result2"
+         id="feBlend4102" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         in="result3"
+         id="feComposite4104" />
+    </filter>
+    <filter
+       inkscape:label="Black Light"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Light areas turn to black"
+       style="color-interpolation-filters:sRGB"
+       id="filter4096">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="result2"
+         id="feColorMatrix4088" />
+      <feComposite
+         k4="0"
+         k2="0"
+         k1="0"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         in="result2"
+         k3="2"
+         result="result4"
+         id="feComposite4090" />
+      <feBlend
+         in="result4"
+         mode="multiply"
+         result="result3"
+         in2="result2"
+         id="feBlend4092" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         in="result3"
+         id="feComposite4094" />
+    </filter>
+    <filter
+       inkscape:label="Black Light"
+       inkscape:menu="Color"
+       inkscape:menu-tooltip="Light areas turn to black"
+       style="color-interpolation-filters:sRGB"
+       id="filter4086">
+      <feColorMatrix
+         type="luminanceToAlpha"
+         result="result2"
+         id="feColorMatrix4078" />
+      <feComposite
+         k4="0"
+         k2="0"
+         k1="0"
+         in2="SourceGraphic"
+         operator="arithmetic"
+         in="result2"
+         k3="2"
+         result="result4"
+         id="feComposite4080" />
+      <feBlend
+         in="result4"
+         mode="multiply"
+         result="result3"
+         in2="result2"
+         id="feBlend4082" />
+      <feComposite
+         in2="SourceGraphic"
+         operator="in"
+         in="result3"
+         id="feComposite4084" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="400"
+     inkscape:cy="560"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1853"
+     inkscape:window-height="1040"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="false"
+     inkscape:snap-page="false"
+     units="in" />
+  <metadata
+     id="metadata4169">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-258.9)">
+    <path
+       class="cls-2"
+       d="m 7.0854996,29.315 a 1.42,1.42 0 0 1 -1.35,-1.81 33.89,33.89 0 0 1 2.5,-6.21 35.2,35.2 0 0 1 3.7200004,-5.72 36.63,36.63 0 0 1 4.75,-4.88 35.12,35.12 0 0 1 5.56,-3.8 32.94,32.94 0 0 1 6.16,-2.64 34.81,34.81 0 0 1 6.68,-1.38 l 3.91,-0.21 a 34.6,34.6 0 0 1 23,8.8 1.4,1.4 0 0 1 -0.94,2.45 1.37,1.37 0 0 1 -0.93,-0.36 c -0.48,-0.43 -1,-0.82 -1.48,-1.22 a 31.46,31.46 0 0 0 -19.69,-6.86 l -3.41,0.19 a 33,33 0 0 0 -6.25,1.3 32.06,32.06 0 0 0 -5.66,2.43 31,31 0 0 0 -5.17,3.48 30.07,30.07 0 0 0 -4.38,4.49 30.19,30.19 0 0 0 -5.0600004,9.06 c -0.24,0.63 -0.48,1.27 -0.66,1.9 a 1.38,1.38 0 0 1 -1.3,0.99 z"
+       id="path260"
+       style="fill:#ffffff;filter:url(#filter4086)"
+       inkscape:connector-curvature="0"
+       transform="matrix(0.26458333,0,0,0.26458333,8.3052493,264.69334)" />
+    <path
+       class="cls-2"
+       d="m 71.8055,67.734995 a 1.41,1.41 0 0 1 -1.19,-1.5 c 0.3,-4.07 0.49,-8.199995 0.56,-12.629995 0,-3.48 0,-6.86 -0.1,-10.06 -0.07,-2.4 -0.19,-4.7 -0.35,-6.84 -0.13,-1.71 -0.24,-2.75 -0.29,-3.09 a 1.4,1.4 0 0 1 1.25,-1.51 h 0.16 a 1.47,1.47 0 0 1 1.39,1.25 c 0.05,0.38 0.15,1.44 0.28,3.15 0.13,1.71 0.28,4 0.37,6.95 0.12,3.18 0.15,6.6 0.09,10.19 -0.06,4.17 -0.25,8.479995 -0.55,12.809995 a 1.42,1.42 0 0 1 -1.41,1.29 z"
+       id="path262"
+       style="fill:#ffffff;filter:url(#filter4096)"
+       inkscape:connector-curvature="0"
+       transform="matrix(0.26458333,0,0,0.26458333,8.3052493,264.69334)" />
+    <path
+       class="cls-2"
+       d="m 48.6055,84.294995 h -0.28 a 1.42,1.42 0 0 1 -1.13,-1.59 c 0.31,-2 0.59,-4.31 0.86,-6.95 0.36,-3.61 0.63,-7.3 0.81,-11 0.22,-4.75 0.3,-9.809995 0.26,-14.999995 0,-3.22 -0.11,-6.41 -0.29,-9.49 -0.12,-1.94 -0.25,-3.27 -0.31,-3.85 v -0.23 a 9.42,9.42 0 0 0 -1.19,-3.71 9.66,9.66 0 0 0 -5.66,-4.52 9.35,9.35 0 0 0 -2.71,-0.4 10.14,10.14 0 0 0 -1.1,0.06 9.44,9.44 0 0 0 -3.66,1.18 9.64,9.64 0 0 0 -4.51,5.65 9.43,9.43 0 0 0 -0.33,3.81 v 0.17 c 0.05,0.51 0.15,1.63 0.24,3.31 0.17,2.57 0.26,5.75 0.27,9 0,4.31 -0.15,8.71 -0.47,13.079995 -0.25,3.61 -0.64,7.35 -1.16,11.12 -0.21,1.59 -0.46,3.18 -0.72,4.75 v 0.14 a 1.42,1.42 0 0 1 -1.34,1.08 h -0.24 a 1.44,1.44 0 0 1 -0.93,-0.57 1.39,1.39 0 0 1 -0.24,-1 c 0.22,-1.37 0.44,-2.74 0.63,-4.11 0.52,-3.66 0.94,-7.55 1.23,-11.54 0.29,-3.989995 0.45,-8.329995 0.45,-12.899995 0,-3 -0.09,-6 -0.25,-8.78 -0.11,-1.91 -0.23,-3.06 -0.26,-3.33 a 12.4,12.4 0 0 1 0.44,-5 12.53,12.53 0 0 1 2.21,-4.23 12.29,12.29 0 0 1 3.64,-3.07 12.58,12.58 0 0 1 4.71,-1.51 12.81,12.81 0 0 1 1.39,-0.08 12.4,12.4 0 0 1 7.75,2.72 12.69,12.69 0 0 1 3.11,3.66 12.06,12.06 0 0 1 1.48,4.68 c 0,0.09 0.2,1.58 0.35,4.27 0.13,2 0.29,5.29 0.32,9.69 0,5.52 -0.07,10.479995 -0.27,15.139995 -0.18,3.67 -0.44,7.28 -0.77,10.72 -0.22,2.14 -0.53,4.93 -0.93,7.49 a 1.4,1.4 0 0 1 -1.4,1.14 z"
+       id="path264"
+       style="fill:#ffffff;filter:url(#filter4106)"
+       inkscape:connector-curvature="0"
+       transform="matrix(0.26458333,0,0,0.26458333,8.3052493,264.69334)" />
+    <path
+       class="cls-2"
+       d="m 46.8655,98.574995 a 25,25 0 0 1 -2.51,-0.14 c -5.8,-1.12 -7.88,-5.91 -8.58,-9.73 a 25,25 0 0 1 -0.17,-7.63 v -0.11 a 0.62,0.62 0 0 1 0,-0.13 v 0 c 0.18,-1.39 0.39,-3.28 0.62,-5.46 0.3,-2.74 0.62,-5.92 0.9,-9.2 0.64,-7.069995 1,-12.629995 1,-16.069995 0,-4.15 -0.17,-7.4 -0.3,-9.4 -0.11,-1.66 -0.21,-2.75 -0.25,-3.18 v -0.38 a 1.39,1.39 0 0 1 1.25,-1.39 v 0 a 1.45,1.45 0 0 1 1.54,1.24 c 0,0 0.13,1.28 0.28,3.53 0.19,3.17 0.29,6.3 0.31,9.55 0,4.62 -0.15,9.36 -0.48,14.119995 -0.26,3.6 -0.65,7.31 -1.13,11 -0.25,2 -0.55,4 -0.9,6.1 v 0.12 0.13 0 c 0,0 0,0 0,0.06 a 23,23 0 0 0 0.17,6.58 c 0.79,4.28 2.88,6.8 6.22,7.46 a 17.72,17.72 0 0 0 2.14,0.14 c 4.54,0 6.59,-2 7.74,-3.48 2.22,-2.89 3.47,-7.64 3.9,-14.88 v -0.4 l 0.07,-1.21 c 0.15,-1.3 0.3,-2.61 0.42,-3.88 0.12,-1.27 0.26,-2.63 0.37,-3.93 0.22,-2.62 0.39,-5.26 0.52,-7.85 0.18,-4.059995 0.24,-8.209995 0.18,-12.709995 0,-2.92 -0.15,-5.79 -0.34,-8.76 -0.14,-2.11 -0.27,-3.44 -0.32,-3.81 a 20.85,20.85 0 0 0 -2.21,-7.3 20.53,20.53 0 0 0 -10.82,-9.7 19.61,19.61 0 0 0 -5.11,-1.25 22.39,22.39 0 0 0 -2.4,-0.15 l -2.21,0.12 a 21.74,21.74 0 0 0 -4.07,0.84 21.33,21.33 0 0 0 -3.7,1.58 21.56,21.56 0 0 0 -2.92,2 l -0.36,0.26 a 20.87,20.87 0 0 0 -2.9,3 22.61,22.61 0 0 0 -2.33,3.38 21.06,21.06 0 0 0 -1.48,3.75 20.42,20.42 0 0 0 -0.74,3.94 20.9,20.9 0 0 0 0.05,4 2.53,2.53 0 0 0 0,0.38 c 0,0.48 0.11,1.4 0.18,2.63 0.1,1.63 0.21,4.27 0.23,7.63 0,3.88 -0.11,7.55 -0.34,11.199995 -0.27,4.46 -0.73,8.94 -1.36,13.31 a 2,2 0 0 0 0,0.33 1.46,1.46 0 0 1 -1.42,1.21 h -0.12 a 1.37,1.37 0 0 1 -0.91,-0.55 1.43,1.43 0 0 1 -0.26,-1 c 0.65,-4.47 1.11,-9 1.37,-13.43 0.23,-3.479995 0.33,-6.999995 0.33,-10.999995 0,-3.49 -0.13,-6 -0.22,-7.5 -0.06,-1.3 -0.15,-2.47 -0.2,-2.82 a 24.58,24.58 0 0 1 0,-4.62 24,24 0 0 1 0.84,-4.48 23.4,23.4 0 0 1 1.7,-4.25 2.19,2.19 0 0 1 0.11,-0.19 c 0.08,-0.13 0.16,-0.26 0.23,-0.39 a 23,23 0 0 1 5.42,-6.61 23.33,23.33 0 0 1 8,-4.4 23.05,23.05 0 0 1 4.53,-1 l 1.37,-0.12 h 1.27 a 23.45,23.45 0 0 1 8.42,1.59 24.05,24.05 0 0 1 2.91,1.39 23.59,23.59 0 0 1 4.23,3 23.1,23.1 0 0 1 5.16,6.63 23.73,23.73 0 0 1 2.52,8.29 v 0.33 c 0.06,0.61 0.18,1.85 0.3,3.6 0.19,3 0.3,5.92 0.35,8.91 0.06,4.46 0,8.67 -0.21,12.849995 -0.25,5.3 -0.69,10.63 -1.32,15.87 -0.35,8.52 -1.84,14.32 -4.56,17.87 -2.38,3.08 -5.63,4.57 -10,4.57 z"
+       id="path266"
+       style="fill:#ffffff;filter:url(#filter4116)"
+       inkscape:connector-curvature="0"
+       transform="matrix(0.26458333,0,0,0.26458333,8.3052493,264.69334)" />
+    <path
+       class="cls-2"
+       d="m 5.1154996,63.014995 a 1.4,1.4 0 0 1 -1.31,-1.44 l 0.64,-20.329995 a 1.44,1.44 0 0 1 1.46,-1.36 1.4,1.4 0 0 1 1.34,1.44 l -0.64,20.329995 a 1.38,1.38 0 0 1 -1.39,1.36 z"
+       id="path268"
+       style="fill:#ffffff;filter:url(#filter4126)"
+       inkscape:connector-curvature="0"
+       transform="matrix(0.26458333,0,0,0.26458333,8.3052493,264.69334)" />
+    <rect
+       id="rect4295"
+       width="2.2678571"
+       height="13.607142"
+       x="57.452377"
+       y="139.7619"
+       style="stroke-width:0.26458332" />
+  </g>
+</svg>
