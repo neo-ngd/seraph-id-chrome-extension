@@ -1,28 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+var elt = document.createElement('script');
+elt.innerHTML = 'window.foo = {bar:function(){/*whatever*/}};';
+document.head.appendChild(elt);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    document.addEventListener('click', () => {
-      this.props.dispatch({
-        type: 'ADD_COUNT',
-      });
-    });
-  }
-
-  render() {
-    return <div>Count: {this.props.count}</div>;
-  }
+function App() {
+  return <div>Count: </div>;
 }
 
-const mapStateToProps = (state) => {
-  return {
-    count: state.count,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;
