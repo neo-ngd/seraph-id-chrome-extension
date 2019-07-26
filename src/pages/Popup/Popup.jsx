@@ -5,22 +5,18 @@ import { connect } from 'react-redux';
 
 import './Popup.css';
 
-class Popup extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
-        Click Count: {this.props.count}
-        <CreateWallet></CreateWallet>
-      </div>
-    );
-  }
+function Popup({ wallet }) {
+  console.log(wallet);
+  return (
+    <div>
+      <NavBar />
+      {wallet === null ? <CreateWallet></CreateWallet> : wallet.name}
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => {
-  return {
-    count: state.count,
-  };
+  return { wallet: state.wallet };
 };
 
 export default connect(mapStateToProps)(Popup);
