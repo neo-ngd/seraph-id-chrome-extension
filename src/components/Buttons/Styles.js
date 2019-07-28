@@ -8,6 +8,5 @@ export const useStyles = makeStyles({
     boxShadow: '0 0.5px 2px 0.5px rgb(88,191,0)',
     color: 'white',
     height: 48,
-    padding: '0 30px',
   },
 });

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   barStyle: {
-    background: 'black',
+    background: '303030',
   },
 });
 

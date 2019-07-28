@@ -1,20 +1,22 @@
 import React from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
 import { connect } from 'react-redux';
-import { createWallet } from '../utils/seraph';
+import { createWallet, createDid } from '../utils/seraph';
 
 function CreateWallet({ dispatch }) {
-  function setWallet() {
-    console.log('clicked');
-
+  function createAndSetWallet() {
     const wallet = createWallet();
-    console.log(wallet);
+    createDid(wallet);
+    setWallet(wallet);
+  }
+
+  function setWallet(wallet) {
     dispatch({ type: 'SET_WALLET', wallet });
   }
 
   return (
     <BaseButton
-      handleClick={setWallet}
+      handleClick={createAndSetWallet}
       text={'Create a Wallet'}
       variant="contained"
     />
