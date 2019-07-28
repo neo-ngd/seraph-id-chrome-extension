@@ -26,13 +26,7 @@ Visit the [Seraph ID](http://www.seraphid.io/) official web page to learn more a
 
 
 ```
-yarn
-```
-
-## Run the application locally
-
-```
-yarn start
+npm i 
 ```
 
 # How to import the extention to chrome
@@ -40,8 +34,7 @@ yarn start
 ## Build the project
 
 ```
-yarn build
-```
+npm start```
 
 ## Import it in Chrome
 
