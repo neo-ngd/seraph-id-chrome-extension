@@ -1,6 +1,6 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { useStyles } from "./Styles";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import { useStyles } from './Styles';
 
 export default function BaseButton({ handleClick, text }) {
   const classes = useStyles();
