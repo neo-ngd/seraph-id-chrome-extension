@@ -19,10 +19,11 @@ function Popup({ wallet }) {
         <WalletInfo
           name={wallet.name}
           address={wallet.accounts[0].label}
+          claims={wallet.accounts[0].claims}
         ></WalletInfo>
       ) : (
-        <CreateWallet />
-      )}
+          <CreateWallet />
+        )}
     </div>
   );
 }

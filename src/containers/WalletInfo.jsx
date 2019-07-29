@@ -3,8 +3,18 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import CopyButton from '../components/Buttons/CopyButton';
+import Claim from '../components/Cards/Claim';
 
-function Landing({ name, address }) {
+function Landing({ name, address, claims }) {
+
+  function showClaimList() {
+    var claimsArr = Object.entries(claims)
+    console.log(claims)
+    let list = claimsArr.map(claim => <Claim id={claim[1].id} schema={claim[1].schema} ></Claim >)
+    return list
+  }
+
+
   return (
     <React.Fragment>
       <CopyButton textToCopy={address}>
@@ -20,6 +30,13 @@ function Landing({ name, address }) {
         </Grid>
       </CopyButton>
       <Divider />
+      <Typography variant="h6" display="block" gutterBottom>
+        Claims
+      </Typography>
+
+      {showClaimList()}
+
+
     </React.Fragment>
   );
 }
