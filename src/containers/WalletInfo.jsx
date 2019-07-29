@@ -14,7 +14,6 @@ function Landing({ name, address, claims }) {
     return list
   }
 
-
   return (
     <React.Fragment>
       <CopyButton textToCopy={address}>

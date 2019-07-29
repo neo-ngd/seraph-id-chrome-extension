@@ -6,8 +6,34 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 
+
 function App() {
+
+  document.addEventListener('handleClaim', function (e) {
+    handleClickOpen()
+  });
+
+  function customConsole() {
+    window.seraphID = {
+      sendClaim: function () {
+        var data = {
+          any: 'JSON-ifiable data',
+          meaning: 'no DOM elements or classes/functions',
+        };
+
+        document.dispatchEvent(new CustomEvent('handleClaim', { detail: data }));
+      },
+      askClaim:console.log("claim asked")
+    }
+  }
+
+  var script = document.createElement('script'),
+    code = document.createTextNode('(' + customConsole + ')();');
+  script.appendChild(code);
+  (document.body || document.head || document.documentElement).appendChild(script);
+
   const [open, setOpen] = React.useState(false);
+  const [claim, setClaim] = React.useState("");
 
   function handleClickOpen() {
     setOpen(true);
