@@ -7,14 +7,14 @@ function CreateWallet() {
   const dispatch = useDispatch()
 
   function createAndSetWallet() {
-    const wallet = createWallet();
-
+    const walletName = { name: 'MyWallet' }
+    const wallet = createWallet(walletName);
     createDid(wallet);
-    console.log("wallet2", wallet)
     setWallet(wallet);
   }
 
   function setWallet(wallet) {
+
     dispatch({ type: 'SET_WALLET', wallet });
   }
 

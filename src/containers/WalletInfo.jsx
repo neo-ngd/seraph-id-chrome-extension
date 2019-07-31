@@ -9,7 +9,6 @@ function Landing({ name, address, claims }) {
 
   function showClaimList() {
     var claimsArr = Object.entries(claims)
-    console.log(claims)
     let list = claimsArr.map(claim => <Claim id={claim[1].id} schema={claim[1].schema} ></Claim >)
     return list
   }

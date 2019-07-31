@@ -7,17 +7,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { createWallet } from "../../../../utils/seraph"
 
 
 function App() {
   const dispatch = useDispatch()
-  const wallet = useSelector(state => state.wallet)
+  const walletFromStore = useSelector(state => state.wallet)
   const [open, setOpen] = React.useState(false);
   const [claim, setClaim] = React.useState("");
 
-  function addClaim(claim) {
-
-    dispatch({ type: 'ADD_CLAIM', claim });
+  function addClaim() {
+    const wallet = createWallet(walletFromStore)
+    wallet.addClaim(claim)
+    dispatch({ type: 'SET_WALLET', wallet }); // redux overrides old wallet with the same wallet + Claim
     handleClose()
   }
 
@@ -28,7 +30,7 @@ function App() {
   });
 
   document.addEventListener('askWallet', function () {
-    document.dispatchEvent(new CustomEvent('receiveWallet', { detail: wallet.accounts[0].label }));
+    document.dispatchEvent(new CustomEvent('receiveWallet', { detail: walletFromStore.accounts[0].label }));
   });
 
   function seraphIdInjected() {
@@ -81,10 +83,10 @@ function App() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={addClaim} color="primary">
+          <Button onClick={handleClose} color="primary">
             Disagree
           </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={addClaim} color="primary" autoFocus>
             Agree
           </Button>
         </DialogActions>
