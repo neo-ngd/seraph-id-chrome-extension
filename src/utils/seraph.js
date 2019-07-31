@@ -17,6 +17,8 @@ export function createDid(wallet) {
   issuer.registerNewSchema('schemaName', ['firstName', 'lastName', 'age'], true);
   var claim = issuer.createClaim(2, 'schemaName', { 'firstName': 'John', 'lastName': 'Doe', 'age': 26 }, 'did:neo:priv:'.concat(wallet.accounts[0].label));
   wallet.addClaim(claim);
+  console.log("eppala",wallet)
+
   return wallet
 
 }

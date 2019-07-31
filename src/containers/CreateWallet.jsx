@@ -1,12 +1,16 @@
 import React from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
-import { connect } from 'react-redux';
 import { createWallet, createDid } from '../utils/seraph';
+import { useDispatch } from 'react-redux'
 
-function CreateWallet({ dispatch }) {
+function CreateWallet() {
+  const dispatch = useDispatch()
+
   function createAndSetWallet() {
     const wallet = createWallet();
+
     createDid(wallet);
+    console.log("wallet2", wallet)
     setWallet(wallet);
   }
 
@@ -23,4 +27,4 @@ function CreateWallet({ dispatch }) {
   );
 }
 
-export default connect()(CreateWallet);
+export default (CreateWallet);
