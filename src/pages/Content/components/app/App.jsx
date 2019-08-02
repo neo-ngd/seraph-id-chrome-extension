@@ -7,7 +7,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { createWallet } from "../../../../commons/seraph"
 
 
 function App() {
@@ -17,9 +16,7 @@ function App() {
   const [claim, setClaim] = React.useState("");
 
   function addClaim() {
-    const wallet = createWallet(walletFromStore)
-    wallet.addClaim(claim)
-    dispatch({ type: 'SET_WALLET', wallet }); // redux overrides old wallet with the same wallet + Claim
+
     handleClose()
   }
 

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 
-import wallet from './wallet';
+import seraphID from './wallet';
 
-export default combineReducers({ wallet });
+export default combineReducers({ seraphID });
