@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { createWallet } from "../../../../utils/seraph"
+import { createWallet } from "../../../../commons/seraph"
 
 
 function App() {

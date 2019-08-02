@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
-import { createWallet, createDid } from '../utils/seraph';
+import { createWallet, createDid } from '../commons/seraph';
 import { useDispatch } from 'react-redux'
 
 function CreateWallet() {
