@@ -20,6 +20,5 @@ export function createDid(wallet) {
   wallet.addClaim(claim);
   wallet.addClaim(claim2);
   return wallet
-
 }
 

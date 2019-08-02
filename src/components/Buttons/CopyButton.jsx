@@ -8,7 +8,7 @@ export default function PublicUrl({ textToCopy, children }) {
   });
 
   return (
-    <Tooltip title={clipboard.copied ? 'Copied!' : 'Copy Link'}>
+    <Tooltip title={clipboard.copied ? 'Copied!' : 'Copy Address'}>
       <Button
         variant="text"
         onClick={() => {

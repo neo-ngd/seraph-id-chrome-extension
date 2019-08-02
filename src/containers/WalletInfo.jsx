@@ -31,10 +31,7 @@ function Landing({ name, address, claims }) {
       <Typography variant="h6" display="block" gutterBottom>
         Claims
       </Typography>
-
       {showClaimList()}
-
-
     </React.Fragment>
   );
 }

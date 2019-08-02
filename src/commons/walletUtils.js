@@ -1,6 +1,3 @@
-
-
-
 export function isFirstUse(wallet) {
     if (wallet === null) return true
     return false
