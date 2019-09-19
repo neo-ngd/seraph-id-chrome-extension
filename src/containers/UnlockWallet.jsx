@@ -23,6 +23,7 @@ function CreateWallet() {
         spacing={2}
       >
         <Grid item xs={12}>
+          UNLOCK WALLET
           <InputText
             text={password}
             handleChange={(e) => handleChange(e)}

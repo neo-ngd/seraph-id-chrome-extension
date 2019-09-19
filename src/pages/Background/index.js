@@ -13,6 +13,7 @@ const composeEnhancers = composeWithDevTools({
 const persistConfig = {
   key: 'root',
   storage: storageSession,
+  blacklist: ['password'],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = createStore(persistedReducer, composeEnhancers());
