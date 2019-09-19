@@ -1,32 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import CreateWallet from '../../containers/CreateWallet';
 import WalletInfo from '../../containers/WalletInfo';
-import { useSelector } from 'react-redux'
-import { isFirstUse } from '../../commons/walletUtils';
+import UnlockWallet from '../../containers/UnlockWallet';
 
-import './Popup.css';
+import { useSelector } from 'react-redux';
 
 function Popup() {
-
-  const wallet = useSelector(state => state.seraphID.wallet)
+  const importedAccount = useSelector((state) => state.seraphID.wallet);
+  const password = useSelector((state) => state.seraphID.password);
 
   return (
     <div>
-      <NavBar />
-      {isFirstUse(wallet) ? (
+      {importedAccount === null ? (
         <CreateWallet />
+      ) : password === null ? (
+        <UnlockWallet></UnlockWallet>
       ) : (
-          <WalletInfo
-            name={wallet.name}
-            address={wallet.accounts[0].label}
-            claims={wallet.accounts[0].claims}
-          ></WalletInfo>
-        )}
+        <WalletInfo importedAccount={importedAccount}></WalletInfo>
+      )}
     </div>
   );
 }
 
-
-
-export default (Popup);
+export default Popup;

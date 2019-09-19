@@ -1,16 +1,11 @@
-import { useState } from "react"
+import { useState } from 'react';
 
 export default function useText() {
+  const [password, setPassword] = useState('');
 
-    const [text, setText] = useState("");
+  const handleChange = (name) => (event) => {
+    setPassword(event.target.value);
+  };
 
-    const handleChange = name => event => {
-        setText(event.target.value);
-    };
-
-    return { text, handleChange }
+  return { password, handleChange };
 }
-
-
-
-

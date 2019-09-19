@@ -1,38 +1,44 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
+import React, { Fragment } from 'react';
+import BaseButton from '../components/Buttons/BaseButton';
+import InputText from '../components/InputText/InputText';
+import Grid from '@material-ui/core/Grid';
+import { useDispatch } from 'react-redux';
+import useText from '../commons/hooks/useText';
 
-const useStyles = makeStyles(theme => ({
-    container: {
-        display: "flex",
-        flexWrap: "wrap"
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1)
-    }
-}));
+function CreateWallet() {
+  const dispatch = useDispatch();
+  const { password, handleChange } = useText();
 
-export default function OutlinedTextFields() {
-    const classes = useStyles();
-    const [values, setValues] = React.useState("");
-    console.log(values);
+  function setPassword() {
+    dispatch({ type: 'SET_PASSWORD', password });
+  }
 
-    const handleChange = name => event => {
-        setValues(event.target.value);
-    };
-
-    return (
-        <form className={classes.container} noValidate autoComplete="off">
-            <TextField
-                id="outlined-name"
-                label="Insert Password"
-                className={classes.textField}
-                value={values}
-                onChange={handleChange()}
-                margin="normal"
-                variant="outlined"
-            />
-        </form>
-    );
+  return (
+    <Fragment>
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={2}
+      >
+        <Grid item xs={12}>
+          <InputText
+            text={password}
+            handleChange={(e) => handleChange(e)}
+          ></InputText>
+        </Grid>
+        <Grid item xs={12}>
+          <BaseButton
+            disabled={password === ''}
+            handleClick={setPassword}
+            text={'Create a Wallet'}
+            variant="contained"
+          />
+        </Grid>
+      </Grid>
+    </Fragment>
+  );
 }
+
+export default CreateWallet;
