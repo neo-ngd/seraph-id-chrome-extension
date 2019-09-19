@@ -34,8 +34,8 @@ npm i
 ## Build the project
 
 ```
-npm start```
-
+npm start
+```
 ## Import it in Chrome
 
 Go to  chrome://extensions/ on Chrome. Press "Load unpacked" and load the build folder.
