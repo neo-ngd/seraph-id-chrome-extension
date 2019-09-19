@@ -7,8 +7,9 @@ import UnlockWallet from '../../containers/UnlockWallet';
 import { useSelector } from 'react-redux';
 
 function Popup() {
-  const importedAccount = useSelector((state) => state.seraphID.wallet);
-  const password = useSelector((state) => state.seraphID.password);
+  const importedAccount = useSelector((state) => state.wallet);
+  console.log(importedAccount);
+  const password = useSelector((state) => state.password);
 
   return (
     <div>

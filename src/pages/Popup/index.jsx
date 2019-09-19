@@ -11,8 +11,8 @@ import { Provider } from 'react-redux';
 
 const proxyStore = new Store();
 //TO DO , use font for evrything
-const cruiserfortress3d = {
-  fontFamily: 'MATRIX',
+const cruiserfortress = {
+  fontFamily: 'cruiserfortress3d',
   fontStyle: 'normal',
   fontDisplay: 'swap',
   fontWeight: 400,
@@ -25,13 +25,13 @@ const cruiserfortress3d = {
 };
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'cruiserfortress3d',
+    fontFamily: 'cruiserfortress',
   },
   palette: {},
   overrides: {
     MuiCssBaseline: {
       '@global': {
-        '@font-face': [cruiserfortress3d],
+        '@font-face': [cruiserfortress],
       },
     },
   },
