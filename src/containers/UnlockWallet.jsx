@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
+import { Grid, Typography } from '@material-ui/core/';
+import { useDispatch } from 'react-redux';
 import BaseButton from '../components/Buttons/BaseButton';
 import InputText from '../components/InputText/InputText';
-import Grid from '@material-ui/core/Grid';
-import { useDispatch } from 'react-redux';
 import useText from '../commons/hooks/useText';
+import { createWallet } from '../commons/seraphSdkUtils';
 
-function CreateWallet() {
+function UnlockWallet({ accountFromStore }) {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
 
@@ -20,20 +21,33 @@ function CreateWallet() {
         direction="column"
         justify="center"
         alignItems="center"
-        spacing={2}
+        spacing={1}
       >
         <Grid item xs={12}>
-          UNLOCK WALLET
+          <Typography variant="h4" gutterBottom>
+            Welcome Back!{' '}
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="subtitle1" gutterBottom>
+            Your DID is waiting{' '}
+            <span role="img" aria-label="sheep">
+              🐑
+            </span>
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
           <InputText
             text={password}
             handleChange={(e) => handleChange(e)}
           ></InputText>
         </Grid>
+
         <Grid item xs={12}>
           <BaseButton
             disabled={password === ''}
             handleClick={setPassword}
-            text={'Create a Wallet'}
+            text={'Unlock Wallet'}
             variant="contained"
           />
         </Grid>
@@ -42,4 +56,4 @@ function CreateWallet() {
   );
 }
 
-export default CreateWallet;
+export default UnlockWallet;

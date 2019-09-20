@@ -7,18 +7,19 @@ import UnlockWallet from '../../containers/UnlockWallet';
 import { useSelector } from 'react-redux';
 
 function Popup() {
-  const importedAccount = useSelector((state) => state.wallet);
-  console.log(importedAccount);
+  const accountFromStore = useSelector((state) => state.wallet);
   const password = useSelector((state) => state.password);
-
   return (
     <div>
-      {importedAccount === null ? (
+      {accountFromStore === null ? (
         <CreateWallet />
       ) : password === null ? (
-        <UnlockWallet></UnlockWallet>
+        <UnlockWallet
+          accountFromStore={accountFromStore}
+          password={password}
+        ></UnlockWallet>
       ) : (
-        <WalletInfo importedAccount={importedAccount}></WalletInfo>
+        <WalletInfo accountFromStore={accountFromStore}></WalletInfo>
       )}
     </div>
   );

@@ -9,10 +9,11 @@ import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
 function CreateWallet() {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
+
   function createAndSetWallet() {
     const wallet = new SeraphIDWallet({ name: 'MyWallet' });
     wallet.createDID(DIDNetwork.PrivateNet);
-    wallet.accounts[0].encrypt('password').then(() => {
+    wallet.accounts[0].encrypt(password).then(() => {
       const exportedWalletJSON = JSON.stringify(wallet.export());
       setWallet(exportedWalletJSON);
     });

@@ -5,20 +5,21 @@ import Typography from '@material-ui/core/Typography';
 import CopyButton from '../components/Buttons/CopyButton';
 import Claim from '../components/Cards/Claim';
 import { createWallet } from '../commons/seraphSdkUtils';
+import { useSelector } from 'react-redux';
 
-function WalletInfo({ importedAccount }) {
+function WalletInfo({ accountFromStore }) {
   const [wallet, setWallet] = useState(null);
-
+  const password = useSelector((state) => state.password);
   useEffect(() => {
-    async function decryptWallet() {
-      const importedWallet = createWallet(JSON.parse(importedAccount));
-      await importedWallet.accounts[0].decrypt('password');
+    async function decryptAccount() {
+      const importedWallet = createWallet(JSON.parse(accountFromStore));
+      await importedWallet.accounts[0].decrypt(password);
       setWallet(importedWallet);
     }
-    decryptWallet();
+    decryptAccount();
   }, []);
 
-  function showClaimList() {
+  function showAllClaims() {
     var claimsArr = Object.entries(wallet.accounts[0].claims);
     let list = claimsArr.map((claim) => (
       <Claim id={claim[1].id} schema={claim[1].schema}></Claim>
@@ -46,7 +47,7 @@ function WalletInfo({ importedAccount }) {
         <Typography variant="h6" display="block" gutterBottom>
           Claims
         </Typography>
-        {showClaimList()}: null}
+        {showAllClaims()}
       </React.Fragment>
     );
   } else return null;

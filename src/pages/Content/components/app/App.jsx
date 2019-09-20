@@ -1,9 +1,13 @@
 import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@material-ui/core';
+import ReactJson from 'react-json-view';
+
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -33,7 +37,6 @@ function App() {
 
   function seraphIdInjected() {
     window.seraphID = {
-      test: 'this is a test',
       sendClaim: function(data) {
         document.dispatchEvent(
           new CustomEvent('handleClaim', { detail: data })
@@ -79,15 +82,30 @@ function App() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {JSON.stringify(claim)}
+            <ReactJson
+              displayObjectSize={false}
+              displayDataTypes={false}
+              src={claim}
+            />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Disagree
+          <Button variant="outlined" onClick={handleClose} color="primary">
+            No{' '}
+            <span role="img" aria-label="sheep">
+              😡
+            </span>
           </Button>
-          <Button onClick={addClaim} color="primary" autoFocus>
-            Agree
+          <Button
+            variant="outlined"
+            onClick={addClaim}
+            color="primary"
+            autoFocus
+          >
+            Yes{' '}
+            <span role="img" aria-label="sheep">
+              💚
+            </span>
           </Button>
         </DialogActions>
       </Dialog>
