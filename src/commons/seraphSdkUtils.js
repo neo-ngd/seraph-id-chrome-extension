@@ -9,6 +9,12 @@ export function createWallet(wallet) {
   return newWallet;
 }
 
+export async function decrypt(accountFromStore, password) {
+  const wallet = createWallet(JSON.parse(accountFromStore));
+  await wallet.accounts[0].decrypt(password);
+  return wallet;
+}
+
 export function createDid(wallet) {
   console.log(wallet);
   wallet.createDID(DIDNetwork.PrivateNet);

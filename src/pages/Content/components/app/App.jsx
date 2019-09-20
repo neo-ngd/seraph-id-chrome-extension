@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogActions,
@@ -7,18 +7,35 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import ReactJson from 'react-json-view';
-
 import Button from '@material-ui/core/Button';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { decrypt } from '../../../../commons/seraphSdkUtils';
 
 function App() {
   const dispatch = useDispatch();
-  const walletFromStore = useSelector((state) => state.wallet);
-  const [open, setOpen] = React.useState(false);
-  const [claim, setClaim] = React.useState('');
+  const accountFromStore = useSelector((state) => state.wallet);
+  const password = useSelector((state) => state.password);
+
+  const [open, setOpen] = useState(false);
+  const [claim, setClaim] = useState('');
+  const [wallet, setWallet] = useState('');
+
+  useEffect(() => {
+    async function decryptSetWallet() {
+      const wallet = await decrypt(accountFromStore, password);
+      setWallet(wallet);
+    }
+    decryptSetWallet();
+  }, []);
 
   function addClaim() {
+    wallet.addClaim(claim);
+
+    wallet.accounts[0].encrypt(password).then(() => {
+      const exportedWalletJSON = JSON.stringify(wallet.export());
+      dispatch({ type: 'SET_WALLET', exportedWalletJSON });
+    });
     handleClose();
   }
 
@@ -27,10 +44,10 @@ function App() {
     handleClickOpen();
   });
 
-  document.addEventListener('askWallet', function() {
+  document.addEventListener('getAddress', function() {
     document.dispatchEvent(
-      new CustomEvent('receiveWallet', {
-        detail: walletFromStore.accounts[0].label,
+      new CustomEvent('receiveAddress', {
+        detail: wallet.accounts[0].label,
       })
     );
   });
@@ -42,12 +59,12 @@ function App() {
           new CustomEvent('handleClaim', { detail: data })
         );
       },
-      getAddress: function() {
+      address: function() {
         let address;
-        document.addEventListener('receiveWallet', function(response) {
+        document.addEventListener('receiveAddress', function(response) {
           address = response.detail;
         });
-        document.dispatchEvent(new CustomEvent('askWallet'));
+        document.dispatchEvent(new CustomEvent('getAddress'));
         return address;
       },
     };
@@ -69,8 +86,7 @@ function App() {
   }
 
   return (
-    <div>
-      {' '}
+    <React.Fragment>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -81,13 +97,11 @@ function App() {
           Do you want to accept this claim ?
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            <ReactJson
-              displayObjectSize={false}
-              displayDataTypes={false}
-              src={claim}
-            />
-          </DialogContentText>
+          <ReactJson
+            displayObjectSize={false}
+            displayDataTypes={false}
+            src={claim}
+          />
         </DialogContent>
         <DialogActions>
           <Button variant="outlined" onClick={handleClose} color="primary">
@@ -109,7 +123,7 @@ function App() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </React.Fragment>
   );
 }
 

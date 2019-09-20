@@ -1,7 +1,7 @@
 export const wallet = (state = null, action) => {
   switch (action.type) {
     case 'SET_WALLET':
-      return action.wallet;
+      return action.wallet ? action.wallet : action.exportedWalletJSON;
     default:
       return state;
   }
