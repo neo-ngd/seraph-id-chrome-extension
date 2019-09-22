@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
 } from '@material-ui/core';
 import ReactJson from 'react-json-view';
@@ -22,6 +21,7 @@ function App() {
   const [wallet, setWallet] = useState('');
 
   useEffect(() => {
+    console.log('mounted');
     async function decryptSetWallet() {
       const wallet = await decrypt(accountFromStore, password);
       setWallet(wallet);
