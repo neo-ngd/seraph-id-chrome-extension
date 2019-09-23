@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@material-ui/core';
-import ReactJson from 'react-json-view';
-import Button from '@material-ui/core/Button';
+import DialogGetClaim from '../../../../components/Dialogs/Dialogs';
+import DialogSendClaim from '../../../../components/Dialogs/Dialogs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { decrypt } from '../../../../commons/seraphSdkUtils';
@@ -15,13 +9,11 @@ function App() {
   const dispatch = useDispatch();
   const accountFromStore = useSelector((state) => state.wallet);
   const password = useSelector((state) => state.password);
-
   const [open, setOpen] = useState(false);
   const [claim, setClaim] = useState('');
   const [wallet, setWallet] = useState('');
 
   useEffect(() => {
-    console.log('mounted');
     async function decryptSetWallet() {
       const wallet = await decrypt(accountFromStore, password);
       setWallet(wallet);
@@ -29,25 +21,39 @@ function App() {
     decryptSetWallet();
   }, []);
 
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
   function addClaim() {
     wallet.addClaim(claim);
-
     wallet.accounts[0].encrypt(password).then(() => {
       const exportedWalletJSON = JSON.stringify(wallet.export());
       dispatch({ type: 'SET_WALLET', exportedWalletJSON });
     });
     handleClose();
   }
-
   document.addEventListener('handleClaim', function(e) {
     setClaim(e.detail);
     handleClickOpen();
   });
 
-  document.addEventListener('getAddress', function() {
+  document.addEventListener('sendAddress', function() {
     document.dispatchEvent(
-      new CustomEvent('receiveAddress', {
+      new CustomEvent('getAddress', {
         detail: wallet.accounts[0].label,
+      })
+    );
+  });
+
+  document.addEventListener('getClaim', function() {
+    document.dispatchEvent(
+      new CustomEvent('sendClaim', {
+        detail: wallet.accounts[0].claims,
       })
     );
   });
@@ -59,12 +65,20 @@ function App() {
           new CustomEvent('handleClaim', { detail: data })
         );
       },
-      address: function() {
+      getClaim: function() {
+        let claim;
+        document.addEventListener('getClaim', function(response) {
+          claim = response.detail;
+        });
+        document.dispatchEvent(new CustomEvent('sendClaim'));
+        return claim;
+      },
+      getAddress: function() {
         let address;
-        document.addEventListener('receiveAddress', function(response) {
+        document.addEventListener('getAddress', function(response) {
           address = response.detail;
         });
-        document.dispatchEvent(new CustomEvent('getAddress'));
+        document.dispatchEvent(new CustomEvent('sendAddress'));
         return address;
       },
     };
@@ -77,52 +91,14 @@ function App() {
     script
   );
 
-  function handleClickOpen() {
-    setOpen(true);
-  }
-
-  function handleClose() {
-    setOpen(false);
-  }
-
   return (
     <React.Fragment>
-      <Dialog
+      <DialogGetClaim
         open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          Do you want to accept this claim ?
-        </DialogTitle>
-        <DialogContent>
-          <ReactJson
-            displayObjectSize={false}
-            displayDataTypes={false}
-            src={claim}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleClose} color="primary">
-            No{' '}
-            <span role="img" aria-label="sheep">
-              😡
-            </span>
-          </Button>
-          <Button
-            variant="outlined"
-            onClick={addClaim}
-            color="primary"
-            autoFocus
-          >
-            Yes{' '}
-            <span role="img" aria-label="sheep">
-              💚
-            </span>
-          </Button>
-        </DialogActions>
-      </Dialog>
+        handleClose={handleClose}
+        claim={claim}
+        handleClaim={addClaim}
+      ></DialogGetClaim>
     </React.Fragment>
   );
 }

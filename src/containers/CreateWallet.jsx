@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
-import InputText from '../components/InputText/InputText';
+import Password from '../components/InputText/InputText';
 import Grid from '@material-ui/core/Grid';
 import { useDispatch } from 'react-redux';
 import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
+import Particles from 'react-particles-js';
 
 function CreateWallet() {
   const dispatch = useDispatch();
@@ -31,13 +32,33 @@ function CreateWallet() {
         direction="column"
         justify="center"
         alignItems="center"
-        spacing={2}
+        spacing={3}
       >
         <Grid item xs={12}>
-          <InputText
+          <Particles
+            params={{
+              particles: {
+                color: { value: '#06110e' },
+              },
+              lineLinked: {
+                color: '#06110e',
+              },
+              interactivity: {
+                events: {
+                  onhover: {
+                    enable: true,
+                    mode: 'repulse',
+                  },
+                },
+              },
+            }}
+          ></Particles>
+        </Grid>
+        <Grid item xs={12}>
+          <Password
             text={password}
             handleChange={(e) => handleChange(e)}
-          ></InputText>
+          ></Password>
         </Grid>
         <Grid item xs={12}>
           <BaseButton

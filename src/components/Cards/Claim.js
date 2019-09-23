@@ -1,24 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
-
   card: {
-    backgroundColor: "transparent",
-    boxShadow: "none",
-
+    backgroundColor: 'transparent',
+    boxShadow: 'none',
   },
 
   expand: {
@@ -31,9 +26,7 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: "black",
-  },
+  avatar: {},
 }));
 
 export default function RecipeReviewCard({ id, schema }) {
@@ -65,16 +58,12 @@ export default function RecipeReviewCard({ id, schema }) {
           </IconButton>
         }
         title={schema}
-        subheader={"Unique Identity Number: " + id}
+        subheader={'Unique Identity Number: ' + id}
       />
 
-      <CardActions disableSpacing>
-
-
-      </CardActions>
+      <CardActions disableSpacing></CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-        </CardContent>
+        <CardContent></CardContent>
       </Collapse>
     </Card>
   );

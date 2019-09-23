@@ -34,7 +34,7 @@ function WalletInfo({ accountFromStore }) {
         <CopyButton textToCopy={address}>
           <Grid container>
             <Grid item xs={12}>
-              <Typography variant="button">{wallet.name}</Typography>
+              <Typography>Address</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="overline" display="block" gutterBottom>
@@ -44,10 +44,16 @@ function WalletInfo({ accountFromStore }) {
           </Grid>
         </CopyButton>
         <Divider />
-        <Typography variant="h6" display="block" gutterBottom>
-          Claims
-        </Typography>
-        {showAllClaims()}
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography variant="h6" display="block" gutterBottom>
+              Claims
+            </Typography>
+            <Grid item xs={12}>
+              {showAllClaims()}
+            </Grid>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   } else return null;

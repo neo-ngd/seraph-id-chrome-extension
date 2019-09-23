@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import BaseButton from '../components/Buttons/BaseButton';
 import InputText from '../components/InputText/InputText';
 import useText from '../commons/hooks/useText';
-import { createWallet } from '../commons/seraphSdkUtils';
+import RotatingLogo from '../components/RotatingLogo/RotatingLogo';
 
-function UnlockWallet({ accountFromStore }) {
+function UnlockWallet() {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
 
@@ -23,6 +23,9 @@ function UnlockWallet({ accountFromStore }) {
         alignItems="center"
         spacing={1}
       >
+        <Grid item xs={12}>
+          <RotatingLogo></RotatingLogo>
+        </Grid>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             Welcome Back!{' '}
