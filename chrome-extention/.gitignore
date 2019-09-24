@@ -16,5 +16,10 @@
 .env.test.local
 .env.production.local
 
+#IDE
+/.idea
+/.vscode
+
+
 # secrets
 secrets.*.js

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
 import Password from '../components/InputText/InputText';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
@@ -52,13 +52,13 @@ function CreateWallet() {
                 },
               },
             }}
-          ></Particles>
+            />
         </Grid>
         <Grid item xs={12}>
           <Password
             text={password}
             handleChange={(e) => handleChange(e)}
-          ></Password>
+            />
         </Grid>
         <Grid item xs={12}>
           <BaseButton

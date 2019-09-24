@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import DialogGetClaim from '../../../../components/Dialogs/Dialogs';
-import DialogSendClaim from '../../../../components/Dialogs/Dialogs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { decrypt } from '../../../../commons/seraphSdkUtils';
+import { createClaim, setExportedWallet } from '../../../Background/actions';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +14,8 @@ function App() {
   const [wallet, setWallet] = useState('');
 
   useEffect(() => {
+    injectScript();
+    registerListeners();
     async function decryptSetWallet() {
       const wallet = await decrypt(accountFromStore, password);
       setWallet(wallet);
@@ -21,44 +23,52 @@ function App() {
     decryptSetWallet();
   }, []);
 
-  function handleClickOpen() {
-    setOpen(true);
-  }
+  const injectScript = () => {
+    const script = document.createElement('script'),
+      code = document.createTextNode('(' + seraphIdInjected + ')();');
+    script.appendChild(code);
+    (document.body || document.head || document.documentElement).appendChild(
+      script
+    );
+  };
 
-  function handleClose() {
-    setOpen(false);
-  }
-
-  function addClaim() {
-    wallet.addClaim(claim);
-    wallet.accounts[0].encrypt(password).then(() => {
-      const exportedWalletJSON = JSON.stringify(wallet.export());
-      dispatch({ type: 'SET_WALLET', exportedWalletJSON });
+  const registerListeners = () => {
+    document.addEventListener('handleClaim', function(e) {
+      setClaim(e.detail);
+      handleClickOpen();
     });
+
+    document.addEventListener('sendAddress', function() {
+      document.dispatchEvent(
+        new CustomEvent('getAddress', {
+          detail: wallet.accounts[0].label,
+        })
+      );
+    });
+
+    document.addEventListener('getClaim', function() {
+      document.dispatchEvent(
+        new CustomEvent('sendClaim', {
+          detail: wallet.accounts[0].claims,
+        })
+      );
+    });
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const addClaim = () => {
+    dispatch(createClaim({test: 1, test2: 2, test3: 3}, 'testSchema'));
     handleClose();
-  }
-  document.addEventListener('handleClaim', function(e) {
-    setClaim(e.detail);
-    handleClickOpen();
-  });
+  };
 
-  document.addEventListener('sendAddress', function() {
-    document.dispatchEvent(
-      new CustomEvent('getAddress', {
-        detail: wallet.accounts[0].label,
-      })
-    );
-  });
-
-  document.addEventListener('getClaim', function() {
-    document.dispatchEvent(
-      new CustomEvent('sendClaim', {
-        detail: wallet.accounts[0].claims,
-      })
-    );
-  });
-
-  function seraphIdInjected() {
+  const seraphIdInjected = () => {
     window.seraphID = {
       sendClaim: function(data) {
         document.dispatchEvent(
@@ -84,22 +94,13 @@ function App() {
     };
   }
 
-  var script = document.createElement('script'),
-    code = document.createTextNode('(' + seraphIdInjected + ')();');
-  script.appendChild(code);
-  (document.body || document.head || document.documentElement).appendChild(
-    script
-  );
-
   return (
-    <React.Fragment>
-      <DialogGetClaim
-        open={open}
-        handleClose={handleClose}
-        claim={claim}
-        handleClaim={addClaim}
-      ></DialogGetClaim>
-    </React.Fragment>
+    <DialogGetClaim
+      open={open}
+      handleClose={handleClose}
+      claim={claim}
+      handleClaim={addClaim}
+      />
   );
 }
 

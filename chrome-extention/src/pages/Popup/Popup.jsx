@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NavBar from '../../components/NavBar/NavBar';
 import CreateWallet from '../../containers/CreateWallet';
 import WalletInfo from '../../containers/WalletInfo';
@@ -9,20 +9,28 @@ import { useSelector } from 'react-redux';
 function Popup() {
   const accountFromStore = useSelector((state) => state.wallet);
   const password = useSelector((state) => state.password);
-  return (
-    <div>
-      <NavBar></NavBar>
-      {accountFromStore === null ? (
-        <CreateWallet />
-      ) : password === null ? (
+
+  const selectComponent = () => {
+    if (!accountFromStore) {
+      return (<CreateWallet />)
+    }
+    if (!password) {
+      return (
         <UnlockWallet
           accountFromStore={accountFromStore}
           password={password}
-        ></UnlockWallet>
-      ) : (
-        <WalletInfo accountFromStore={accountFromStore}></WalletInfo>
-      )}
-    </div>
+      />)
+    }
+    return (
+      <WalletInfo
+        accountFromStore={accountFromStore}/>)
+  };
+
+  return (
+    <Fragment>
+      <NavBar/>
+      {selectComponent()}
+    </Fragment>
   );
 }
 

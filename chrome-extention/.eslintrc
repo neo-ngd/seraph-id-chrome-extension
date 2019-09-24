@@ -1,4 +1,6 @@
 {
   "extends": "react-app",
-  "webextensions": true
+  "env": {
+    "webextensions": true
+  }
 }

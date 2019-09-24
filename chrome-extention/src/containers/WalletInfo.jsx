@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, useEffect, Fragment } from 'react';
+import {Grid, Divider, Typography } from '@material-ui/core';
 import CopyButton from '../components/Buttons/CopyButton';
 import Claim from '../components/Cards/Claim';
 import { createWallet } from '../commons/seraphSdkUtils';
@@ -20,17 +18,16 @@ function WalletInfo({ accountFromStore }) {
   }, []);
 
   function showAllClaims() {
-    var claimsArr = Object.entries(wallet.accounts[0].claims);
-    let list = claimsArr.map((claim) => (
-      <Claim id={claim[1].id} schema={claim[1].schema}></Claim>
+    const claimsArr = Object.entries(wallet.accounts[0].claims);
+    return claimsArr.map((claim) => (
+      <Claim id={claim[1].id} schema={claim[1].schema} />
     ));
-    return list;
   }
 
   if (wallet) {
     const { label: address } = wallet.accounts[0];
     return (
-      <React.Fragment>
+      <Fragment>
         <CopyButton textToCopy={address}>
           <Grid container>
             <Grid item xs={12}>
@@ -54,9 +51,10 @@ function WalletInfo({ accountFromStore }) {
             </Grid>
           </Grid>
         </Grid>
-      </React.Fragment>
+      </Fragment>
     );
-  } else return null;
+  }
+  return null;
 }
 
 export default WalletInfo;

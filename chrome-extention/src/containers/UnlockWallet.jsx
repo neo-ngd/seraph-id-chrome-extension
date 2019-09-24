@@ -5,13 +5,14 @@ import BaseButton from '../components/Buttons/BaseButton';
 import InputText from '../components/InputText/InputText';
 import useText from '../commons/hooks/useText';
 import RotatingLogo from '../components/RotatingLogo/RotatingLogo';
+import { setPassword } from '../pages/Background/actions';
 
 function UnlockWallet() {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
 
-  function setPassword() {
-    dispatch({ type: 'SET_PASSWORD', password });
+  function dispatchPassword() {
+    dispatch(setPassword(password));
   }
 
   return (
@@ -24,7 +25,7 @@ function UnlockWallet() {
         spacing={1}
       >
         <Grid item xs={12}>
-          <RotatingLogo></RotatingLogo>
+          <RotatingLogo/>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
@@ -43,13 +44,13 @@ function UnlockWallet() {
           <InputText
             text={password}
             handleChange={(e) => handleChange(e)}
-          ></InputText>
+            />
         </Grid>
 
         <Grid item xs={12}>
           <BaseButton
             disabled={password === ''}
-            handleClick={setPassword}
+            handleClick={dispatchPassword}
             text={'Unlock Wallet'}
             variant="contained"
           />

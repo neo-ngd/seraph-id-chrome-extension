@@ -1,0 +1,4 @@
+export const CREATE_CLAIM_ALIAS = 'CREATE_CLAIM_ALIAS';
+
+export const SET_WALLET = 'SET_WALLET';
+export const SET_PASSPORT = 'SET_PASSPORT';
