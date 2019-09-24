@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DialogGetClaim from '../../../../components/Dialogs/Dialogs';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { decrypt } from '../../../../commons/seraphSdkUtils';
-import { createClaim, setExportedWallet } from '../../../Background/actions';
+import { createClaim } from '../../../Background/actions';
 
 function App() {
   const dispatch = useDispatch();
