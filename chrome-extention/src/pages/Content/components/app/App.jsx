@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import DialogGetClaim from '../../../../components/Dialogs/Dialogs';
+import DialogClaim from '../../../../components/Dialogs/Dialogs';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrypt } from '../../../../commons/seraphSdkUtils';
-import { createClaim } from '../../../Background/actions';
+import { askClaim, createClaim, setClaim, toggleDialog } from '../../../Background/actions';
+import { dialogTypes } from '../../contentTypes';
 
 function App() {
   const dispatch = useDispatch();
-  const accountFromStore = useSelector((state) => state.wallet);
-  const password = useSelector((state) => state.password);
-  const [open, setOpen] = useState(false);
-  const [claim, setClaim] = useState('');
+  const { dialog, password, claim, wallet: accountFromStore } = useSelector(state => state);
   const [wallet, setWallet] = useState('');
 
   useEffect(() => {
@@ -32,9 +30,9 @@ function App() {
   };
 
   const registerListeners = () => {
-    document.addEventListener('handleClaim', function(e) {
-      setClaim(e.detail);
-      handleClickOpen();
+    document.addEventListener('sendClaim', ({detail: claim}) => {
+      dispatch(setClaim(claim));
+      handleClickOpen(dialogTypes.GET_CLAIM);
     });
 
     document.addEventListener('sendAddress', function() {
@@ -52,14 +50,18 @@ function App() {
         })
       );
     });
+
+    document.addEventListener('askClaim', ({detail: claimID}) => {
+      dispatch(askClaim(claimID));
+    })
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClickOpen = context => {
+    dispatch(toggleDialog({open: true, context}))
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(toggleDialog({open: false, context: null}));
   };
 
   const addClaim = () => {
@@ -67,11 +69,17 @@ function App() {
     handleClose();
   };
 
+  const shareClaim = () =>{
+    // TODO
+    console.warn('SHARE!');
+    handleClose()
+  };
+
   const seraphIdInjected = () => {
     window.seraphID = {
       sendClaim: function(data) {
         document.dispatchEvent(
-          new CustomEvent('handleClaim', { detail: data })
+          new CustomEvent('sendClaim', { detail: data })
         );
       },
       getClaim: function() {
@@ -90,15 +98,19 @@ function App() {
         document.dispatchEvent(new CustomEvent('sendAddress'));
         return address;
       },
+      askClaim: function(claimID) {
+        document.dispatchEvent(new CustomEvent('askClaim', { detail: claimID }))
+      }
     };
-  }
+  };
 
   return (
-    <DialogGetClaim
-      open={open}
+    <DialogClaim
+      open={dialog.open}
       handleClose={handleClose}
       claim={claim}
-      handleClaim={addClaim}
+      handleClaim={dialog.context === dialogTypes.ASK_CLAIM ? shareClaim : addClaim}
+      context={dialog.context}
       />
   );
 }

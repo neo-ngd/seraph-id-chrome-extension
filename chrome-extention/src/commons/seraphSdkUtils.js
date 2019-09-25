@@ -1,4 +1,4 @@
-import { DIDNetwork, SeraphIDWallet, SeraphIDIssuer } from '@sbc/seraph-id-sdk';
+import { DIDNetwork, SeraphIDWallet, SeraphIDIssuer, SeraphIDVerifier } from '@sbc/seraph-id-sdk';
 import env from '../environments/environment';
 import { v4 as uuid } from 'uuid';
 

@@ -31,6 +31,8 @@ function App() {
     window.seraphID.sendClaim(claim);
   }
 
+  const askClaim = () => window.seraphID.askClaim('0ef9f924-0c7b-499e-9d89-a8d1cc0a357d');
+
   return (
     <div className={classes.root}>
       <Grid container justify="center" spacing={0}>
@@ -38,6 +40,7 @@ function App() {
           <header className="page1">
             <img src={logo} alt="logo" className="logo1" />
             <Button text={"Get Claim"} handleClick={getSera} />
+            <Button text={"Ask Claim"} handleClick={askClaim} />
           </header>
         </Grid>
         <Grid item xs={12} sm={4}>

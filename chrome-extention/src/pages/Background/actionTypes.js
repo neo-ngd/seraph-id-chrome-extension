@@ -1,4 +1,8 @@
 export const CREATE_CLAIM_ALIAS = 'CREATE_CLAIM_ALIAS';
+export const ASK_CLAIM_ALIAS = 'ASK_CLAIM_ALIAS';
 
 export const SET_WALLET = 'SET_WALLET';
 export const SET_PASSPORT = 'SET_PASSPORT';
+export const SET_CLAIM = 'SET_CLAIM';
+export const DESTROY_CLAIM = 'DESTROY_CLAIM';
+export const TOGGLE_DIALOG = 'TOGGLE_DIALOG';
