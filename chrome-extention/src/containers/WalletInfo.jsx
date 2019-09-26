@@ -1,9 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import {Grid, Divider, Typography } from '@material-ui/core';
+import {Grid, Divider, Typography, Box } from '@material-ui/core';
 import CopyButton from '../components/Buttons/CopyButton';
 import Claim from '../components/Cards/Claim';
 import { createWallet } from '../commons/seraphSdkUtils';
 import { useSelector } from 'react-redux';
+import NavBar from '../components/NavBar/NavBar';
+import Layout from '../components/Layout/Layout';
 
 function WalletInfo({ accountFromStore }) {
   const [wallet, setWallet] = useState(null);
@@ -20,38 +22,21 @@ function WalletInfo({ accountFromStore }) {
   function showAllClaims() {
     const claimsArr = Object.entries(wallet.accounts[0].claims);
     return claimsArr.map((claim) => (
-      <Claim id={claim[1].id} schema={claim[1].schema} />
+      <Claim id={claim[1].id} schema={claim[1].schema} content={wallet.accounts[0]} />
     ));
   }
 
   if (wallet) {
     const { label: address } = wallet.accounts[0];
+
     return (
-      <Fragment>
-        <CopyButton textToCopy={address}>
-          <Grid container>
-            <Grid item xs={12}>
-              <Typography>Address</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography variant="overline" display="block" gutterBottom>
-                {address}
-              </Typography>
-            </Grid>
-          </Grid>
-        </CopyButton>
-        <Divider />
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h6" display="block" gutterBottom>
-              Claims
-            </Typography>
-            <Grid item xs={12}>
-              {showAllClaims()}
-            </Grid>
-          </Grid>
-        </Grid>
-      </Fragment>
+      <Layout padding={'60px 0 0 0'} justifyStart>
+        <NavBar address={address} name="Account 1" />
+        <Box display="flex" flexDirection="column">
+          <Box fontSize="24px" color="text.primary">Claims</Box>
+          {showAllClaims()}
+        </Box>
+      </Layout>
     );
   }
   return null;

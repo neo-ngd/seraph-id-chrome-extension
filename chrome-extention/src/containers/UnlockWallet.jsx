@@ -1,11 +1,12 @@
-import React, { Fragment } from 'react';
-import { Grid, Typography } from '@material-ui/core/';
+import React from 'react';
+import { Box } from '@material-ui/core/';
 import { useDispatch } from 'react-redux';
 import BaseButton from '../components/Buttons/BaseButton';
-import InputText from '../components/InputText/InputText';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
+import { setPassword } from '../pages/Background/actions';
+import Layout from '../components/Layout/Layout';
 import useText from '../commons/hooks/useText';
 import RotatingLogo from '../components/RotatingLogo/RotatingLogo';
-import { setPassword } from '../pages/Background/actions';
 
 function UnlockWallet() {
   const dispatch = useDispatch();
@@ -16,47 +17,27 @@ function UnlockWallet() {
   }
 
   return (
-    <Fragment>
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={1}
-      >
-        <Grid item xs={12}>
-          <RotatingLogo/>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h4" gutterBottom>
-            Welcome Back!{' '}
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="subtitle1" gutterBottom>
-            Your DID is waiting{' '}
-            <span role="img" aria-label="sheep">
-              🐑
-            </span>
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <InputText
-            text={password}
-            handleChange={(e) => handleChange(e)}
-            />
-        </Grid>
+    <Layout>
+      <Box>
+        <Box fontSize={24} color="text.primary">Welcome back</Box>
+      </Box>
 
-        <Grid item xs={12}>
-          <BaseButton
-            disabled={password === ''}
-            handleClick={dispatchPassword}
-            text={'Unlock Wallet'}
-            variant="contained"
-          />
-        </Grid>
-      </Grid>
-    </Fragment>
+      <Box>
+        <RotatingLogo />
+      </Box>
+
+      <Box>
+        <PasswordInput value={password} handleChange={handleChange} />
+        <Box mt={1} fontSize="10px" color="text.secondary">To continue, please unlock your wallet</Box>
+      </Box>
+
+      <Box>
+        <BaseButton
+          handleClick={dispatchPassword}
+          text={'Unlock Wallet'}
+        />
+      </Box>
+    </Layout>
   );
 }
 

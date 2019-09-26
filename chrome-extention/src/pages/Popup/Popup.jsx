@@ -1,36 +1,65 @@
-import React, { Fragment } from 'react';
-import NavBar from '../../components/NavBar/NavBar';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Box } from '@material-ui/core';
+
 import CreateWallet from '../../containers/CreateWallet';
 import WalletInfo from '../../containers/WalletInfo';
 import UnlockWallet from '../../containers/UnlockWallet';
+import Welcome from '../../containers/Welcome';
 
-import { useSelector } from 'react-redux';
+const PAGES = {
+  WELCOME: 'welcome',
+  CREATE_WALLET: 'create_wallet',
+  UNLOCK_WALLET: 'unlock_wallet',
+  CLAIMS: 'claims',
+};
 
 function Popup() {
+  const [page, setPage] = useState(PAGES.WELCOME);
   const accountFromStore = useSelector((state) => state.wallet);
   const password = useSelector((state) => state.password);
 
-  const selectComponent = () => {
-    if (!accountFromStore) {
-      return (<CreateWallet />)
+  const goToPage = page => setPage(page);
+
+  useEffect(() => {
+    if (accountFromStore) {
+      if (password) {
+        goToPage(PAGES.CLAIMS);
+      } else {
+        goToPage(PAGES.UNLOCK_WALLET);
+      }
     }
-    if (!password) {
+  }, [accountFromStore, password])
+
+  const selectComponent = () => {
+    if (page === PAGES.WELCOME) {
+      return (<Welcome onGoTopage={() => goToPage(PAGES.CREATE_WALLET)} />)
+    }
+
+    if (page === PAGES.CREATE_WALLET) {
+      return (<CreateWallet onGoTopage={() => goToPage(PAGES.UNLOCK_WALLET)} />)
+    }
+
+    if (page === PAGES.UNLOCK_WALLET) {
       return (
         <UnlockWallet
           accountFromStore={accountFromStore}
           password={password}
-      />)
+        />
+      )
     }
-    return (
-      <WalletInfo
-        accountFromStore={accountFromStore}/>)
+
+    if (page === PAGES.CLAIMS) {
+      return <WalletInfo accountFromStore={accountFromStore}/>
+    }
+
+    return (<div>page error</div>)
   };
 
   return (
-    <Fragment>
-      <NavBar/>
+    <Box display="flex" height="100%" width="100%">
       {selectComponent()}
-    </Fragment>
+    </Box>
   );
 }
 

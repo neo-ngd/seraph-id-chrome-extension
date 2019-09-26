@@ -11,7 +11,18 @@ const proxyStore = new Store();
 //TO DO , use font for evrything
 
 const theme = createMuiTheme({
-  palette: {},
+  palette: {
+    text: {
+      primary: '#FFF',
+      secondary: '#CBCFD4',
+      light: '#CBCFD4',
+    },
+    primary: {
+      main: '#3C444D',
+      dark: '#30363D',
+      light: '#FFF',
+    },
+  },
 });
 
 proxyStore.ready().then(() => {

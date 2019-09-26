@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
-import Password from '../components/InputText/InputText';
-import { Grid } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
-import Particles from 'react-particles-js';
+import Layout from '../components/Layout/Layout';
+import PasswordInput from '../components/PasswordInput/PasswordInput';
 
 function CreateWallet() {
   const dispatch = useDispatch();
@@ -26,50 +26,28 @@ function CreateWallet() {
   }
 
   return (
-    <Fragment>
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item xs={12}>
-          <Particles
-            params={{
-              particles: {
-                color: { value: '#06110e' },
-              },
-              lineLinked: {
-                color: '#06110e',
-              },
-              interactivity: {
-                events: {
-                  onhover: {
-                    enable: true,
-                    mode: 'repulse',
-                  },
-                },
-              },
-            }}
-            />
-        </Grid>
-        <Grid item xs={12}>
-          <Password
-            text={password}
-            handleChange={(e) => handleChange(e)}
-            />
-        </Grid>
-        <Grid item xs={12}>
-          <BaseButton
-            disabled={password === ''}
-            handleClick={createAndSetWallet}
-            text={'Create a Wallet'}
-            variant="contained"
-          />
-        </Grid>
-      </Grid>
-    </Fragment>
+    <Layout>
+      <Box display="flex" flexDirection="column">
+        <Box fontSize={24} color="text.primary">Please choose a secure password </Box>
+
+        <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
+          The password will be used to lock the extention after you close the browser and to encrypt the wallet if you decide to export it... so don’t forget it!
+        </Box>
+      </Box>
+
+      <Box>
+        <PasswordInput value={password} handleChange={handleChange} minLength={5} />
+        <Box mt={1} fontSize="10px" color="text.secondary">Chose a password of at least 5 characters</Box>
+      </Box>
+
+      <Box flexDirection="column" display="flex" mt={2} pb={2}>
+        <BaseButton
+          disabled={password.length < 5}
+          handleClick={createAndSetWallet}
+          text={'Create a Wallet'}
+        />
+      </Box>
+    </Layout>
   );
 }
 

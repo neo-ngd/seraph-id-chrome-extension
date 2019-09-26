@@ -43,6 +43,7 @@ class React3DRotationBox extends Component {
           perspective: props.perspective,
           minWidth: props.minWidth,
           minHeight: props.minHeight,
+          textAlign: 'center',
         }}
       >
         <div
@@ -61,7 +62,7 @@ class React3DRotationBox extends Component {
 React3DRotationBox.defaultProps = {
   rotateForce: 10,
   perspective: '200px',
-  minWidth: '300px',
+  minWidth: 'auto',
   minHeight: '150px',
 };
 

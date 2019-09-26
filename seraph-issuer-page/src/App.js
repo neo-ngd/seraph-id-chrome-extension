@@ -31,7 +31,7 @@ function App() {
     window.seraphID.sendClaim(claim);
   }
 
-  const askClaim = () => window.seraphID.askClaim('0ef9f924-0c7b-499e-9d89-a8d1cc0a357d');
+  const askClaim = () => window.seraphID.askClaim('0e5edf34-0451-4eb5-9781-92a413fc6445');
 
   return (
     <div className={classes.root}>

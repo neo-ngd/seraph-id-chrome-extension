@@ -1,6 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
+
 body {
-  width: 357px;
-  height: 570px;
-  margin: 0px;
-  background-color: white;
+  width: 306px;
+  height: 514px;
+  margin: 0;
+  padding: 24px;
+  background-color:#3C444D;
+  box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  font-family: 'Zilla Slab', serif;
+}
+
+#app-container {
+  display: flex;
+  height: 100%;
 }
