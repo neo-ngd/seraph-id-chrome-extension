@@ -1,23 +1,17 @@
 import React from "react";
 import { Grid } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "./components/Buttons/BaseButton";
-import logo from "./imgs/logo.svg";
-import seedAcademy from "./imgs/seedAcademy.jpg";
-import nsa from "./imgs/ns.jpg";
+import NavBar from "./components/NavBar/NavBar";
 import "./App.css";
 import { createClaim } from "./seraphUtils";
+import IssuerPage from "./scenes/IssuerPage";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  paper: {
-    height: 140,
-    width: 100
-  },
-  control: {
-    padding: theme.spacing(2)
+  page: {
+    paddingTop: "90px"
   }
 }));
 
@@ -31,29 +25,23 @@ function App() {
     window.seraphID.sendClaim(claim);
   }
 
-  const askClaim = () => window.seraphID.askClaim('0e5edf34-0451-4eb5-9781-92a413fc6445');
+  const askClaim = () =>
+    window.seraphID.askClaim("0e5edf34-0451-4eb5-9781-92a413fc6445");
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center" spacing={0}>
-        <Grid item xs={12} sm={4}>
-          <header className="page1">
-            <img src={logo} alt="logo" className="logo1" />
-            <Button text={"Get Claim"} handleClick={getSera} />
-            <Button text={"Ask Claim"} handleClick={askClaim} />
-          </header>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <header className="page2">
-            <img src={seedAcademy} alt="logo" className="logo2" />
-            <Button text={"Get Claim"} handleClick={getSera} />
-          </header>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <header className="page3">
-            <img src={nsa} alt="logo" className="logo3" />
-            <Button text={"Get Claim"} handleClick={getSera} />
-          </header>
+      <NavBar></NavBar>
+
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        spacing={3}
+        className={classes.page}
+      >
+        <Grid item xs={12}>
+          <IssuerPage></IssuerPage>
         </Grid>
       </Grid>
     </div>
