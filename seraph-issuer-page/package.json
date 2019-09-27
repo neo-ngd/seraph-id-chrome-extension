@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.2",
+    "@material-ui/icons": "^4.4.3",
     "@sbc/seraph-id-sdk": "^1.0.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-router-dom": "^5.1.0",
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
     "svg-mesh-3d": "^1.1.0"
