@@ -8,7 +8,6 @@ import { Store } from 'webext-redux';
 import { Provider } from 'react-redux';
 
 const proxyStore = new Store();
-//TO DO , use font for evrything
 
 const theme = createMuiTheme({
   palette: {
@@ -16,11 +15,13 @@ const theme = createMuiTheme({
       primary: '#FFF',
       secondary: '#CBCFD4',
       light: '#CBCFD4',
+      hint: '#00BF0B',
     },
     primary: {
       main: '#3C444D',
       dark: '#30363D',
       light: '#FFF',
+      contrastText: '#00BF0B',
     },
   },
 });

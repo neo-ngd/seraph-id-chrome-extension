@@ -1,54 +1,56 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import ReactJson from 'react-json-view';
-import Button from '@material-ui/core/Button';
 import { dialogTypes } from '../../pages/Content/contentTypes';
+import BaseModal from '../Modals/BaseModal';
+import BaseButton from '../Buttons/BaseButton';
 
-function DialogClaims({ open, handleClose, claim, handleClaim, context }) {
+const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaName, verifierName }) => {
+  const header = () => (
+    <Box color="text.primary">
+      {context === dialogTypes.GET_CLAIM
+        ? 'Do you want to accept this claim?'
+        : `${verifierName} wants to access your ${schemaName}. Do you want to share it?`
+      }
+    </Box>
+  );
   return (
-    <Dialog
-      open={open}
+    <BaseModal
+      HeaderCompoennt={header}
+      isOpen={open}
       onClose={handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      style={{
+        left: '50%',
+        width: 'auto',
+        transform: 'translateX(-50%)',
+        right: 0,
+        bottom: 0,
+        maxWidth: '300px',
+        zIndex: 99,
+      }}
     >
-      <DialogTitle id="alert-dialog-title">
-        {context === dialogTypes.GET_CLAIM ?
-          'Do you want to accept this claim?' :
-          'Do you agree to share this claim?'}
-      </DialogTitle>
-      <DialogContent>
+      <Box>
         <ReactJson
-          displayObjectSize={false}
-          displayDataTypes={false}
-          src={claim}
+            displayObjectSize={false}
+            displayDataTypes={false}
+            src={claim}
+          />
+      </Box>
+
+      <Box alignSelf="flex-end" width="80%" pr="20px" display="flex">
+        <BaseButton
+          handleClick={handleClose}
+          small
+          text="No"
         />
-      </DialogContent>
-      <DialogActions>
-        <Button variant="outlined" onClick={handleClose} color="primary">
-          No{' '}
-          <span role="img" aria-label="sheep">
-            😡
-          </span>
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={handleClaim}
-          color="primary"
-          autoFocus
-        >
-          Yes{' '}
-          <span role="img" aria-label="sheep">
-            💚
-          </span>
-        </Button>
-      </DialogActions>
-    </Dialog>
+
+        <BaseButton
+          small
+          handleClick={handleClaim}
+          text="Yes"
+        />
+      </Box>
+    </BaseModal>
   );
 }
 

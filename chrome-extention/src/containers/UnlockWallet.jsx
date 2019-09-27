@@ -35,6 +35,7 @@ function UnlockWallet() {
         <BaseButton
           handleClick={dispatchPassword}
           text={'Unlock Wallet'}
+          icon
         />
       </Box>
     </Layout>

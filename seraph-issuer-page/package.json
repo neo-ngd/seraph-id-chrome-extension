@@ -11,7 +11,8 @@
     "react-router-dom": "^5.1.0",
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
-    "svg-mesh-3d": "^1.1.0"
+    "svg-mesh-3d": "^1.1.0",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

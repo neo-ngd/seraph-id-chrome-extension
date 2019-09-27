@@ -1,6 +1,6 @@
 import { ASK_CLAIM_ALIAS, CREATE_CLAIM_ALIAS } from './actionTypes';
 import { createClaim, decrypt } from '../../commons/seraphSdkUtils';
-import { setExportedWallet, setClaim, toggleDialog } from './actions';
+import {setExportedWallet, setClaim, toggleDialog, sendError} from './actions';
 import { dialogTypes } from '../Content/contentTypes';
 
 const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
@@ -13,29 +13,40 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
     const exportedWalletJSON = JSON.stringify(decryptedWallet.export());
     chrome.notifications.create({
       type: 'basic',
-      iconUrl: 'https://picsum.photos/50',
+      iconUrl: 'https://picsum.photos/50', // TODO add brand image
       title: '',
       message: 'The claim has been saved'});
     return dispatch(setExportedWallet(exportedWalletJSON));
-  } catch (e) {
-    // TODO error handler
-    console.warn(e)
+  } catch (error) {
+    dispatch(sendError({
+      code: 'err:unknown',
+      message: 'unknown error',
+      error
+    }))
   }
 };
 
-const askClaimAlias = ({claimID}) => async (dispatch, getState) => {
+const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch, getState) => {
   try {
     const { wallet, password } = getState();
     const decryptedWallet = await decrypt(wallet, password);
-    const claim = decryptedWallet.getClaim(claimID);
+    const claims = decryptedWallet.getAllClaims(issuerDID);
+    const claim = claims.find(claim => claim.schema === schemaName);
     if (!!claim) {
       dispatch(setClaim(claim));
-      return dispatch(toggleDialog({open: true, context: dialogTypes.ASK_CLAIM}))
+      return dispatch(toggleDialog({open: true, context: dialogTypes.ASK_CLAIM, verifierName, schemaName}))
     }
-    // TODO dispatch error
-  } catch (e) {
-    // TODO error handler
-    console.warn(e)
+    return dispatch(sendError({
+      code: 'err:notFound',
+      message: "credential doesn't exists",
+      error: new Error("credential doesn't exists")
+    }))
+  } catch (error) {
+    dispatch(sendError({
+      code: 'err:unknown',
+      message: 'unknown error',
+      error
+    }))
   }
 };
 

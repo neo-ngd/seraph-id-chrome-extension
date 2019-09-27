@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux';

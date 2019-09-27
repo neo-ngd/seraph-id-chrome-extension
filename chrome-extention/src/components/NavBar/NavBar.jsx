@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, Box} from '@material-ui/core';
+import {AppBar, Toolbar, Box, ButtonBase} from '@material-ui/core';
 
-const useStyles = makeStyles(({ palette }) => ({
+const useStyles = makeStyles(({ palette, spacing }) => ({
   barStyle: {
     background: palette.primary.dark,
     height: '56px',
@@ -11,9 +11,17 @@ const useStyles = makeStyles(({ palette }) => ({
     left: 0,
     right: 0,
   },
+  imageContainer: {
+    position: 'absolute',
+    right: spacing(-2),
+    top: spacing(1)
+  },
+  img: {
+    maxWidth: '80px',
+  }
 }));
 
-export default function NavBar({ address, name }) {
+export default function NavBar({ address, name, onOpenAccountsModal }) {
   const classes = useStyles();
 
   return (
@@ -27,6 +35,10 @@ export default function NavBar({ address, name }) {
           <Box color="text.secondary" fontSize="10px" textAlign="center" pt="5px">
             {address}
           </Box>
+
+          <ButtonBase disableRipple onClick={onOpenAccountsModal} className={classes.imageContainer}>
+            <img className={classes.img} src={require("../../assets/icons/fingerprint.png")} />
+          </ButtonBase>
         </Box>
       </Toolbar>
     </AppBar>

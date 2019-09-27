@@ -27,11 +27,11 @@ export default function SpacingGrid() {
     window.seraphID.sendClaim(claim);
   }
 
-  const createAndSetClaim = () => {
+  const createAndSetClaim = async () => {
     if (window.seraphID === undefined) {
       setError("No wallet detected, please retry");
     } else {
-      const claim = createClaim(values);
+      const claim = await createClaim(values);
 
       setClaim(claim);
     }
@@ -80,7 +80,7 @@ export default function SpacingGrid() {
             <Button
               handleClick={() => createAndSetClaim()}
               text={"Send Request"}
-            ></Button>
+            />
           </Grid>
           <Grid item xs={12}>
             {error ? <p style={{ color: "red" }}>{error}</p> : null}
@@ -104,7 +104,7 @@ export default function SpacingGrid() {
               <Button
                 handleClick={() => sendClaimToWallet()}
                 text={"Send Request"}
-              ></Button>
+              />
             </Grid>
           </Grid>
         </React.Fragment>

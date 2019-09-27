@@ -1,9 +1,12 @@
 import {
   DESTROY_CLAIM,
+  SEND_ERROR,
+  DESTROY_ERROR,
   SET_CLAIM,
   SET_PASSPORT,
   SET_WALLET,
-  TOGGLE_DIALOG } from '../actionTypes';
+  TOGGLE_DIALOG
+} from '../actionTypes';
 
 export const wallet = (state = null, action) => {
   switch (action.type) {
@@ -35,7 +38,9 @@ export const claim = (state = null, action) => {
 
 const initDialogState = {
   open: false,
-  context: null
+  context: null,
+  verifierName: null,
+  schemaName: null,
 };
 export const dialog = (state = initDialogState, action) => {
   switch (action.type) {
@@ -44,4 +49,20 @@ export const dialog = (state = initDialogState, action) => {
     default:
       return state;
   }
-}
+};
+
+const initErrorState = {
+  code: null,
+  message: null,
+  error: null,
+};
+export const error = (state = initErrorState, action) => {
+  switch (action.type) {
+    case SEND_ERROR:
+      return action.error;
+    case DESTROY_ERROR:
+      return initErrorState;
+    default:
+      return state;
+  }
+};

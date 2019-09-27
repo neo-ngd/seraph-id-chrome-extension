@@ -18,4 +18,14 @@ export const useStyles = makeStyles(({ spacing }) => ({
     top: 10,
     color: '#FFF',
   },
+  smallButton: {
+    height: '17px',
+    fontSize: '8px',
+    marginBottom: spacing(1),
+    padding: 0,
+  },
+  smallArrowRight: {
+    fontSize: '12px',
+    top: '3px',
+  }
 }));

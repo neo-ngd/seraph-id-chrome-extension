@@ -7,8 +7,10 @@ import {
   DID_NETWORK,
   PASSPORT_SCHEMA_NAME
 } from "./config";
+import { v4 as uuid } from 'uuid';
 
-export const createClaim = values => {
+export const createClaim = async (values) => {
+  const address =  await window.seraphID.getAddress();
   const issuer = new SeraphIDIssuer(
     GOVERNMENT_SCRIPT_HASH,
     NEO_RPC_URL,
@@ -36,11 +38,11 @@ export const createClaim = values => {
     })
     .catch(err => console.error("registerNewSchema ERR: ", err));
 
-  var claim = issuer.createClaim(
-    "0e5edf34-0451-4eb5-9781-92a413fc6445",
+  const claim = issuer.createClaim(
+    uuid(),
     PASSPORT_SCHEMA_NAME,
     values,
-    "did:neoid:priv:".concat("AVqs6s6BaDNXLtyoik7hK2KvXaohMgGPTD")
+    `did:neoid:priv:${address}`
   );
   issuer
     .issueClaim(claim, GOVERNMENT_ISSUER_PRIVATE_KEY)

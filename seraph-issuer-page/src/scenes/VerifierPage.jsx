@@ -4,11 +4,13 @@ import Button from "../components/Buttons/BaseButton";
 import Typography from "@material-ui/core/Typography";
 
 export default function SpacingGrid() {
+  // eslint-disable-next-line
   const [claim, setClaim] = React.useState(null);
+  // eslint-disable-next-line
   const [error, setError] = React.useState(null);
 
   function askClaim() {
-    window.seraphID.askClaim("8dddfaab-9a98-4cc9-8013-5d4fa00fe162");
+    window.seraphID.askClaim('Passport', 'did:neoid:priv:AKrEnB5fhbi2bN8VqyxsDU3ijGG2tLVPeu', 'Test');
   }
 
   return (
@@ -28,7 +30,7 @@ export default function SpacingGrid() {
           </Grid>
 
           <Grid item xs={12}>
-            <Button onClick={askClaim} text={"LOGIN"}></Button>
+            <Button handleClick={askClaim} text={"LOGIN"}/>
           </Grid>
           <Grid item xs={12}>
             {error ? <p style={{ color: "red" }}>{error}</p> : null}

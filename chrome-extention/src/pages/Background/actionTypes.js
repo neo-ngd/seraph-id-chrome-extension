@@ -6,3 +6,5 @@ export const SET_PASSPORT = 'SET_PASSPORT';
 export const SET_CLAIM = 'SET_CLAIM';
 export const DESTROY_CLAIM = 'DESTROY_CLAIM';
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG';
+export const SEND_ERROR = 'SEND_ERROR';
+export const DESTROY_ERROR = 'DESTROY_ERROR';

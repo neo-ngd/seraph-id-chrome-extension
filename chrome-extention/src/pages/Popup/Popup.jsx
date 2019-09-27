@@ -16,9 +16,7 @@ const PAGES = {
 
 function Popup() {
   const [page, setPage] = useState(PAGES.WELCOME);
-  const accountFromStore = useSelector((state) => state.wallet);
-  const password = useSelector((state) => state.password);
-
+  const { password, wallet: accountFromStore } = useSelector(state => state);
   const goToPage = page => setPage(page);
 
   useEffect(() => {
@@ -29,7 +27,7 @@ function Popup() {
         goToPage(PAGES.UNLOCK_WALLET);
       }
     }
-  }, [accountFromStore, password])
+  }, [accountFromStore, password]);
 
   const selectComponent = () => {
     if (page === PAGES.WELCOME) {

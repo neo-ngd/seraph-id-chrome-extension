@@ -7,7 +7,7 @@ function RotationLogo() {
       <img
       //TODO: temporary placeholder
         src={require("../../assets/icons/fingerprint.png")}
-        style={{ maxWidth: '100px' }}
+        style={{ maxWidth: '230px' }}
       />
     </RotationBox>
   );

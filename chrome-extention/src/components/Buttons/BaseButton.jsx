@@ -4,8 +4,9 @@ import Button from '@material-ui/core/Button';
 import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 import { useStyles } from './Styles';
+import clsx from 'clsx';
 
-export default function BaseButton({ handleClick, text, disabled = false, icon = true }) {
+export default function BaseButton({ handleClick, text, small = false, disabled = false, icon = false }) {
   const classes = useStyles();
 
   return (
@@ -14,13 +15,12 @@ export default function BaseButton({ handleClick, text, disabled = false, icon =
       onClick={handleClick}
       variant="contained"
       color="inherit"
-      className={classes.button}
+      className={clsx(classes.button, small && classes.smallButton)}
       style={disabled ? { opacity: 0.5 } : {}}
-      showNavigationIcon={icon}
     >
       {text}
       {icon && (
-        <ArrowRight className={classes.arrowRight} />
+        <ArrowRight className={clsx(classes.arrowRight, classes.smallArrowRight)} />
       )}
     </Button>
   );
