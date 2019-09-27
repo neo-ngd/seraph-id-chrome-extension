@@ -36,10 +36,7 @@ export default function SpacingGrid() {
         </Grid>
       ) : (
         <React.Fragment>
-          <Typography style={{ color: "#ffffff" }}>
-            Your Claim is ready, you can now save it in to your Wallet
-          </Typography>
-          <Button text={"Login"}></Button>
+          <Typography style={{ color: "#ffffff" }}>Welcome </Typography>
         </React.Fragment>
       )}
     </React.Fragment>
