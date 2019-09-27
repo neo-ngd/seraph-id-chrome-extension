@@ -7,9 +7,9 @@ import { createClaim } from "../seraphUtils";
 
 export default function SpacingGrid() {
   const [values, setValues] = React.useState({
-    name: "Natalia",
-    surname: "Kowalski",
-    age: "50"
+    name: "News",
+    surname: "Morgans",
+    age: "53"
   });
 
   const [claim, setClaim] = React.useState(null);
