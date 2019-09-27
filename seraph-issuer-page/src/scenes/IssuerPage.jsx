@@ -7,9 +7,13 @@ import { createClaim } from "../seraphUtils";
 
 export default function SpacingGrid() {
   const [values, setValues] = React.useState({
-    name: "News",
-    surname: "Morgans",
-    age: "53"
+    idNumber: "J12393496",
+    firstName: "Edward",
+    secondName: "Newgate",
+    birthDate: "02.07.1945",
+    citizenship: "Greek",
+    address: "Via Biella",
+    gender: "M"
   });
 
   const [claim, setClaim] = React.useState(null);
@@ -24,13 +28,11 @@ export default function SpacingGrid() {
   }
 
   const createAndSetClaim = () => {
-    if (
-      window.seraphID === undefined ||
-      window.seraphID.getAddress() === undefined
-    ) {
+    if (window.seraphID === undefined) {
       setError("No wallet detected, please retry");
     } else {
       const claim = createClaim(values);
+
       setClaim(claim);
     }
   };
@@ -53,25 +55,25 @@ export default function SpacingGrid() {
           <Grid item xs={12}>
             <TextField
               id="standard-name"
-              label="Name"
-              value={values.name}
-              onChange={handleChange("name")}
+              label="First Name"
+              value={values.firstName}
+              onChange={handleChange("firstName")}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               id="standard-name"
-              label="Surname"
-              value={values.surname}
-              onChange={handleChange("surname")}
+              label="Second Name"
+              value={values.secondName}
+              onChange={handleChange("secondName")}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               id="standard-name"
-              label="Age"
-              value={values.age}
-              onChange={handleChange("age")}
+              label="Birth Date"
+              value={values.birthDate}
+              onChange={handleChange("birthDate")}
             />
           </Grid>
           <Grid item xs={12}>
@@ -86,13 +88,25 @@ export default function SpacingGrid() {
         </Grid>
       ) : (
         <React.Fragment>
-          <Typography style={{ color: "#ffffff" }}>
-            Your Claim is ready, you can now save it in to your Wallet{" "}
-          </Typography>
-          <Button
-            handleClick={() => sendClaimToWallet()}
-            text={"Send Request"}
-          ></Button>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item xs={12}>
+              <Typography style={{ color: "#ffffff" }}>
+                Your Claim is ready, you can now save it in to your Wallet{" "}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                handleClick={() => sendClaimToWallet()}
+                text={"Send Request"}
+              ></Button>
+            </Grid>
+          </Grid>
         </React.Fragment>
       )}
     </React.Fragment>

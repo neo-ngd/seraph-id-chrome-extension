@@ -3,28 +3,49 @@ import {
   GOVERNMENT_SCRIPT_HASH,
   NEO_RPC_URL,
   NEOSCAN_URL,
-  GOVERNMENT_ISSUER_PRIVATE_KEY
+  GOVERNMENT_ISSUER_PRIVATE_KEY,
+  DID_NETWORK,
+  PASSPORT_SCHEMA_NAME
 } from "./config";
 
 export const createClaim = values => {
-  const address = window.seraphID.getAddress();
   const issuer = new SeraphIDIssuer(
     GOVERNMENT_SCRIPT_HASH,
     NEO_RPC_URL,
-    NEOSCAN_URL
-  );
-  issuer.registerNewSchema("Passport", ["firstName", "lastName", "age"], true);
-  var claim = issuer.createClaim(
-    "0e5edf34-0451-4eb5-9781-92a413fc6445",
-    "Passport",
-    values,
-    "did:neoid:priv:".concat(address)
+    NEOSCAN_URL,
+    DID_NETWORK
   );
 
   issuer
-    .issueClaim(claim, GOVERNMENT_ISSUER_PRIVATE_KEY)
-    .then(res => {
-      return res;
+    .registerNewSchema(
+      PASSPORT_SCHEMA_NAME,
+      [
+        "idNumber",
+        "firstName",
+        "secondName",
+        "birthDate",
+        "gender",
+        "citizenship",
+        "address"
+      ],
+      true,
+      GOVERNMENT_ISSUER_PRIVATE_KEY
+    )
+    .then(r => {
+      console.log(r);
     })
-    .catch(e => e);
+    .catch(err => console.error("registerNewSchema ERR: ", err));
+
+  var claim = issuer.createClaim(
+    "0e5edf34-0451-4eb5-9781-92a413fc6445",
+    PASSPORT_SCHEMA_NAME,
+    values,
+    "did:neoid:priv:".concat("AVqs6s6BaDNXLtyoik7hK2KvXaohMgGPTD")
+  );
+  issuer
+    .issueClaim(claim, GOVERNMENT_ISSUER_PRIVATE_KEY)
+    .then(r => console.log("res", r))
+    .catch(e => console.log("err", e));
+
+  return claim;
 };
