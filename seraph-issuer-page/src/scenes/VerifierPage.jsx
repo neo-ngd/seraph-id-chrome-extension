@@ -10,7 +10,7 @@ export default function SpacingGrid() {
   const [error, setError] = React.useState(null);
 
   function askClaim() {
-    window.seraphID.askClaim('Passport', 'did:neoid:priv:AKrEnB5fhbi2bN8VqyxsDU3ijGG2tLVPeu', 'Test');
+    window.seraphID.askClaim('Passport', "did:neoid:priv:Af5nA8W1RMs57wkg6Cw79Lrd2nobL7vL6Z", 'Test');
   }
 
   return (

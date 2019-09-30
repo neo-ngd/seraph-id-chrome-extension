@@ -22,32 +22,35 @@ const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaNa
       style={{
         left: '50%',
         width: 'auto',
-        transform: 'translateX(-50%)',
+        transform: 'translateX(-50%) translateY(20%)',
         right: 0,
-        bottom: 0,
         maxWidth: '300px',
         zIndex: 99,
       }}
     >
-      <Box>
+      <Box overflow="auto" >
         <ReactJson
             displayObjectSize={false}
             displayDataTypes={false}
+            enableClipboard={false}
             src={claim}
           />
       </Box>
 
-      <Box alignSelf="flex-end" width="80%" pr="20px" display="flex">
+      <Box alignSelf="flex-end" display="flex" pt={2} pb={1}>
         <BaseButton
           handleClick={handleClose}
           small
           text="No"
+          fullWidth={false}
+          reject={true}
         />
 
         <BaseButton
           small
           handleClick={handleClaim}
           text="Yes"
+          fullWidth={false}
         />
       </Box>
     </BaseModal>

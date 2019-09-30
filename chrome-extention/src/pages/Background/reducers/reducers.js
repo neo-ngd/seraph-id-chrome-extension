@@ -37,7 +37,6 @@ export const claim = (state = null, action) => {
 };
 
 const initDialogState = {
-  open: false,
   context: null,
   verifierName: null,
   schemaName: null,

@@ -7,6 +7,7 @@ import { createWallet } from '../../commons/seraphSdkUtils';
 import BaseButton from '../Buttons/BaseButton';
 import { downloadFile, readFileFromDisk } from '../../commons/walletUtils';
 import BaseModal from './BaseModal';
+import { setExportedWallet } from '../../pages/Background/actions';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {
@@ -28,19 +29,23 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   removeIcon: {
     color: palette.text.secondary,
     padding: 0,
     fontSize: '12px',
-    marginLeft: spacing(2),
+    marginLeft: spacing(1),
   },
   accountInfo: {
-    paddingTop: spacing(1),
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   buttonsContainer: {
     flexDirection: 'column',
     padding: '0 32px',
+    marginTop: spacing(2),
     marginBottom: spacing(2),
   },
 }));
@@ -61,13 +66,13 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
     dispatch({ type: 'SET_WALLET', exportedWalletJSON });
     readFileFromDisk();
     // const allClaims = newWallet.getAllClaims(Object.keys(newWallet.didMap)[0]);
-  }
+  };
 
   const exportWallet = () => {
     wallet.encryptAll(password);
     const exportedWalletJson = JSON.stringify(wallet.export());
     downloadFile(exportedWalletJson, 'wallet.json', 'text/json');
-  }
+  };
 
   const header = () => (
     <Box>
@@ -76,12 +81,12 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
         <AddCircle />
       </ButtonBase>
     </Box>
-  )
+  );
 
   return (
     <BaseModal HeaderCompoennt={header} isOpen={isOpen} onClose={onClose}>
       {accounts.map((account, index) => (
-        <Box className={classes.accountRow}>
+        <Box key={account.label} className={classes.accountRow}>
           <Box>
             <Box color="text.primary" fontSize="14px">{`Account ${index}`}</Box>
             <Box color="text.primary" fontSize="6px">{account.label}</Box>

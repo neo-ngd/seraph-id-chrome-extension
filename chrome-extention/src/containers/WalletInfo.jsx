@@ -25,7 +25,7 @@ function WalletInfo({ accountFromStore }) {
   const showAllClaims = () => {
     const claimsArr = Object.entries(wallet.accounts[0].claims);
     return claimsArr.map((claim) => (
-      <Claim id={claim[1].id} schema={claim[1].schema} content={wallet.accounts[0]} />
+      <Claim key={claim[0]} id={claim[1].id} schema={claim[1].schema} content={claim[1].attributes} />
     ));
   };
 

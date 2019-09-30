@@ -15,6 +15,7 @@ import {dialogTypes, eventNames} from '../../contentTypes';
 
 function App() {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const { dialog, password, claim, error, wallet: accountFromStore } = useSelector(state => state);
 
   useEffect(() => {
@@ -64,11 +65,13 @@ function App() {
   };
 
   const handleClickOpen = context => {
-    dispatch(toggleDialog({open: true, context}))
+    dispatch(toggleDialog({context}))
+    setOpen(true);
   };
 
   const handleClose = () => {
-    dispatch(toggleDialog({open: false, context: null}));
+    dispatch(toggleDialog({context: null}));
+    setOpen(false);
   };
 
   const handleDecline = () => {
@@ -76,8 +79,9 @@ function App() {
       code: 'err:decline',
       message: 'user didn\'t accept to share the credential',
       error: new Error('user didn\'t accept to share the credential')
-    }))
-    dispatch(toggleDialog({open: false, context: null}));
+    }));
+    dispatch(toggleDialog({context: null}));
+    setOpen(false);
   };
 
   const addClaim = () => {
@@ -156,6 +160,7 @@ function App() {
       handleClose={dialog.context === dialogTypes.ASK_CLAIM ? handleDecline : handleClose}
       claim={claim}
       handleClaim={dialog.context === dialogTypes.ASK_CLAIM ? shareClaim : addClaim}
+      open={open}
       {...dialog}
       />
   );

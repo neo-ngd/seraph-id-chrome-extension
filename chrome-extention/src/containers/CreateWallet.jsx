@@ -6,6 +6,7 @@ import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
 import Layout from '../components/Layout/Layout';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
+import {setPassword, setExportedWallet} from "../pages/Background/actions";
 
 function CreateWallet() {
   const dispatch = useDispatch();
@@ -21,8 +22,8 @@ function CreateWallet() {
   }
 
   function setWallet(wallet) {
-    dispatch({ type: 'SET_WALLET', wallet });
-    dispatch({ type: 'SET_PASSWORD', password });
+    dispatch(setExportedWallet(wallet));
+    dispatch(setPassword(password));
   }
 
   return (

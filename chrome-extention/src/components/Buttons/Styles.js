@@ -9,7 +9,10 @@ export const useStyles = makeStyles(({ spacing }) => ({
     color: '#FFF',
     fontSize: 15,
     fontWeight: 'bold',
-    width: '100%',
+    marginRight: '12px',
+  },
+  rejectButton: {
+    background: 'linear-gradient(90deg, #90908D 0%, #F2F2F2 100%)',
   },
   arrowRight: {
     fontSize: 24,
@@ -19,10 +22,10 @@ export const useStyles = makeStyles(({ spacing }) => ({
     color: '#FFF',
   },
   smallButton: {
-    height: '17px',
-    fontSize: '8px',
+    height: '22px',
+    fontSize: '10px',
     marginBottom: spacing(1),
-    padding: 0,
+    padding: '0 8px',
   },
   smallArrowRight: {
     fontSize: '12px',
