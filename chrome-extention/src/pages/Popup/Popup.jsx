@@ -16,18 +16,18 @@ const PAGES = {
 
 function Popup() {
   const [page, setPage] = useState(PAGES.WELCOME);
-  const { password, wallet: accountFromStore } = useSelector(state => state);
+  const { session, wallet: accountFromStore } = useSelector(state => state);
   const goToPage = page => setPage(page);
 
   useEffect(() => {
     if (accountFromStore) {
-      if (password) {
+      if (session) {
         goToPage(PAGES.CLAIMS);
       } else {
         goToPage(PAGES.UNLOCK_WALLET);
       }
     }
-  }, [accountFromStore, password]);
+  }, [accountFromStore, session]);
 
   const selectComponent = () => {
     if (page === PAGES.WELCOME) {
@@ -35,15 +35,12 @@ function Popup() {
     }
 
     if (page === PAGES.CREATE_WALLET) {
-      return (<CreateWallet onGoTopage={() => goToPage(PAGES.UNLOCK_WALLET)} />)
+      return (<CreateWallet />)
     }
 
     if (page === PAGES.UNLOCK_WALLET) {
       return (
-        <UnlockWallet
-          accountFromStore={accountFromStore}
-          password={password}
-        />
+        <UnlockWallet />
       )
     }
 

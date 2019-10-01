@@ -2,12 +2,13 @@ import '../../../assets/icons/icon128';
 
 import { combineReducers } from 'redux';
 
-import { wallet, password, claim, dialog, error } from './reducers';
+import { wallet, claim, dialog, error, hash, session } from './reducers';
 
 export default combineReducers({
   wallet,
-  password,
   claim,
   dialog,
-  error
+  error,
+  hash,
+  session
 });

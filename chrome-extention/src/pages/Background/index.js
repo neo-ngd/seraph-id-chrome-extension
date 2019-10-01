@@ -15,7 +15,7 @@ const composeEnhancers = composeWithDevTools({
 const persistConfig = {
   key: 'root',
   storage: storageSession,
-  blacklist: ['password'],
+  blacklist: ['session', 'error'],
 };
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const middlewares = [alias(aliases), thunk];

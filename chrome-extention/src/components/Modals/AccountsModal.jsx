@@ -7,7 +7,6 @@ import { createWallet } from '../../commons/seraphSdkUtils';
 import BaseButton from '../Buttons/BaseButton';
 import { downloadFile, readFileFromDisk } from '../../commons/walletUtils';
 import BaseModal from './BaseModal';
-import { setExportedWallet } from '../../pages/Background/actions';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {

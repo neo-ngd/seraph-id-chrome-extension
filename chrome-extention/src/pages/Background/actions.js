@@ -1,15 +1,28 @@
 import {
   ASK_CLAIM_ALIAS,
   CREATE_CLAIM_ALIAS,
-  SET_PASSPORT,
+  SET_PASSWORD,
   SET_WALLET,
   SET_CLAIM,
   TOGGLE_DIALOG,
-  SEND_ERROR, DESTROY_ERROR, DESTROY_CLAIM
+  SEND_ERROR,
+  DESTROY_ERROR,
+  DESTROY_CLAIM,
+  SET_PASSWORD_ALIAS,
+  CHECK_PASSWORD_ALIAS, SET_HASH, DESTROY_HASH, GET_PASSWORD_ALIAS, SET_SESSION, DESTROY_SESSION
 } from './actionTypes';
 
+export const getEncryptedPassword = () =>
+    ({ type: GET_PASSWORD_ALIAS });
+
+export const checkPassword = password =>
+    ({ type: CHECK_PASSWORD_ALIAS, password });
+
+export const setEncryptedPassword = password =>
+    ({type: SET_PASSWORD_ALIAS, password});
+
 export const setPassword = password =>
-  ({type: SET_PASSPORT, password});
+  ({type: SET_PASSWORD, password});
 
 export const setExportedWallet = exportedWalletJSON =>
   ({type: SET_WALLET, exportedWalletJSON });
@@ -34,4 +47,17 @@ export const sendError = error =>
 
 export const destroyError = () =>
     ({ type: DESTROY_ERROR });
+
+export const setHash = hash =>
+    ({ type: SET_HASH, hash});
+
+export const destroyHash = () =>
+    ({ type: DESTROY_HASH });
+
+export const setSession = session =>
+    ({ type: SET_SESSION, session});
+
+export const destroySession = session =>
+    ({ type: DESTROY_SESSION, session});
+
 

@@ -2,24 +2,31 @@ import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import Claim from '../components/Cards/Claim';
 import { createWallet } from '../commons/seraphSdkUtils';
-import { useSelector } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import Layout from '../components/Layout/Layout';
 import AccountsModal from '../components/Modals/AccountsModal';
+import { useDispatch } from "react-redux";
+import {getEncryptedPassword} from "../pages/Background/actions";
 
 function WalletInfo({ accountFromStore }) {
+  const dispatch = useDispatch();
   const [wallet, setWallet] = useState(null);
-  const password = useSelector((state) => state.password);
   const [modalVisibility, setModalVisibility] = useState(false);
 
   useEffect(() => {
-    async function decryptAccount() {
-      const importedWallet = createWallet(JSON.parse(accountFromStore));
-      await importedWallet.accounts[0].decrypt(password);
-      setWallet(importedWallet);
-    }
-    decryptAccount();
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+      if (request.msg === 'encryptedPw') {
+        decryptAccount(request.password);
+      }
+    });
+    dispatch(getEncryptedPassword())
   }, []);
+
+  const decryptAccount = async (password) => {
+    const importedWallet = createWallet(JSON.parse(accountFromStore));
+    await importedWallet.accounts[0].decrypt(password);
+    setWallet(importedWallet);
+  };
 
   
   const showAllClaims = () => {

@@ -12,6 +12,7 @@ import {
   toggleDialog
 } from '../../../Background/actions';
 import {dialogTypes, eventNames} from '../../contentTypes';
+import { NO_WALLET, CLAIM_DECLINE } from "../../../../commons/errorCodes";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function App() {
   const getAddressListener = wallet =>
       !!wallet ?
           document.dispatchEvent(new CustomEvent('getAddress', {detail: wallet.accounts[0].label})) :
-          dispatch(sendError({code: 'err:noWallet', message: 'cannot find any wallet', error: new Error('cannot find any wallet')}));
+          dispatch(sendError({code: NO_WALLET, message: 'cannot find any wallet', error: new Error('cannot find any wallet')}));
 
   const askClaimListener = ({detail}) => dispatch(askClaim(detail));
 
@@ -76,7 +77,7 @@ function App() {
 
   const handleDecline = () => {
     dispatch(sendError({
-      code: 'err:decline',
+      code: CLAIM_DECLINE,
       message: 'user didn\'t accept to share the credential',
       error: new Error('user didn\'t accept to share the credential')
     }));
