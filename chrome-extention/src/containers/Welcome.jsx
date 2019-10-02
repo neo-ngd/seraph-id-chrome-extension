@@ -1,8 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box, Link, makeStyles } from '@material-ui/core';
 import Layout from '../components/Layout/Layout';
+import { createWallet } from '../commons/seraphSdkUtils';
+import { setExportedWallet } from '../pages/Background/actions';
+import { createFileInput } from '../commons/walletUtils';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   link: {
@@ -13,7 +17,32 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 function Welcome({ onGoTopage }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  function handleImportedFile() {
+    const file = this.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+      const json = reader.result;
+      const newWallet = new createWallet(JSON.parse(json));
+
+      const exportedWalletJSON = JSON.stringify(newWallet.export());
+
+      dispatch(setExportedWallet(exportedWalletJSON));
+      // const allClaims = newWallet.getAllClaims(Object.keys(newWallet.didMap)[0]);
+    };
+  
+    reader.readAsText(file);
+  }
+
+  const importWallet = () => {
+    const file = createFileInput();
+    file.click();
+
+    file.addEventListener("change", handleImportedFile, false);
+  };
 
   return (
     <Layout>
@@ -33,7 +62,7 @@ function Welcome({ onGoTopage }) {
           handleClick={onGoTopage}
           text={'Create a Wallet'}
         />
-        <Link href="#" className={classes.link}>Or import an existing one</Link>
+        <Link href="#" onClick={importWallet} className={classes.link}>Or import an existing one</Link>
       </Box>
     </Layout>
   );

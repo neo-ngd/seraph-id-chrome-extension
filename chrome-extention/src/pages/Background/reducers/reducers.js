@@ -1,12 +1,10 @@
 import {
   DESTROY_CLAIM,
-  SEND_ERROR,
-  DESTROY_ERROR,
   SET_CLAIM,
   SET_WALLET,
   TOGGLE_DIALOG,
-  SET_HASH,
-  DESTROY_HASH, SET_SESSION, DESTROY_SESSION
+  SET_SESSION,
+  DESTROY_SESSION
 } from '../actionTypes';
 
 export const wallet = (state = null, action) => {
@@ -38,33 +36,6 @@ export const dialog = (state = initDialogState, action) => {
   switch (action.type) {
     case TOGGLE_DIALOG:
       return action.dialog;
-    default:
-      return state;
-  }
-};
-
-const initErrorState = {
-  code: null,
-  message: null,
-  error: null,
-};
-export const error = (state = initErrorState, action) => {
-  switch (action.type) {
-    case SEND_ERROR:
-      return action.error;
-    case DESTROY_ERROR:
-      return initErrorState;
-    default:
-      return state;
-  }
-};
-
-export const hash = (state = null, action) => {
-  switch (action.type) {
-    case SET_HASH:
-      return action.hash;
-    case DESTROY_HASH:
-      return null;
     default:
       return state;
   }

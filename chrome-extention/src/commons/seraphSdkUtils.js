@@ -15,7 +15,7 @@ export const createWallet = wallet => new SeraphIDWallet(wallet);
  * Decrypt the wallet
  * @param accountFromStore
  * @param password
- * @return {Promise<SeraphIDWallet>}
+ * @return {Promise<SeraphIDWallet | null>}
  */
 export const decrypt = async (accountFromStore, password) => {
   try {
@@ -23,8 +23,7 @@ export const decrypt = async (accountFromStore, password) => {
     await wallet.accounts[0].decrypt(password);
     return wallet;
   } catch (e) {
-    // TODO handle error
-    console.warn(e)
+    return null;
   }
 };
 

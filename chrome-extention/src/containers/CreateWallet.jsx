@@ -6,24 +6,25 @@ import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
 import Layout from '../components/Layout/Layout';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
-import {setExportedWallet, setEncryptedPassword} from "../pages/Background/actions";
+import {getEncryptedPasswordToCS, setExportedWallet, setPassword} from "../pages/Background/actions";
 
 function CreateWallet() {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
 
-  function createAndSetWallet() {
+  async function createAndSetWallet() {
     const wallet = new SeraphIDWallet({ name: 'MyWallet' });
     wallet.createDID(DIDNetwork.PrivateNet);
-    wallet.accounts[0].encrypt(password).then(() => {
-      const exportedWalletJSON = JSON.stringify(wallet.export());
-      setWallet(exportedWalletJSON);
-    });
+    await wallet.accounts[0].encrypt(password);
+
+    const exportedWalletJSON = JSON.stringify(wallet.export());
+    setWallet(exportedWalletJSON);
   }
 
   function setWallet(wallet) {
     dispatch(setExportedWallet(wallet));
-    dispatch(setEncryptedPassword(password));
+    dispatch(setPassword(password));
+    dispatch(getEncryptedPasswordToCS())
   }
 
   return (

@@ -17,9 +17,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     paddingLeft: theme.spacing(1)
   },
+  error: {
+    border: '2px solid',
+    borderColor: theme.palette.primary.error,
+  }
 }));
 
-export default function PasswordInput({ value, handleChange, minLength }) {
+export default function PasswordInput({ value, handleChange, minLength, hasError }) {
   const classes = useStyles();
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -29,7 +33,7 @@ export default function PasswordInput({ value, handleChange, minLength }) {
   return (
     <InputBase
       id="outlined-adornment-password"
-      className={clsx(classes.textField)}
+      className={clsx(classes.textField, hasError && classes.error)}
       type={showPassword ? 'text' : 'password'}
       placeholder="Password"
       value={value}

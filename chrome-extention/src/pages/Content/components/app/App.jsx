@@ -6,28 +6,40 @@ import {
   askClaim,
   createClaim,
   destroyClaim,
-  destroyError,
-  sendError,
+  getEncryptedPasswordToCS,
+  sendErrorToCSAlias,
   setClaim,
   toggleDialog
 } from '../../../Background/actions';
-import {dialogTypes, eventNames} from '../../contentTypes';
-import { NO_WALLET, CLAIM_DECLINE } from "../../../../commons/errorCodes";
+import {claimDeclineError, ERROR_MSG, walletNotFoundError} from "../../../../commons/errors";
+import {DIALOG_TYPES, ENCRYPTED_PW_MSG, EVENT_NAMES} from "../../../../commons/constants";
 
 function App() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { dialog, password, claim, error, wallet: accountFromStore } = useSelector(state => state);
+  const { dialog, claim, wallet: accountFromStore } = useSelector(state => state);
 
   useEffect(() => {
     injectScript();
-    const decryptSetWallet = async () => {
-      const wallet = await decrypt(accountFromStore, password);
-      registerListeners(wallet);
-    };
-    decryptSetWallet();
+    chrome.runtime.onMessage.addListener(onMessageListener);
+    dispatch(getEncryptedPasswordToCS());
     return unregisterListeners;
   }, []);
+
+  const onMessageListener = request => {
+    if (request.msg === ENCRYPTED_PW_MSG) {
+      decryptSetWallet(request.password);
+    }
+    if (request.msg === ERROR_MSG) {
+      dispatchClaimErrorEvent(request.error);
+    }
+  };
+
+  const decryptSetWallet = async (password) => {
+    const wallet = await decrypt(accountFromStore, password);
+    unregisterListeners();
+    registerListeners(wallet);
+  };
 
   const injectScript = () => {
     const script = document.createElement('script'),
@@ -40,33 +52,38 @@ function App() {
 
   const getClaimListener = ({detail: claim}) => {
     dispatch(setClaim(claim));
-    handleClickOpen(dialogTypes.GET_CLAIM);
+    handleClickOpen(DIALOG_TYPES.GET_CLAIM);
   };
 
-  const getAddressListener = wallet =>
-      !!wallet ?
-          document.dispatchEvent(new CustomEvent('getAddress', {detail: wallet.accounts[0].label})) :
-          dispatch(sendError({code: NO_WALLET, message: 'cannot find any wallet', error: new Error('cannot find any wallet')}));
+  const getAddressListener = (wallet) =>
+    !!wallet ?
+        document.dispatchEvent(new CustomEvent('getAddress', {detail: wallet.accounts[0].label})) :
+        dispatch(sendErrorToCSAlias(walletNotFoundError()));
 
   const askClaimListener = ({detail}) => dispatch(askClaim(detail));
 
   const registerListeners = (wallet) => {
     document.addEventListener('sendClaim', getClaimListener);
-    document.addEventListener('sendAddress', () => getAddressListener(wallet));
+    document.addEventListener('sendAddress', () => getAddressListener(wallet)); // TODO UNREGISTER NOT WORKING
     document.addEventListener('askClaim', askClaimListener);
-    // TEST PURPOSE
-    document.addEventListener(eventNames.CLAIM_SUCCESS, e => console.warn(e));
-    document.addEventListener(eventNames.CLAIM_ERROR, e => console.warn(e));
+    // TODO REMOVE
+    document.addEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener);
+    document.addEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener);
   };
 
   const unregisterListeners = () => {
     document.removeEventListener('sendClaim', getClaimListener);
     document.removeEventListener('sendAddress', getAddressListener);
     document.removeEventListener('askClaim', askClaimListener);
+    // TODO REMOVE
+    document.removeEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener);
+    document.removeEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener);
   };
 
+  const dummyListener = e => console.warn(e);
+
   const handleClickOpen = context => {
-    dispatch(toggleDialog({context}))
+    dispatch(toggleDialog({context}));
     setOpen(true);
   };
 
@@ -76,11 +93,7 @@ function App() {
   };
 
   const handleDecline = () => {
-    dispatch(sendError({
-      code: CLAIM_DECLINE,
-      message: 'user didn\'t accept to share the credential',
-      error: new Error('user didn\'t accept to share the credential')
-    }));
+    dispatch(sendErrorToCSAlias(claimDeclineError()));
     dispatch(toggleDialog({context: null}));
     setOpen(false);
   };
@@ -102,9 +115,11 @@ function App() {
        * Send the claim to content script
        * @param {object} claim
        */
-      sendClaim: claim => document.dispatchEvent(
-          new CustomEvent('sendClaim', { detail: claim })
-      ),
+      sendClaim: claim => {
+        document.dispatchEvent(
+            new CustomEvent('sendClaim', { detail: claim })
+        )
+      },
 
       /**
        * Ask for the claim
@@ -141,7 +156,7 @@ function App() {
    * @return {boolean}
    */
   const dispatchClaimErrorEvent = error =>
-      document.dispatchEvent(new CustomEvent(eventNames.CLAIM_ERROR, { detail: error}));
+      document.dispatchEvent(new CustomEvent(EVENT_NAMES.CLAIM_ERROR, { detail: error}));
 
   /**
    * Dispatch claimSuccess event.
@@ -149,18 +164,13 @@ function App() {
    * @return {boolean}
    */
   const dispatchClaimSuccessEvent = claim =>
-      document.dispatchEvent(new CustomEvent(eventNames.CLAIM_SUCCESS, { detail: claim}));
-
-  if (!!error.error) {
-    dispatchClaimErrorEvent(error);
-    dispatch(destroyError())
-  }
+      document.dispatchEvent(new CustomEvent(EVENT_NAMES.CLAIM_SUCCESS, { detail: claim}));
 
   return (
     <DialogClaim
-      handleClose={dialog.context === dialogTypes.ASK_CLAIM ? handleDecline : handleClose}
+      handleClose={dialog.context === DIALOG_TYPES.ASK_CLAIM ? handleDecline : handleClose}
       claim={claim}
-      handleClaim={dialog.context === dialogTypes.ASK_CLAIM ? shareClaim : addClaim}
+      handleClaim={dialog.context === DIALOG_TYPES.ASK_CLAIM ? shareClaim : addClaim}
       open={open}
       {...dialog}
       />

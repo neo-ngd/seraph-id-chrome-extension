@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 
@@ -26,6 +26,8 @@ function Popup() {
       } else {
         goToPage(PAGES.UNLOCK_WALLET);
       }
+    } else {
+      goToPage(PAGES.WELCOME);
     }
   }, [accountFromStore, session]);
 
@@ -53,7 +55,9 @@ function Popup() {
 
   return (
     <Box display="flex" height="100%" width="100%">
-      {selectComponent()}
+      <Suspense fallback="loading...">
+          {selectComponent()}
+      </Suspense>
     </Box>
   );
 }

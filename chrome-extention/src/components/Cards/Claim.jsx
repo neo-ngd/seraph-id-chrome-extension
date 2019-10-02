@@ -50,12 +50,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function RecipeReviewCard({ id, schema, content }) {
+export default function RecipeReviewCard({ id, schema, content, onRemoveClaim }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-
-  const handleRemoveClick = () => {
-  }
 
   const renderActionIcons = () => (
     <Box>
@@ -74,7 +71,7 @@ export default function RecipeReviewCard({ id, schema, content }) {
       <IconButton
         className={classes.removeIcon}
         disableRipple
-        onClick={handleRemoveClick}
+        onClick={() => onRemoveClaim(id)}
         aria-expanded={expanded}
         aria-label="show more"
       >
@@ -99,7 +96,7 @@ export default function RecipeReviewCard({ id, schema, content }) {
       />
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent style={{maxWidth: '100%', overflow: 'scroll'}}>
           <ReactJson
             displayObjectSize={false}
             displayDataTypes={false}

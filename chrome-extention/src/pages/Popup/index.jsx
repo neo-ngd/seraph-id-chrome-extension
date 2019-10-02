@@ -16,12 +16,14 @@ const theme = createMuiTheme({
       secondary: '#CBCFD4',
       light: '#CBCFD4',
       hint: '#00BF0B',
+      error: '#FF6E6E',
     },
     primary: {
       main: '#3C444D',
       dark: '#30363D',
       light: '#FFF',
       contrastText: '#00BF0B',
+      error: '#FF6E6E',
     },
   },
 });

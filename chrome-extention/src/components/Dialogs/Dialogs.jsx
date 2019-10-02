@@ -1,17 +1,15 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import ReactJson from 'react-json-view';
-import { dialogTypes } from '../../pages/Content/contentTypes';
 import BaseModal from '../Modals/BaseModal';
 import BaseButton from '../Buttons/BaseButton';
+import logo from '../../assets/icons/logo-header.png';
+import {DIALOG_TYPES} from "../../commons/constants";
 
 const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaName, verifierName }) => {
   const header = () => (
-    <Box color="text.primary">
-      {context === dialogTypes.GET_CLAIM
-        ? 'Do you want to accept this claim?'
-        : `${verifierName} wants to access your ${schemaName}. Do you want to share it?`
-      }
+    <Box pt="8px" pb="8px">
+      <img alt="logo" src={logo} />
     </Box>
   );
   return (
@@ -28,6 +26,12 @@ const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaNa
         zIndex: 99,
       }}
     >
+      <Box fontSize="16px" pb="16px" textAlign="center" color="text.primary">
+        {context === DIALOG_TYPES.GET_CLAIM
+          ? 'Do you want to accept this claim?'
+          : `${verifierName} wants to access your ${schemaName}. Do you want to share it?`
+        }
+      </Box>
       <Box overflow="auto" >
         <ReactJson
             displayObjectSize={false}

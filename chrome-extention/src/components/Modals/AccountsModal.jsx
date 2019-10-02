@@ -3,10 +3,11 @@ import { Box, ButtonBase, IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddCircle, Close } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
-import { createWallet } from '../../commons/seraphSdkUtils';
 import BaseButton from '../Buttons/BaseButton';
-import { downloadFile, readFileFromDisk } from '../../commons/walletUtils';
 import BaseModal from './BaseModal';
+import { setExportedWallet } from '../../pages/Background/actions';
+import { createFileInput, downloadFile } from '../../commons/walletUtils';
+import {sendErrorToCS, UNKNOWN, unknownError} from "../../commons/errors";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {
@@ -51,27 +52,40 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 
 const AccountsModal = ({ isOpen, onClose, wallet }) => {
   const classes = useStyles();
-  const password = useSelector((state) => state.password);
   const dispatch = useDispatch();
+  const accountFromStore = useSelector(state => state.wallet);
   const { accounts } = wallet;
 
-  const handleRemoveClick = () => {}
+  const handleRemoveAccount = () => {
+    dispatch(setExportedWallet(null)); // TODO: there is no method in SDK for remove account
+  }
 
-  const importWallet = () => {
-    const newWallet = new createWallet(JSON.parse(json));
-    newWallet.decryptAll(password);
-    const exportedWalletJSON = JSON.stringify(wallet.export());
+  const handleExportWallet = () => {
+    downloadFile(accountFromStore, 'wallet.json', 'text/json');
+  }
 
-    dispatch({ type: 'SET_WALLET', exportedWalletJSON });
-    readFileFromDisk();
-    // const allClaims = newWallet.getAllClaims(Object.keys(newWallet.didMap)[0]);
-  };
+  const handleImportWallet = () => {
+    try {
+      const fileInput = createFileInput();
 
-  const exportWallet = () => {
-    wallet.encryptAll(password);
-    const exportedWalletJson = JSON.stringify(wallet.export());
-    downloadFile(exportedWalletJson, 'wallet.json', 'text/json');
-  };
+      fileInput.addEventListener("change", function() {
+        const file = this.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = async function() {
+          const json = reader.result;
+          dispatch(setExportedWallet(json));
+          fileInput.remove();
+        };
+      
+        reader.readAsText(file);
+      }, false);
+
+      fileInput.click();
+    } catch (error) {
+      dispatch(sendErrorToCS(unknownError(error)));
+    }
+  }
 
   const header = () => (
     <Box>
@@ -96,7 +110,7 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
             <IconButton
               className={classes.removeIcon}
               disableRipple
-              onClick={handleRemoveClick}
+              onClick={handleRemoveAccount}
               aria-label="remove"
             >
               <Close color="inherit" fontSize="inherit" />
@@ -107,12 +121,12 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
 
       <Box className={classes.buttonsContainer}>
         <BaseButton
-          handleClick={exportWallet}
+          handleClick={handleExportWallet}
           text={'Export wallet'}
           small
         />
         <BaseButton
-          handleClick={importWallet}
+          handleClick={handleImportWallet}
           text={'Import wallet'}
           small
         />

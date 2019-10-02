@@ -2,25 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 import Claim from '../components/Cards/Claim';
 import { createWallet } from '../commons/seraphSdkUtils';
+import { useDispatch } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import Layout from '../components/Layout/Layout';
 import AccountsModal from '../components/Modals/AccountsModal';
-import { useDispatch } from "react-redux";
-import {getEncryptedPassword} from "../pages/Background/actions";
+import { setExportedWallet } from '../pages/Background/actions';
+import { getEncryptedPassword } from "../pages/Background/actions";
+import {ENCRYPTED_PW_MSG} from "../commons/constants";
 
 function WalletInfo({ accountFromStore }) {
   const dispatch = useDispatch();
   const [wallet, setWallet] = useState(null);
+  const [pw, setPw] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
-
+  
   useEffect(() => {
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      if (request.msg === 'encryptedPw') {
+    chrome.runtime.onMessage.addListener(request => {
+      if (request.msg === ENCRYPTED_PW_MSG) {
         decryptAccount(request.password);
+        setPw(request.password);
       }
     });
     dispatch(getEncryptedPassword())
   }, []);
+
+  useEffect(() => {
+    handleCloseAccountsModal(false);
+    decryptAccount(pw);
+  }, [accountFromStore]);
 
   const decryptAccount = async (password) => {
     const importedWallet = createWallet(JSON.parse(accountFromStore));
@@ -28,11 +37,24 @@ function WalletInfo({ accountFromStore }) {
     setWallet(importedWallet);
   };
 
-  
-  const showAllClaims = () => {
-    const claimsArr = Object.entries(wallet.accounts[0].claims);
-    return claimsArr.map((claim) => (
-      <Claim key={claim[0]} id={claim[1].id} schema={claim[1].schema} content={claim[1].attributes} />
+  const removeClaim = async (id) => {
+    delete wallet.accounts[0].claims[id];
+    setWallet(wallet);
+
+    await wallet.accounts[0].encrypt(pw);
+    const exportedWalletJSON = JSON.stringify(wallet.export());
+    dispatch(setExportedWallet(exportedWalletJSON));
+  }
+
+  const showAllClaims = (claims) => {
+    return claims.map((claim) => (
+      <Claim
+        key={claim[0]}
+        id={claim[1].id}
+        schema={claim[1].schema}
+        content={claim[1].attributes}
+        onRemoveClaim={removeClaim}
+      />
     ));
   };
 
@@ -44,10 +66,9 @@ function WalletInfo({ accountFromStore }) {
     setModalVisibility(false);
   };
 
-
   if (wallet) {
-    const { label: address } = wallet.accounts[0];
     const claimsArr = Object.entries(wallet.accounts[0].claims);
+    const { label: address } = wallet.accounts[0];
 
     return (
       <Layout padding={'60px 0 0 0'} justifyStart>
@@ -62,7 +83,7 @@ function WalletInfo({ accountFromStore }) {
 
           {claimsArr.length > 0 ? (
             <Box>
-              {showAllClaims()}
+              {showAllClaims(claimsArr)}
             </Box>
           ) : (
             <Box color="text.primary" fontSize="16px" lineHeight="28px" textAlign="center">
