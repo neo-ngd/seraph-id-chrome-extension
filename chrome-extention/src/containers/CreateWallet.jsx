@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -11,8 +11,10 @@ import {getEncryptedPasswordToCS, setExportedWallet, setPassword} from "../pages
 function CreateWallet() {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
+  const [isLoading, setIsLoading] = useState();
 
   async function createAndSetWallet() {
+    setIsLoading(true);
     const wallet = new SeraphIDWallet({ name: 'MyWallet' });
     wallet.createDID(DIDNetwork.PrivateNet);
     await wallet.accounts[0].encrypt(password);
@@ -28,7 +30,7 @@ function CreateWallet() {
   }
 
   return (
-    <Layout>
+    <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
         <Box fontSize={24} color="text.primary">Please choose a secure password </Box>
 

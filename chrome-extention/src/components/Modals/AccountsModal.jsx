@@ -13,7 +13,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {
     position: 'absolute',
     right: spacing(2),
-    top: spacing(0.5),
+    top: spacing(1.1),
     color: palette.primary.contrastText,
   },
   headerText: {
@@ -88,7 +88,7 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
   }
 
   const header = () => (
-    <Box>
+    <Box pt="5px">
       <Box className={classes.headerText}>Accounts</Box>
       <ButtonBase className={classes.addIcon}>
         <AddCircle />

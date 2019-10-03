@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
   header: {
     backgroundColor: palette.primary.dark,
-    height: '32px',
+    height: '42px',
   },
   content: {
     paddingTop: spacing(2),

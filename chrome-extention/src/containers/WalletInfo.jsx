@@ -15,11 +15,14 @@ function WalletInfo({ accountFromStore }) {
   const [wallet, setWallet] = useState(null);
   const [pw, setPw] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [isLoading, setIsLoading] = useState();
   
   useEffect(() => {
-    chrome.runtime.onMessage.addListener(request => {
+    setIsLoading(true);
+    chrome.runtime.onMessage.addListener(async request => {
       if (request.msg === ENCRYPTED_PW_MSG) {
-        decryptAccount(request.password);
+        await decryptAccount(request.password);
+        setIsLoading(false);
         setPw(request.password);
       }
     });
@@ -27,8 +30,15 @@ function WalletInfo({ accountFromStore }) {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
+
     handleCloseAccountsModal(false);
-    decryptAccount(pw);
+    if (pw) {
+      (async () => {
+        await decryptAccount(pw);
+        setIsLoading(false);
+      })();
+    }
   }, [accountFromStore]);
 
   const decryptAccount = async (password) => {
@@ -71,13 +81,14 @@ function WalletInfo({ accountFromStore }) {
     const { label: address } = wallet.accounts[0];
 
     return (
-      <Layout padding={'60px 0 0 0'} justifyStart>
+      <Layout padding={'60px 0 0 0'} justifyStart isLoading={isLoading}>
         <NavBar address={address} onOpenAccountsModal={openAccountsModal} name="Account 1" />
         <Box
           display="flex" 
           flex="1"
           flexDirection="column"
           justifyContent={claimsArr.length > 0 ? 'flex-start' : 'space-between'}
+          overflow="auto"
         >
           <Box fontSize="24px" color="text.primary">Claims</Box>
 

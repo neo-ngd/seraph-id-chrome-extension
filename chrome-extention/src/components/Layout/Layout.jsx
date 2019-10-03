@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Box, CircularProgress } from '@material-ui/core';
 
-function Layout({ children, justifyStart, padding }) {
+function Layout({ children, justifyStart, padding, isLoading }) {
   return (
     <Box
       justifyContent={justifyStart ? 'flex-start' : 'space-between'}
@@ -10,9 +10,16 @@ function Layout({ children, justifyStart, padding }) {
       height="100%"
       flex={'0 0 100%'}
       padding={padding}
-      overflow-y="auto"
+      overflow="hidden"
+      maxWidth="100%"
     >
-      {children}
+      {isLoading ? (
+        <Box style={{
+          margin: 'auto',
+        }}>
+          <CircularProgress style={{ color: 'white' }} />
+        </Box>
+      ) : children }
     </Box>
   );
 }

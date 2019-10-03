@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Box } from '@material-ui/core';
 
@@ -55,9 +55,7 @@ function Popup() {
 
   return (
     <Box display="flex" height="100%" width="100%">
-      <Suspense fallback="loading...">
-          {selectComponent()}
-      </Suspense>
+      {selectComponent()}
     </Box>
   );
 }

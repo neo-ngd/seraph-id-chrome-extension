@@ -3,13 +3,13 @@ import { Box } from '@material-ui/core';
 import ReactJson from 'react-json-view';
 import BaseModal from '../Modals/BaseModal';
 import BaseButton from '../Buttons/BaseButton';
-import logo from '../../assets/icons/logo-header.png';
 import {DIALOG_TYPES} from "../../commons/constants";
+import Icon from '../Icon/Icon';
 
 const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaName, verifierName }) => {
   const header = () => (
-    <Box pt="8px" pb="8px">
-      <img alt="logo" src={logo} />
+    <Box pl="10px" pt="6px">
+      <Icon />
     </Box>
   );
   return (

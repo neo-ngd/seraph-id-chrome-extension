@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box, Link, makeStyles } from '@material-ui/core';
 import Layout from '../components/Layout/Layout';
-import { createWallet } from '../commons/seraphSdkUtils';
 import { setExportedWallet } from '../pages/Background/actions';
 import { createFileInput } from '../commons/walletUtils';
+import { sendErrorToCS, unknownError } from '../commons/errors';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   link: {
@@ -19,33 +19,36 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 function Welcome({ onGoTopage }) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
 
-  function handleImportedFile() {
-    const file = this.files[0];
-    const reader = new FileReader();
+  const handleImportWallet = () => {
+    try {
+      const fileInput = createFileInput();
 
-    reader.onload = async function() {
-      const json = reader.result;
-      const newWallet = new createWallet(JSON.parse(json));
+      fileInput.addEventListener("change", function() {
+        setIsLoading(true);
 
-      const exportedWalletJSON = JSON.stringify(newWallet.export());
+        const file = this.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = async function() {
+          const json = reader.result;
+          dispatch(setExportedWallet(json));
+          fileInput.remove();
+        };
+      
+        reader.readAsText(file);
+      }, false);
 
-      dispatch(setExportedWallet(exportedWalletJSON));
-      // const allClaims = newWallet.getAllClaims(Object.keys(newWallet.didMap)[0]);
-    };
-  
-    reader.readAsText(file);
+      fileInput.click();
+    } catch (error) {
+      setIsLoading(false);
+      dispatch(sendErrorToCS(unknownError(error)));
+    }
   }
 
-  const importWallet = () => {
-    const file = createFileInput();
-    file.click();
-
-    file.addEventListener("change", handleImportedFile, false);
-  };
-
   return (
-    <Layout>
+    <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
         <Box fontSize={24} color="text.primary">Welcome to Seraph ID</Box>
 
@@ -62,7 +65,7 @@ function Welcome({ onGoTopage }) {
           handleClick={onGoTopage}
           text={'Create a Wallet'}
         />
-        <Link href="#" onClick={importWallet} className={classes.link}>Or import an existing one</Link>
+        <Link href="#" onClick={handleImportWallet} className={classes.link}>Or import an existing one</Link>
       </Box>
     </Layout>
   );
