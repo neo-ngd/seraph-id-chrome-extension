@@ -9,8 +9,7 @@ import {
 } from "./config";
 import { v4 as uuid } from 'uuid';
 
-export const createClaim = async (values) => {
-  const address =  await window.seraphID.getAddress();
+export const createClaim = async (values, address) => {
   const issuer = new SeraphIDIssuer(
     GOVERNMENT_SCRIPT_HASH,
     NEO_RPC_URL,

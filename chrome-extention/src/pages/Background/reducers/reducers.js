@@ -4,7 +4,7 @@ import {
   SET_WALLET,
   TOGGLE_DIALOG,
   SET_SESSION,
-  DESTROY_SESSION
+  DESTROY_SESSION, SET_ACTIVE_ACCOUNT
 } from '../actionTypes';
 
 export const wallet = (state = null, action) => {
@@ -47,6 +47,15 @@ export const session = (state = false, action) => {
       return action.session;
     case DESTROY_SESSION:
       return false;
+    default:
+      return state;
+  }
+};
+
+export const activeAccount = (state = null, action) => {
+  switch (action.type) {
+    case SET_ACTIVE_ACCOUNT:
+      return action.account;
     default:
       return state;
   }

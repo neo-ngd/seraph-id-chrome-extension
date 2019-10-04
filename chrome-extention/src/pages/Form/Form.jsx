@@ -4,7 +4,7 @@ import BaseButton from "../../components/Buttons/BaseButton";
 import RotationLogo from "../../components/RotatingLogo/RotatingLogo";
 import {useDispatch} from "react-redux";
 import {IMPORT_ERROR_MSG, IMPORT_SUCCESS_MSG, SUCCESS, ERROR, WALLET_NAME} from "../../commons/constants";
-import {importWalletAlias} from "../Background/actions";
+import {importWalletAlias, setSession} from "../Background/actions";
 
 const useStyles = makeStyles(({palette, spacing}) => ({
     container: {
@@ -77,6 +77,7 @@ const Form = () => {
         reader.onload = async () => {
             const json = reader.result;
             if (validfile(json)) {
+                dispatch(setSession(false));
                 return dispatch(importWalletAlias(json));
             }
             setIsUploading(false);

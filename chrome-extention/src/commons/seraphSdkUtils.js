@@ -20,7 +20,8 @@ export const createWallet = wallet => new SeraphIDWallet(wallet);
 export const decrypt = async (accountFromStore, password) => {
   try {
     const wallet = createWallet(JSON.parse(accountFromStore));
-    await wallet.accounts[0].decrypt(password);
+    const accounts = wallet.accounts.map(acc => acc.decrypt(password));
+    await Promise.all(accounts);
     return wallet;
   } catch (e) {
     return null;

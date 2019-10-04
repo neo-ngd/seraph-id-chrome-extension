@@ -7,7 +7,8 @@ import {
   GET_PASSWORD_CS_ALIAS,
   SEND_ERROR_CS_ALIAS,
   SEND_ERROR_POPUP_ALIAS,
-  IMPORT_WALLET_ALIAS
+  IMPORT_WALLET_ALIAS,
+  SHARE_ACTIVE_ACCOUNT,
 } from './actionTypes';
 import { createClaim, decrypt } from '../../commons/seraphSdkUtils';
 import {
@@ -15,7 +16,7 @@ import {
   setClaim,
   toggleDialog,
   setSession,
-  getEncryptedPasswordToCS
+  getEncryptedPasswordToCS, setActiveAccount
 } from './actions';
 import { pwService } from "./pwService";
 import {
@@ -26,8 +27,28 @@ import {
   sendErrorToPopup,
   walletNotFoundError
 } from "../../commons/errors";
-import {DIALOG_TYPES, ENCRYPTED_PW_MSG, IMPORT_ERROR_MSG, IMPORT_SUCCESS_MSG} from "../../commons/constants";
+import {
+  ADD_CLAIM_ERROR_MSG,
+  ADD_CLAIM_SUCCESS_MSG,
+  DIALOG_TYPES,
+  ENCRYPTED_PW_MSG,
+  IMPORT_ERROR_MSG,
+  IMPORT_SUCCESS_MSG,
+  SHARE_ACCOUNT_MSG, SHARE_CLAIM_ERROR_MSG, SHARE_CLAIM_SUCCESS_MSG
+} from "../../commons/constants";
 import icon from '../../assets/icons/icon64.png';
+
+const addClaimResultEvent = success => {
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {msg: success ? ADD_CLAIM_SUCCESS_MSG : ADD_CLAIM_ERROR_MSG });
+  });
+};
+
+const shareClaimResultEvent = success => {
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {msg: success ? SHARE_CLAIM_SUCCESS_MSG : SHARE_CLAIM_ERROR_MSG });
+  });
+};
 
 const sendErrorToCSAlias = ({error}) =>
     () => sendErrorToCS(error);
@@ -46,7 +67,9 @@ const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
     const decrypted = await decrypt(wallet, password);
     if (!!decrypted) {
       pwService.password = password;
+      dispatch(setActiveAccount(decrypted.accounts[0].label));
       dispatch(getEncryptedPasswordToCS());
+      dispatch(shareActiveAccountAlias());
       return dispatch(setSession(true));
     }
     return sendErrorToPopup(invalidPwError());
@@ -56,14 +79,21 @@ const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
 };
 
 const getEncryptedPasswordAlias = () => (dispatch, getState) => {
-  const { wallet } = getState();
-  chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet});
+  const { wallet, activeAccount } = getState();
+  chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet, activeAccount});
 };
 
 const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
-  const { wallet } = getState();
+  const { wallet, activeAccount } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, {msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet});
+    chrome.tabs.sendMessage(tabs[0].id, {msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet, activeAccount});
+  });
+};
+
+const shareActiveAccountAlias = () => (dispatch, getState) => {
+  const { activeAccount } = getState();
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.sendMessage(tabs[0].id, {msg: SHARE_ACCOUNT_MSG, activeAccount });
   });
 };
 
@@ -73,18 +103,23 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
     const decryptedWallet = await decrypt(wallet, pwService.password);
     if (!!decryptedWallet) {
       const claim = createClaim(schemaName, data, decryptedWallet);
+      // TODO the claim is always adding to the first account!!
       decryptedWallet.addClaim(claim);
-      await decryptedWallet.accounts[0].encrypt(pwService.password);
+      const encryption = decryptedWallet.accounts.map(acc => acc.encrypt(pwService.password));
+      await Promise.all(encryption);
       const exportedWalletJSON = JSON.stringify(decryptedWallet.export());
       chrome.notifications.create({
         type: 'basic',
         iconUrl: icon,
         title: '',
         message: 'The claim has been saved'});
+      addClaimResultEvent(true);
       return dispatch(setExportedWallet(exportedWalletJSON));
     }
+    addClaimResultEvent(false);
     return sendErrorToCS(walletNotFoundError())
   } catch (error) {
+    addClaimResultEvent(false);
     sendErrorToCS(unknownError(error))
   }
 };
@@ -100,25 +135,28 @@ const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch
         dispatch(setClaim(claim));
         return dispatch(toggleDialog({open: true, context: DIALOG_TYPES.ASK_CLAIM, verifierName, schemaName}))
       }
+      shareClaimResultEvent(false);
       return sendErrorToCS(claimNotFoundError())
     }
+    shareClaimResultEvent(false);
     return sendErrorToCS(walletNotFoundError())
   } catch (error) {
+    shareClaimResultEvent(false);
     sendErrorToCS(unknownError(error))
   }
 };
 
 const importWalletAlias = ({wallet}) => async (dispatch) => {
   try {
+    dispatch(setExportedWallet(wallet));
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_SUCCESS_MSG});
+    });
     chrome.notifications.create({
       type: 'basic',
       iconUrl: icon,
       title: '',
       message: 'Your wallet has been imported'});
-      dispatch(setExportedWallet(wallet));
-    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-      chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_SUCCESS_MSG});
-    });
   } catch (error) {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_ERROR_MSG});
@@ -136,4 +174,5 @@ export default {
   [SEND_ERROR_POPUP_ALIAS]: action => sendErrorToPopupAlias(action),
   [SEND_ERROR_CS_ALIAS]: action => sendErrorToCSAlias(action),
   [IMPORT_WALLET_ALIAS]: action => importWalletAlias(action),
+  [SHARE_ACTIVE_ACCOUNT]: () => shareActiveAccountAlias(),
 }

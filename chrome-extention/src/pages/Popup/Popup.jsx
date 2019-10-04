@@ -47,7 +47,7 @@ function Popup() {
     }
 
     if (page === PAGES.CLAIMS) {
-      return <WalletInfo accountFromStore={accountFromStore}/>
+      return <WalletInfo />
     }
 
     return (<div>page error</div>)

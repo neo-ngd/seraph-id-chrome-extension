@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box } from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import Claim from '../components/Cards/Claim';
-import { createWallet } from '../commons/seraphSdkUtils';
-import { useDispatch } from 'react-redux';
+import {decrypt} from '../commons/seraphSdkUtils';
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import Layout from '../components/Layout/Layout';
 import AccountsModal from '../components/Modals/AccountsModal';
@@ -10,41 +10,34 @@ import { setExportedWallet } from '../pages/Background/actions';
 import { getEncryptedPassword } from "../pages/Background/actions";
 import {ENCRYPTED_PW_MSG} from "../commons/constants";
 
-function WalletInfo({ accountFromStore }) {
+function WalletInfo() {
   const dispatch = useDispatch();
   const [wallet, setWallet] = useState(null);
   const [pw, setPw] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState();
+  const { activeAccount } = useSelector(state => state);
   
   useEffect(() => {
     setIsLoading(true);
-    chrome.runtime.onMessage.addListener(async request => {
-      if (request.msg === ENCRYPTED_PW_MSG) {
-        await decryptAccount(request.password);
-        setIsLoading(false);
-        setPw(request.password);
-      }
-    });
-    dispatch(getEncryptedPassword())
+    chrome.runtime.onMessage.addListener(listener);
+    dispatch(getEncryptedPassword());
+    return () => chrome.runtime.onMessage.removeListener(listener);
   }, []);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    handleCloseAccountsModal(false);
-    if (pw) {
-      (async () => {
-        await decryptAccount(pw);
-        setIsLoading(false);
-      })();
+  const listener = async request =>  {
+    if (request.msg === ENCRYPTED_PW_MSG) {
+      setPw(request.password);
+      await decryptAccount(request.password, request.wallet);
     }
-  }, [accountFromStore]);
+  };
 
-  const decryptAccount = async (password) => {
-    const importedWallet = createWallet(JSON.parse(accountFromStore));
-    await importedWallet.accounts[0].decrypt(password);
-    setWallet(importedWallet);
+  const decryptAccount = async (password, accountFromStore) => {
+    const wallet = await decrypt(accountFromStore, password);
+    if (!!wallet) {
+      setWallet(wallet);
+      setIsLoading(false);
+    }
   };
 
   const removeClaim = async (id) => {
@@ -80,13 +73,14 @@ function WalletInfo({ accountFromStore }) {
     chrome.tabs.create({url: 'https://demo.seraphid.io/'})
   };
 
-  if (wallet) {
-    const claimsArr = Object.entries(wallet.accounts[0].claims);
-    const { label: address } = wallet.accounts[0];
+  if (!!wallet) {
+    const account = wallet.accounts.find(acc => acc.label === activeAccount);
+    const claimsArr = Object.entries(account.claims);
+    const { label: address } = account;
 
     return (
       <Layout padding={'60px 0 0 0'} justifyStart isLoading={isLoading}>
-        <NavBar address={address} onOpenAccountsModal={openAccountsModal} name="Account 1" />
+        <NavBar address={address} onOpenAccountsModal={openAccountsModal} name={`Account ${wallet.accounts.indexOf(account) + 1}`} />
         <Box
           display="flex" 
           flex="1"
@@ -101,7 +95,7 @@ function WalletInfo({ accountFromStore }) {
             </Box>
           ) : (
             <Box color="text.primary" fontSize="16px" lineHeight="28px" textAlign="center">
-              No Claims yet? Why you don’t play around with our <string style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>demo</string>
+              No Claims yet? Why don’t you play around with our <span style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>demo</span>
             </Box>
           )}
         </Box>
@@ -114,7 +108,7 @@ function WalletInfo({ accountFromStore }) {
       </Layout>
     );
   }
-  return null;
+  return <Layout isLoading={isLoading} />;
 }
 
 export default WalletInfo;

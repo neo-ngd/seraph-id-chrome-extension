@@ -1,20 +1,45 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
+import React, {Fragment, useEffect, useState} from "react";
+import {Grid, Typography} from "@material-ui/core";
 import Button from "../components/Buttons/BaseButton";
-import Typography from "@material-ui/core/Typography";
 
-export default function SpacingGrid() {
+const SUCCESS = 'SUCCESS';
+const ERROR = 'ERROR';
+
+export default function VerifierPage({address}) {
   // eslint-disable-next-line
   const [claim, setClaim] = React.useState(null);
   // eslint-disable-next-line
   const [error, setError] = React.useState(null);
 
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    document.addEventListener('shareClaimSuccess', claimSuccessListener);
+    document.addEventListener('shareClaimError', claimErrorListener);
+    return () => {
+      document.removeEventListener('shareClaimSuccess', claimSuccessListener);
+      document.removeEventListener('shareClaimError', claimErrorListener);
+    }
+  }, []);
+
+  const claimSuccessListener = ({detail}) => {
+    setClaim(detail);
+    setStatus(SUCCESS);
+    setIsSending(false);
+  };
+  const claimErrorListener = () => {
+    setStatus(ERROR);
+    setIsSending(false);
+  };
+
   function askClaim() {
-    window.seraphID.askClaim('Passport', "did:neoid:priv:Af5nA8W1RMs57wkg6Cw79Lrd2nobL7vL6Z", 'Test');
+    setIsSending(true);
+    window.seraphID.askClaim('Passport', `did:neoid:priv:${address}`, 'Demo');
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       {claim === null ? (
         <Grid
           container
@@ -24,23 +49,26 @@ export default function SpacingGrid() {
           spacing={3}
         >
           <Grid item xs={12}>
-            <Typography style={{ color: "#ffffff" }}>
+            {!status && <Typography style={{ color: "#ffffff" }}>
               To Access our service login with your passport
-            </Typography>
+            </Typography>}
+            {status === ERROR && <Typography style={{ color: "#FF6E6E" }}>
+              Something went wrong! Try again.{" "}
+            </Typography>}
           </Grid>
 
           <Grid item xs={12}>
-            <Button handleClick={askClaim} text={"LOGIN"}/>
+            <Button handleClick={askClaim} text={"Login"} disabled={!address || isSending}/>
           </Grid>
           <Grid item xs={12}>
             {error ? <p style={{ color: "red" }}>{error}</p> : null}
           </Grid>
         </Grid>
       ) : (
-        <React.Fragment>
-          <Typography style={{ color: "#ffffff" }}>Welcome </Typography>
-        </React.Fragment>
+        <Fragment>
+          <Typography style={{ color: "#ffffff" }}>Welcome {claim.attributes.attributes.firstName} {claim.attributes.attributes.secondName}</Typography>
+        </Fragment>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 }

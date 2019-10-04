@@ -6,7 +6,13 @@ import useText from '../commons/hooks/useText';
 import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
 import Layout from '../components/Layout/Layout';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
-import {getEncryptedPasswordToCS, setExportedWallet, setPassword} from "../pages/Background/actions";
+import {
+  getEncryptedPasswordToCS,
+  setActiveAccount,
+  setExportedWallet,
+  setPassword,
+  shareActiveAccountAlias
+} from "../pages/Background/actions";
 import {WALLET_NAME} from "../commons/constants";
 
 function CreateWallet() {
@@ -18,15 +24,18 @@ function CreateWallet() {
     setIsLoading(true);
     const wallet = new SeraphIDWallet({ name: WALLET_NAME });
     wallet.createDID(DIDNetwork.PrivateNet);
+    dispatch(setActiveAccount(wallet.accounts[0].label));
     await wallet.accounts[0].encrypt(password);
 
     const exportedWalletJSON = JSON.stringify(wallet.export());
     setWallet(exportedWalletJSON);
+
   }
 
   function setWallet(wallet) {
     dispatch(setExportedWallet(wallet));
     dispatch(setPassword(password));
+    dispatch(shareActiveAccountAlias());
     dispatch(getEncryptedPasswordToCS())
   }
 

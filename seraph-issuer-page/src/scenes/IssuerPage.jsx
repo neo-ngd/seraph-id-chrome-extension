@@ -1,11 +1,14 @@
-import React from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "../components/Buttons/BaseButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { createClaim } from "../seraphUtils";
 
-export default function SpacingGrid() {
+const SUCCESS = 'SUCCESS';
+const ERROR = 'ERROR';
+
+export default function IssuerPage({address}) {
   const [values, setValues] = React.useState({
     idNumber: "J12393496",
     firstName: "Edward",
@@ -16,14 +19,35 @@ export default function SpacingGrid() {
     gender: "M"
   });
 
-  const [claim, setClaim] = React.useState(null);
-  const [error, setError] = React.useState(null);
+  const [claim, setClaim] = useState(null);
+  const [error, setError] = useState(null);
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    document.addEventListener('addClaimSuccess', claimSuccessListener);
+    document.addEventListener('addClaimError', claimErrorListener);
+    return () => {
+      document.removeEventListener('addClaimSuccess', claimSuccessListener);
+      document.removeEventListener('addClaimError', claimErrorListener);
+    }
+  }, []);
+
+  const claimSuccessListener = () => {
+    setStatus(SUCCESS);
+    setIsSending(false);
+  };
+  const claimErrorListener = () => {
+    setStatus(ERROR);
+    setIsSending(false);
+  };
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
   };
 
   function sendClaimToWallet() {
+    setIsSending(true);
     window.seraphID.sendClaim(claim);
   }
 
@@ -31,14 +55,14 @@ export default function SpacingGrid() {
     if (window.seraphID === undefined) {
       setError("No wallet detected, please retry");
     } else {
-      const claim = await createClaim(values);
+      const claim = await createClaim(values, address);
 
       setClaim(claim);
     }
   };
 
   return (
-    <React.Fragment>
+    <Fragment>
       {claim === null ? (
         <Grid
           container
@@ -80,6 +104,7 @@ export default function SpacingGrid() {
             <Button
               handleClick={() => createAndSetClaim()}
               text={"Send Request"}
+              disabled={!address}
             />
           </Grid>
           <Grid item xs={12}>
@@ -87,7 +112,7 @@ export default function SpacingGrid() {
           </Grid>
         </Grid>
       ) : (
-        <React.Fragment>
+        <Fragment>
           <Grid
             container
             direction="column"
@@ -96,19 +121,29 @@ export default function SpacingGrid() {
             spacing={3}
           >
             <Grid item xs={12}>
-              <Typography style={{ color: "#ffffff" }}>
+              {!status && <Typography style={{ color: "#ffffff" }}>
                 Your Claim is ready, you can now save it in to your Wallet{" "}
-              </Typography>
+              </Typography>}
+              {status === ERROR && <Typography style={{ color: "#FF6E6E" }}>
+                Something went wrong! Try again.{" "}
+              </Typography>}
+              {status === SUCCESS && <Typography style={{color: "#00BF0B"}}>
+                Your claim has been added.{" "}
+              </Typography>}
             </Grid>
             <Grid item xs={12}>
               <Button
-                handleClick={() => sendClaimToWallet()}
-                text={"Send Request"}
+                handleClick={status === SUCCESS ? () => {
+                  setClaim(null);
+                  setStatus(null);
+                } : () => sendClaimToWallet()}
+                text={`Send ${status === SUCCESS ? 'another' : ''} request`}
+                disabled={isSending}
               />
             </Grid>
           </Grid>
-        </React.Fragment>
+        </Fragment>
       )}
-    </React.Fragment>
+    </Fragment>
   );
 }

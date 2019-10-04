@@ -10,7 +10,11 @@ import {
   GET_PASSWORD_ALIAS,
   SET_SESSION,
   DESTROY_SESSION,
-  GET_PASSWORD_CS_ALIAS, SEND_ERROR_POPUP_ALIAS, SEND_ERROR_CS_ALIAS, IMPORT_WALLET_ALIAS
+  GET_PASSWORD_CS_ALIAS,
+  SEND_ERROR_POPUP_ALIAS,
+  SEND_ERROR_CS_ALIAS,
+  IMPORT_WALLET_ALIAS,
+  SET_ACTIVE_ACCOUNT, SHARE_ACTIVE_ACCOUNT
 } from './actionTypes';
 
 export const getEncryptedPassword = () =>
@@ -52,9 +56,14 @@ export const destroySession = session =>
 export const sendErrorToPopupAlias = error =>
     ({ type: SEND_ERROR_POPUP_ALIAS, error });
 
+export const shareActiveAccountAlias = () =>
+    ({ type: SHARE_ACTIVE_ACCOUNT });
+
 export const sendErrorToCSAlias = error =>
     ({ type: SEND_ERROR_CS_ALIAS, error });
 
 export const importWalletAlias = wallet =>
     ({ type: IMPORT_WALLET_ALIAS, wallet });
 
+export const setActiveAccount = account =>
+    ({ type: SET_ACTIVE_ACCOUNT, account });
