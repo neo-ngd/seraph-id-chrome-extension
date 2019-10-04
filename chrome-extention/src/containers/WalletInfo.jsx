@@ -54,7 +54,7 @@ function WalletInfo({ accountFromStore }) {
     await wallet.accounts[0].encrypt(pw);
     const exportedWalletJSON = JSON.stringify(wallet.export());
     dispatch(setExportedWallet(exportedWalletJSON));
-  }
+  };
 
   const showAllClaims = (claims) => {
     return claims.map((claim) => (
@@ -76,6 +76,10 @@ function WalletInfo({ accountFromStore }) {
     setModalVisibility(false);
   };
 
+  const openDemo = () => {
+    chrome.tabs.create({url: 'https://demo.seraphid.io/'})
+  };
+
   if (wallet) {
     const claimsArr = Object.entries(wallet.accounts[0].claims);
     const { label: address } = wallet.accounts[0];
@@ -91,14 +95,13 @@ function WalletInfo({ accountFromStore }) {
           overflow="auto"
         >
           <Box fontSize="24px" color="text.primary">Claims</Box>
-
           {claimsArr.length > 0 ? (
             <Box>
               {showAllClaims(claimsArr)}
             </Box>
           ) : (
             <Box color="text.primary" fontSize="16px" lineHeight="28px" textAlign="center">
-              No Claims yet? Why you don’t play around with our demo
+              No Claims yet? Why you don’t play around with our <string style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>demo</string>
             </Box>
           )}
         </Box>

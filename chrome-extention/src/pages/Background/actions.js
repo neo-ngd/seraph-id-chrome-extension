@@ -10,7 +10,7 @@ import {
   GET_PASSWORD_ALIAS,
   SET_SESSION,
   DESTROY_SESSION,
-  GET_PASSWORD_CS_ALIAS, SEND_ERROR_POPUP_ALIAS, SEND_ERROR_CS_ALIAS
+  GET_PASSWORD_CS_ALIAS, SEND_ERROR_POPUP_ALIAS, SEND_ERROR_CS_ALIAS, IMPORT_WALLET_ALIAS
 } from './actionTypes';
 
 export const getEncryptedPassword = () =>
@@ -54,4 +54,7 @@ export const sendErrorToPopupAlias = error =>
 
 export const sendErrorToCSAlias = error =>
     ({ type: SEND_ERROR_CS_ALIAS, error });
+
+export const importWalletAlias = wallet =>
+    ({ type: IMPORT_WALLET_ALIAS, wallet });
 

@@ -6,8 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 import BaseButton from '../Buttons/BaseButton';
 import BaseModal from './BaseModal';
 import { setExportedWallet } from '../../pages/Background/actions';
-import { createFileInput, downloadFile } from '../../commons/walletUtils';
-import {sendErrorToCS, UNKNOWN, unknownError} from "../../commons/errors";
+import { downloadFile } from '../../commons/walletUtils';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {
@@ -58,34 +57,11 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
 
   const handleRemoveAccount = () => {
     dispatch(setExportedWallet(null)); // TODO: there is no method in SDK for remove account
-  }
+  };
 
   const handleExportWallet = () => {
     downloadFile(accountFromStore, 'wallet.json', 'text/json');
-  }
-
-  const handleImportWallet = () => {
-    try {
-      const fileInput = createFileInput();
-
-      fileInput.addEventListener("change", function() {
-        const file = this.files[0];
-        const reader = new FileReader();
-    
-        reader.onload = async function() {
-          const json = reader.result;
-          dispatch(setExportedWallet(json));
-          fileInput.remove();
-        };
-      
-        reader.readAsText(file);
-      }, false);
-
-      fileInput.click();
-    } catch (error) {
-      dispatch(sendErrorToCS(unknownError(error)));
-    }
-  }
+  };
 
   const header = () => (
     <Box pt="5px">
@@ -95,6 +71,10 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
       </ButtonBase>
     </Box>
   );
+
+  const openFormTab = () => {
+    chrome.tabs.create({url: 'form.html'})
+  };
 
   return (
     <BaseModal HeaderCompoennt={header} isOpen={isOpen} onClose={onClose}>
@@ -126,7 +106,7 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
           small
         />
         <BaseButton
-          handleClick={handleImportWallet}
+          handleClick={openFormTab}
           text={'Import wallet'}
           small
         />

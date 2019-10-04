@@ -6,7 +6,15 @@ import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import { useStyles } from './Styles';
 import clsx from 'clsx';
 
-export default function BaseButton({ handleClick, text, small = false, disabled = false, icon = false, fullWidth = true, reject = false }) {
+export default function BaseButton(
+    { handleClick,
+      text,
+      small = false,
+      disabled = false,
+      icon = false,
+      fullWidth = true,
+      reject = false,
+      component = undefined }) {
   const classes = useStyles();
 
   const style = {};
@@ -19,6 +27,7 @@ export default function BaseButton({ handleClick, text, small = false, disabled 
 
   return (
     <Button
+      component={component}
       disabled={disabled}
       onClick={handleClick}
       variant="contained"

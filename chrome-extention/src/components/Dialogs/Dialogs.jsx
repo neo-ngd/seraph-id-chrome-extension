@@ -18,12 +18,7 @@ const DialogClaims = ({ open, handleClose, claim, handleClaim, context, schemaNa
       isOpen={open}
       onClose={handleClose}
       style={{
-        left: '50%',
-        width: 'auto',
-        transform: 'translateX(-50%) translateY(20%)',
-        right: 0,
         maxWidth: '300px',
-        zIndex: 99,
       }}
     >
       <Box fontSize="16px" pb="16px" textAlign="center" color="text.primary">

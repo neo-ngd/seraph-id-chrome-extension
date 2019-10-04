@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'none',
     borderBottom: 'solid 1px rgba(255, 255, 255, 0.1)'
   },
+    cardContent: {
+        maxWidth: '100%',
+        overflow: 'auto',
+    },
 
   expand: {
     transform: 'rotate(0deg)',
@@ -96,7 +100,7 @@ export default function RecipeReviewCard({ id, schema, content, onRemoveClaim })
       />
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent style={{maxWidth: '100%', overflow: 'scroll'}}>
+        <CardContent className={classes.cardContent}>
           <ReactJson
             displayObjectSize={false}
             displayDataTypes={false}

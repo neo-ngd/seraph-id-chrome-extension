@@ -7,6 +7,7 @@ import { SeraphIDWallet, DIDNetwork } from '@sbc/seraph-id-sdk';
 import Layout from '../components/Layout/Layout';
 import PasswordInput from '../components/PasswordInput/PasswordInput';
 import {getEncryptedPasswordToCS, setExportedWallet, setPassword} from "../pages/Background/actions";
+import {WALLET_NAME} from "../commons/constants";
 
 function CreateWallet() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function CreateWallet() {
 
   async function createAndSetWallet() {
     setIsLoading(true);
-    const wallet = new SeraphIDWallet({ name: 'MyWallet' });
+    const wallet = new SeraphIDWallet({ name: WALLET_NAME });
     wallet.createDID(DIDNetwork.PrivateNet);
     await wallet.accounts[0].encrypt(password);
 

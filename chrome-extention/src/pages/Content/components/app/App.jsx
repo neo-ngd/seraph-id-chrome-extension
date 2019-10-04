@@ -17,28 +17,33 @@ import {DIALOG_TYPES, ENCRYPTED_PW_MSG, EVENT_NAMES} from "../../../../commons/c
 function App() {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { dialog, claim, wallet: accountFromStore } = useSelector(state => state);
+  const [isListener, setIsListener] = useState(false);
+  const { dialog, claim } = useSelector(state => state);
 
   useEffect(() => {
     injectScript();
     chrome.runtime.onMessage.addListener(onMessageListener);
     dispatch(getEncryptedPasswordToCS());
-    return unregisterListeners;
+    return () => {
+      chrome.runtime.onMessage.removeListener(onMessageListener);
+      unregisterListeners();
+    }
   }, []);
 
   const onMessageListener = request => {
     if (request.msg === ENCRYPTED_PW_MSG) {
-      decryptSetWallet(request.password);
+      decryptSetWallet(request.password, request.wallet);
     }
     if (request.msg === ERROR_MSG) {
       dispatchClaimErrorEvent(request.error);
     }
   };
 
-  const decryptSetWallet = async (password) => {
-    const wallet = await decrypt(accountFromStore, password);
-    unregisterListeners();
-    registerListeners(wallet);
+  const decryptSetWallet = async (password, encryptedWallet) => {
+    const wallet = await decrypt(encryptedWallet, password);
+    if (!isListener) {
+      registerListeners(wallet);
+    }
   };
 
   const injectScript = () => {
@@ -64,20 +69,20 @@ function App() {
 
   const registerListeners = (wallet) => {
     document.addEventListener('sendClaim', getClaimListener);
-    document.addEventListener('sendAddress', () => getAddressListener(wallet)); // TODO UNREGISTER NOT WORKING
+    document.addEventListener('sendAddress', () => getAddressListener(wallet));
     document.addEventListener('askClaim', askClaimListener);
-    // TODO REMOVE
-    document.addEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener);
-    document.addEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener);
+    document.addEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener); // TODO REMOVE
+    document.addEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener); // TODO REMOVE
+    setIsListener(true);
   };
 
   const unregisterListeners = () => {
     document.removeEventListener('sendClaim', getClaimListener);
     document.removeEventListener('sendAddress', getAddressListener);
     document.removeEventListener('askClaim', askClaimListener);
-    // TODO REMOVE
-    document.removeEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener);
-    document.removeEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener);
+    document.removeEventListener(EVENT_NAMES.CLAIM_SUCCESS, dummyListener); // TODO REMOVE
+    document.removeEventListener(EVENT_NAMES.CLAIM_ERROR, dummyListener); // TODO REMOVE
+    setIsListener(false);
   };
 
   const dummyListener = e => console.warn(e);

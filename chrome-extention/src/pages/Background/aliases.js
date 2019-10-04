@@ -6,7 +6,8 @@ import {
   GET_PASSWORD_ALIAS,
   GET_PASSWORD_CS_ALIAS,
   SEND_ERROR_CS_ALIAS,
-  SEND_ERROR_POPUP_ALIAS
+  SEND_ERROR_POPUP_ALIAS,
+  IMPORT_WALLET_ALIAS
 } from './actionTypes';
 import { createClaim, decrypt } from '../../commons/seraphSdkUtils';
 import {
@@ -25,7 +26,8 @@ import {
   sendErrorToPopup,
   walletNotFoundError
 } from "../../commons/errors";
-import {DIALOG_TYPES, ENCRYPTED_PW_MSG} from "../../commons/constants";
+import {DIALOG_TYPES, ENCRYPTED_PW_MSG, IMPORT_ERROR_MSG, IMPORT_SUCCESS_MSG} from "../../commons/constants";
+import icon from '../../assets/icons/icon64.png';
 
 const sendErrorToCSAlias = ({error}) =>
     () => sendErrorToCS(error);
@@ -53,13 +55,15 @@ const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
   }
 };
 
-const getEncryptedPasswordAlias = () => () => {
-  chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password});
+const getEncryptedPasswordAlias = () => (dispatch, getState) => {
+  const { wallet } = getState();
+  chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet});
 };
 
-const getEncryptedPasswordCSAlias = () => () => {
+const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
+  const { wallet } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, {msg: ENCRYPTED_PW_MSG, password: pwService.password});
+    chrome.tabs.sendMessage(tabs[0].id, {msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet});
   });
 };
 
@@ -74,7 +78,7 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
       const exportedWalletJSON = JSON.stringify(decryptedWallet.export());
       chrome.notifications.create({
         type: 'basic',
-        iconUrl: 'https://picsum.photos/50', // TODO add brand image
+        iconUrl: icon,
         title: '',
         message: 'The claim has been saved'});
       return dispatch(setExportedWallet(exportedWalletJSON));
@@ -104,6 +108,24 @@ const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch
   }
 };
 
+const importWalletAlias = ({wallet}) => async (dispatch) => {
+  try {
+    chrome.notifications.create({
+      type: 'basic',
+      iconUrl: icon,
+      title: '',
+      message: 'Your wallet has been imported'});
+      dispatch(setExportedWallet(wallet));
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_SUCCESS_MSG});
+    });
+  } catch (error) {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+      chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_ERROR_MSG});
+    });
+  }
+};
+
 export default {
   [CREATE_CLAIM_ALIAS]: action => createClaimAlias(action),
   [ASK_CLAIM_ALIAS]: action => askClaimAlias(action),
@@ -113,4 +135,5 @@ export default {
   [GET_PASSWORD_CS_ALIAS]: () => getEncryptedPasswordCSAlias(),
   [SEND_ERROR_POPUP_ALIAS]: action => sendErrorToPopupAlias(action),
   [SEND_ERROR_CS_ALIAS]: action => sendErrorToCSAlias(action),
+  [IMPORT_WALLET_ALIAS]: action => importWalletAlias(action),
 }

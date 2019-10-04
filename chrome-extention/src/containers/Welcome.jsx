@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
 
 import BaseButton from '../components/Buttons/BaseButton';
@@ -7,6 +7,7 @@ import Layout from '../components/Layout/Layout';
 import { setExportedWallet } from '../pages/Background/actions';
 import { createFileInput } from '../commons/walletUtils';
 import { sendErrorToCS, unknownError } from '../commons/errors';
+import {IMPORT_SUCCESS_MSG} from "../commons/constants";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   link: {
@@ -17,35 +18,12 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 function Welcome({ onGoTopage }) {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleImportWallet = () => {
-    try {
-      const fileInput = createFileInput();
-
-      fileInput.addEventListener("change", function() {
-        setIsLoading(true);
-
-        const file = this.files[0];
-        const reader = new FileReader();
-    
-        reader.onload = async function() {
-          const json = reader.result;
-          dispatch(setExportedWallet(json));
-          fileInput.remove();
-        };
-      
-        reader.readAsText(file);
-      }, false);
-
-      fileInput.click();
-    } catch (error) {
-      setIsLoading(false);
-      dispatch(sendErrorToCS(unknownError(error)));
-    }
-  }
+  const openFormTab = () => {
+    chrome.tabs.create({url: 'form.html'})
+  };
 
   return (
     <Layout isLoading={isLoading}>
@@ -65,7 +43,7 @@ function Welcome({ onGoTopage }) {
           handleClick={onGoTopage}
           text={'Create a Wallet'}
         />
-        <Link href="#" onClick={handleImportWallet} className={classes.link}>Or import an existing one</Link>
+        <Link href="#" onClick={openFormTab} className={classes.link}>Or import an existing one</Link>
       </Box>
     </Layout>
   );

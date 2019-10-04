@@ -4,6 +4,18 @@
   box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: #30363D;
+  border-radius: 2px;
+}
+
 body {
   width: 306px;
   height: 514px;

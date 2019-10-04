@@ -1,13 +1,13 @@
 import React from 'react';
 import RotationBox from './RotatingBox';
 
-function RotationLogo() {
+const RotationLogo = ({maxWidth = '230px'}) => {
   return (
     <RotationBox perspective="200px" rotateForce={20} minWidth="auto">
       <img
-      //TODO: temporary placeholder
+        alt={'logo'}
         src={require("../../assets/icons/fingerprint.png")}
-        style={{ maxWidth: '230px' }}
+        style={{ maxWidth }}
       />
     </RotationBox>
   );

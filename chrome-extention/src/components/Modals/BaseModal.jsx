@@ -5,11 +5,12 @@ import { makeStyles } from '@material-ui/styles';
 const useStyles = makeStyles(({ palette, spacing }) => ({
   wrapper: {
     position: 'absolute',
-    margin: spacing(3),
     width: 'calc(100% - 48px)',
     height: 'calc(100% - 48px)',
-    top: 0,
-    left: 0,
+    top: spacing(2),
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: 99999,
   },
   container: {
     position: 'absolute',
