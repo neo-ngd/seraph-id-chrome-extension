@@ -1,3 +1,6 @@
+export const wait = (timeout) =>
+    new Promise(res => setTimeout(() => res('done'), timeout));
+
 const downloadFile = (content, fileName, contentType) => {
   const a = document.createElement('a');
   const file = new Blob([content], {type: contentType});
@@ -11,5 +14,5 @@ const createFileInput = () => {
   fileSelector.setAttribute('type', 'file');
 
   return fileSelector;
-}
+};
 export { downloadFile, createFileInput };

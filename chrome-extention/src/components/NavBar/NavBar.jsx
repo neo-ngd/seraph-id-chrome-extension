@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Box, ButtonBase} from '@material-ui/core';
+import image from '../../assets/icons/fingerprint.png';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   barStyle: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   }
 }));
 
-export default function NavBar({ address, name, onOpenAccountsModal }) {
+const NavBar = ({ address, name, onOpenAccountsModal }) => {
   const classes = useStyles();
 
   return (
@@ -32,15 +34,23 @@ export default function NavBar({ address, name, onOpenAccountsModal }) {
             {name}
           </Box>
 
-          <Box color="text.secondary" fontSize="10px" textAlign="center" pt="5px">
+          <Box color="text.secondary" fontSize="10px" textAlign="center" pt={0.6}>
             {address}
           </Box>
 
           <ButtonBase disableRipple onClick={onOpenAccountsModal} className={classes.imageContainer}>
-            <img className={classes.img} src={require("../../assets/icons/fingerprint.png")} />
+            <img alt="logo-img" className={classes.img} src={image} />
           </ButtonBase>
         </Box>
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+NavBar.propTypes = {
+  address: PropTypes.string,
+  name: PropTypes.string,
+  onOpenAccountModal: PropTypes.func,
+};
+
+export default NavBar;

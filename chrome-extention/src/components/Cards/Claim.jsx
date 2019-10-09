@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { Card, CardHeader, CardContent, Collapse, IconButton, Box } from '@material-ui/core';
@@ -45,22 +46,23 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
   },
   root: {
-    padding: '16px 0 8px',
+    padding: `${theme.spacing(2)} 0 ${theme.spacing(1)}`,
     marginRight: theme.spacing(1),
   },
   action: {
-    marginTop: theme.spacing(1) + theme.spacing(0.5),
+    marginTop: theme.spacing(1.5),
     paddingRight: theme.spacing(1),
   }
 }));
 
-export default function RecipeReviewCard({ id, schema, content, onRemoveClaim }) {
+const Claim = ({ id, schema, content, onRemoveClaim }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const renderActionIcons = () => (
     <Box>
       <IconButton
+        data-test-id={'claim-expand-button'}
         className={clsx(classes.expand, {
           [classes.expandOpen]: expanded,
         })}
@@ -73,6 +75,7 @@ export default function RecipeReviewCard({ id, schema, content, onRemoveClaim })
       </IconButton>
 
       <IconButton
+        data-test-id={'claim-remove-button'}
         className={classes.removeIcon}
         disableRipple
         onClick={() => onRemoveClaim(id)}
@@ -82,8 +85,7 @@ export default function RecipeReviewCard({ id, schema, content, onRemoveClaim })
         <Close color="inherit" fontSize="inherit" />
       </IconButton>
     </Box>
-  )
-
+  );
 
   return (
     <Card className={classes.card}>
@@ -111,4 +113,13 @@ export default function RecipeReviewCard({ id, schema, content, onRemoveClaim })
       </Collapse>
     </Card>
   );
-}
+};
+
+Claim.propTypes = {
+    id: PropTypes.number,
+    schema: PropTypes.string,
+    content: PropTypes.object,
+    onRemovalClaim: PropTypes.func,
+};
+
+export default Claim;

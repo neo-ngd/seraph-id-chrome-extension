@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WalletInfo /> should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <WalletInfo>
+    <Layout
+      isLoading={true}
+    >
+      <Styled(MuiBox)
+        display="flex"
+        flex="0 0 100%"
+        flexDirection="column"
+        height="100%"
+        justifyContent="space-between"
+        maxWidth="100%"
+        overflow="hidden"
+      >
+        <div
+          className="MuiBox-root MuiBox-root-2"
+        >
+          <Styled(MuiBox)
+            style={
+              Object {
+                "margin": "auto",
+              }
+            }
+          >
+            <div
+              className="MuiBox-root MuiBox-root-3"
+              style={
+                Object {
+                  "margin": "auto",
+                }
+              }
+            >
+              <WithStyles(ForwardRef(CircularProgress))
+                style={
+                  Object {
+                    "color": "white",
+                  }
+                }
+              >
+                <ForwardRef(CircularProgress)
+                  classes={
+                    Object {
+                      "circle": "MuiCircularProgress-circle",
+                      "circleDisableShrink": "MuiCircularProgress-circleDisableShrink",
+                      "circleIndeterminate": "MuiCircularProgress-circleIndeterminate",
+                      "circleStatic": "MuiCircularProgress-circleStatic",
+                      "colorPrimary": "MuiCircularProgress-colorPrimary",
+                      "colorSecondary": "MuiCircularProgress-colorSecondary",
+                      "indeterminate": "MuiCircularProgress-indeterminate",
+                      "root": "MuiCircularProgress-root",
+                      "static": "MuiCircularProgress-static",
+                      "svg": "MuiCircularProgress-svg",
+                    }
+                  }
+                  style={
+                    Object {
+                      "color": "white",
+                    }
+                  }
+                >
+                  <div
+                    className="MuiCircularProgress-root MuiCircularProgress-colorPrimary MuiCircularProgress-indeterminate"
+                    role="progressbar"
+                    style={
+                      Object {
+                        "color": "white",
+                        "height": 40,
+                        "width": 40,
+                      }
+                    }
+                  >
+                    <svg
+                      className="MuiCircularProgress-svg"
+                      viewBox="22 22 44 44"
+                    >
+                      <circle
+                        className="MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate"
+                        cx={44}
+                        cy={44}
+                        fill="none"
+                        r={20.2}
+                        strokeWidth={3.6}
+                        style={Object {}}
+                      />
+                    </svg>
+                  </div>
+                </ForwardRef(CircularProgress)>
+              </WithStyles(ForwardRef(CircularProgress))>
+            </div>
+          </Styled(MuiBox)>
+        </div>
+      </Styled(MuiBox)>
+    </Layout>
+  </WalletInfo>
+</Provider>
+`;

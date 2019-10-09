@@ -9,8 +9,10 @@ import AccountsModal from '../components/Modals/AccountsModal';
 import { setExportedWallet } from '../pages/Background/actions';
 import { getEncryptedPassword } from "../pages/Background/actions";
 import {ENCRYPTED_PW_MSG} from "../commons/constants";
+import dictionary from "../commons/dictionary";
+import env from '../environments/environment';
 
-function WalletInfo() {
+const WalletInfo = () => {
   const dispatch = useDispatch();
   const [wallet, setWallet] = useState(null);
   const [pw, setPw] = useState(null);
@@ -70,7 +72,7 @@ function WalletInfo() {
   };
 
   const openDemo = () => {
-    chrome.tabs.create({url: 'https://demo.seraphid.io/'})
+    chrome.tabs.create({url: env.DEMO_URL})
   };
 
   if (!!wallet) {
@@ -80,7 +82,7 @@ function WalletInfo() {
 
     return (
       <Layout padding={'60px 0 0 0'} justifyStart isLoading={isLoading}>
-        <NavBar address={address} onOpenAccountsModal={openAccountsModal} name={`Account ${wallet.accounts.indexOf(account) + 1}`} />
+        <NavBar address={address} onOpenAccountsModal={openAccountsModal} name={`${dictionary.commons.account} ${wallet.accounts.indexOf(account) + 1}`} />
         <Box
           display="flex" 
           flex="1"
@@ -88,14 +90,14 @@ function WalletInfo() {
           justifyContent={claimsArr.length > 0 ? 'flex-start' : 'space-between'}
           overflow="auto"
         >
-          <Box fontSize="24px" color="text.primary">Claims</Box>
+          <Box fontSize="24px" color="text.primary">{dictionary.commons.claims}</Box>
           {claimsArr.length > 0 ? (
             <Box>
               {showAllClaims(claimsArr)}
             </Box>
           ) : (
             <Box color="text.primary" fontSize="16px" lineHeight="28px" textAlign="center">
-              No Claims yet? Why don’t you play around with our <span style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>demo</span>
+              {dictionary.walletInfo.info}<span data-test-id={'open-demo-link'} style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>{dictionary.walletInfo.demo}</span>
             </Box>
           )}
         </Box>
@@ -109,6 +111,6 @@ function WalletInfo() {
     );
   }
   return <Layout isLoading={isLoading} />;
-}
+};
 
 export default WalletInfo;

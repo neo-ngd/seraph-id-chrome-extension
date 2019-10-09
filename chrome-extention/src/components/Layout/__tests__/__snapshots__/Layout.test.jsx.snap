@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout /> should render component 1`] = `
+<Styled(MuiBox)
+  display="flex"
+  flex="0 0 100%"
+  flexDirection="column"
+  height="100%"
+  justifyContent="flex-start"
+  maxWidth="100%"
+  overflow="hidden"
+  padding="2px"
+>
+  <Child />
+</Styled(MuiBox)>
+`;
+
+exports[`<Layout /> should render component in loading state 1`] = `
+<Styled(MuiBox)
+  display="flex"
+  flex="0 0 100%"
+  flexDirection="column"
+  height="100%"
+  justifyContent="flex-start"
+  maxWidth="100%"
+  overflow="hidden"
+  padding="2px"
+>
+  <Styled(MuiBox)
+    style={
+      Object {
+        "margin": "auto",
+      }
+    }
+  >
+    <WithStyles(ForwardRef(CircularProgress))
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    />
+  </Styled(MuiBox)>
+</Styled(MuiBox)>
+`;
+
+exports[`<Layout /> should render component with space-between prop 1`] = `
+<Styled(MuiBox)
+  display="flex"
+  flex="0 0 100%"
+  flexDirection="column"
+  height="100%"
+  justifyContent="space-between"
+  maxWidth="100%"
+  overflow="hidden"
+  padding="2px"
+>
+  <Child />
+</Styled(MuiBox)>
+`;

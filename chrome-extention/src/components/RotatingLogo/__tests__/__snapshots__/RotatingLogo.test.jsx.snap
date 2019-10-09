@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RotatingLogo /> should render component 1`] = `
+<React3DRotationBox
+  minHeight="150px"
+  minWidth="auto"
+  perspective="200px"
+  rotateForce={20}
+>
+  <img
+    alt="logo"
+    src="test-file-stub"
+    style={
+      Object {
+        "maxWidth": "200px",
+      }
+    }
+  />
+</React3DRotationBox>
+`;

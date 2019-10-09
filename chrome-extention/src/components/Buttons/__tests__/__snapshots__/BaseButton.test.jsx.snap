@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BaseButton /> should render <BaseButton /> component 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={false}
+  style={Object {}}
+  variant="contained"
+/>
+`;
+
+exports[`<BaseButton /> should render as the "reject" variant 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1 makeStyles-rejectButton-2"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={false}
+  style={Object {}}
+  variant="contained"
+/>
+`;
+
+exports[`<BaseButton /> should render as the small variant 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1 makeStyles-smallButton-4"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={false}
+  style={Object {}}
+  variant="contained"
+/>
+`;
+
+exports[`<BaseButton /> should render component in full width 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={false}
+  style={
+    Object {
+      "width": "100%",
+    }
+  }
+  variant="contained"
+/>
+`;
+
+exports[`<BaseButton /> should render component with the icon 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={false}
+  style={Object {}}
+  variant="contained"
+>
+  <KeyboardArrowRightIcon
+    className="makeStyles-arrowRight-3"
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  />
+</WithStyles(ForwardRef(Button))>
+`;
+
+exports[`<BaseButton /> should render disabled component 1`] = `
+<WithStyles(ForwardRef(Button))
+  className="makeStyles-button-1"
+  color="inherit"
+  data-test-id="base-button"
+  disabled={true}
+  style={
+    Object {
+      "opacity": 0.5,
+    }
+  }
+  variant="contained"
+/>
+`;

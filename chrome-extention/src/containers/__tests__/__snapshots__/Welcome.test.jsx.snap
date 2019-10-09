@@ -1,0 +1,322 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Welcome /> should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Welcome
+    onGoToPage={[MockFunction]}
+  >
+    <Layout
+      isLoading={false}
+    >
+      <Styled(MuiBox)
+        display="flex"
+        flex="0 0 100%"
+        flexDirection="column"
+        height="100%"
+        justifyContent="space-between"
+        maxWidth="100%"
+        overflow="hidden"
+      >
+        <div
+          className="MuiBox-root MuiBox-root-3"
+        >
+          <Styled(MuiBox)
+            display="flex"
+            flexDirection="column"
+          >
+            <div
+              className="MuiBox-root MuiBox-root-4"
+            >
+              <Styled(MuiBox)
+                color="text.primary"
+                fontSize={24}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-5"
+                >
+                  Welcome to Seraph ID
+                </div>
+              </Styled(MuiBox)>
+              <Styled(MuiBox)
+                color="text.secondary"
+                fontSize={14}
+                lineHeight="22px"
+                mt={2}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-6"
+                >
+                  Seraph ID chrome extention allows you to manage your claims in a user-frielndly way
+                </div>
+              </Styled(MuiBox)>
+              <Styled(MuiBox)
+                color="text.secondary"
+                fontSize={14}
+                lineHeight="22px"
+                mt={2}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-7"
+                >
+                  To start to use Seraph ID please create a wallet or import an existing one
+                </div>
+              </Styled(MuiBox)>
+            </div>
+          </Styled(MuiBox)>
+          <Styled(MuiBox)
+            display="flex"
+            flexDirection="column"
+          >
+            <div
+              className="MuiBox-root MuiBox-root-8"
+            >
+              <BaseButton
+                disabled={false}
+                fullWidth={false}
+                handleClick={[MockFunction]}
+                icon={false}
+                reject={false}
+                small={false}
+                testID="base-button"
+                text="Create a Wallet"
+              >
+                <WithStyles(ForwardRef(Button))
+                  className="makeStyles-button-9"
+                  color="inherit"
+                  data-test-id="base-button"
+                  disabled={false}
+                  onClick={[MockFunction]}
+                  style={Object {}}
+                  variant="contained"
+                >
+                  <ForwardRef(Button)
+                    className="makeStyles-button-9"
+                    classes={
+                      Object {
+                        "colorInherit": "MuiButton-colorInherit",
+                        "contained": "MuiButton-contained",
+                        "containedPrimary": "MuiButton-containedPrimary",
+                        "containedSecondary": "MuiButton-containedSecondary",
+                        "disabled": "Mui-disabled",
+                        "focusVisible": "Mui-focusVisible",
+                        "fullWidth": "MuiButton-fullWidth",
+                        "label": "MuiButton-label",
+                        "outlined": "MuiButton-outlined",
+                        "outlinedPrimary": "MuiButton-outlinedPrimary",
+                        "outlinedSecondary": "MuiButton-outlinedSecondary",
+                        "root": "MuiButton-root",
+                        "sizeLarge": "MuiButton-sizeLarge",
+                        "sizeSmall": "MuiButton-sizeSmall",
+                        "text": "MuiButton-text",
+                        "textPrimary": "MuiButton-textPrimary",
+                        "textSecondary": "MuiButton-textSecondary",
+                      }
+                    }
+                    color="inherit"
+                    data-test-id="base-button"
+                    disabled={false}
+                    onClick={[MockFunction]}
+                    style={Object {}}
+                    variant="contained"
+                  >
+                    <WithStyles(ForwardRef(ButtonBase))
+                      className="MuiButton-root makeStyles-button-9 MuiButton-contained MuiButton-colorInherit"
+                      component="button"
+                      data-test-id="base-button"
+                      disabled={false}
+                      focusRipple={true}
+                      focusVisibleClassName="Mui-focusVisible"
+                      onClick={[MockFunction]}
+                      style={Object {}}
+                      type="button"
+                    >
+                      <ForwardRef(ButtonBase)
+                        className="MuiButton-root makeStyles-button-9 MuiButton-contained MuiButton-colorInherit"
+                        classes={
+                          Object {
+                            "disabled": "Mui-disabled",
+                            "focusVisible": "Mui-focusVisible",
+                            "root": "MuiButtonBase-root",
+                          }
+                        }
+                        component="button"
+                        data-test-id="base-button"
+                        disabled={false}
+                        focusRipple={true}
+                        focusVisibleClassName="Mui-focusVisible"
+                        onClick={[MockFunction]}
+                        style={Object {}}
+                        type="button"
+                      >
+                        <button
+                          className="MuiButtonBase-root MuiButton-root makeStyles-button-9 MuiButton-contained MuiButton-colorInherit"
+                          data-test-id="base-button"
+                          disabled={false}
+                          onBlur={[Function]}
+                          onClick={[MockFunction]}
+                          onDragLeave={[Function]}
+                          onFocus={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseLeave={[Function]}
+                          onMouseUp={[Function]}
+                          onTouchEnd={[Function]}
+                          onTouchMove={[Function]}
+                          onTouchStart={[Function]}
+                          style={Object {}}
+                          tabIndex={0}
+                          type="button"
+                        >
+                          <span
+                            className="MuiButton-label"
+                          >
+                            Create a Wallet
+                          </span>
+                          <NoSsr>
+                            <WithStyles(undefined)
+                              center={false}
+                            >
+                              <ForwardRef(TouchRipple)
+                                center={false}
+                                classes={
+                                  Object {
+                                    "child": "MuiTouchRipple-child",
+                                    "childLeaving": "MuiTouchRipple-childLeaving",
+                                    "childPulsate": "MuiTouchRipple-childPulsate",
+                                    "ripple": "MuiTouchRipple-ripple",
+                                    "ripplePulsate": "MuiTouchRipple-ripplePulsate",
+                                    "rippleVisible": "MuiTouchRipple-rippleVisible",
+                                    "root": "MuiTouchRipple-root",
+                                  }
+                                }
+                              >
+                                <span
+                                  className="MuiTouchRipple-root"
+                                >
+                                  <TransitionGroup
+                                    childFactory={[Function]}
+                                    component={null}
+                                    exit={true}
+                                  />
+                                </span>
+                              </ForwardRef(TouchRipple)>
+                            </WithStyles(undefined)>
+                          </NoSsr>
+                        </button>
+                      </ForwardRef(ButtonBase)>
+                    </WithStyles(ForwardRef(ButtonBase))>
+                  </ForwardRef(Button)>
+                </WithStyles(ForwardRef(Button))>
+              </BaseButton>
+              <WithStyles(ForwardRef(Link))
+                className="makeStyles-link-1"
+                data-test-id="import-wallet-link"
+                href="#"
+                onClick={[Function]}
+              >
+                <ForwardRef(Link)
+                  className="makeStyles-link-1"
+                  classes={
+                    Object {
+                      "button": "MuiLink-button",
+                      "focusVisible": "Mui-focusVisible",
+                      "root": "MuiLink-root",
+                      "underlineAlways": "MuiLink-underlineAlways",
+                      "underlineHover": "MuiLink-underlineHover",
+                      "underlineNone": "MuiLink-underlineNone",
+                    }
+                  }
+                  data-test-id="import-wallet-link"
+                  href="#"
+                  onClick={[Function]}
+                >
+                  <WithStyles(ForwardRef(Typography))
+                    className="MuiLink-root MuiLink-underlineHover makeStyles-link-1"
+                    color="primary"
+                    component="a"
+                    data-test-id="import-wallet-link"
+                    href="#"
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onFocus={[Function]}
+                    variant="inherit"
+                  >
+                    <ForwardRef(Typography)
+                      className="MuiLink-root MuiLink-underlineHover makeStyles-link-1"
+                      classes={
+                        Object {
+                          "alignCenter": "MuiTypography-alignCenter",
+                          "alignJustify": "MuiTypography-alignJustify",
+                          "alignLeft": "MuiTypography-alignLeft",
+                          "alignRight": "MuiTypography-alignRight",
+                          "body1": "MuiTypography-body1",
+                          "body2": "MuiTypography-body2",
+                          "button": "MuiTypography-button",
+                          "caption": "MuiTypography-caption",
+                          "colorError": "MuiTypography-colorError",
+                          "colorInherit": "MuiTypography-colorInherit",
+                          "colorPrimary": "MuiTypography-colorPrimary",
+                          "colorSecondary": "MuiTypography-colorSecondary",
+                          "colorTextPrimary": "MuiTypography-colorTextPrimary",
+                          "colorTextSecondary": "MuiTypography-colorTextSecondary",
+                          "displayBlock": "MuiTypography-displayBlock",
+                          "displayInline": "MuiTypography-displayInline",
+                          "gutterBottom": "MuiTypography-gutterBottom",
+                          "h1": "MuiTypography-h1",
+                          "h2": "MuiTypography-h2",
+                          "h3": "MuiTypography-h3",
+                          "h4": "MuiTypography-h4",
+                          "h5": "MuiTypography-h5",
+                          "h6": "MuiTypography-h6",
+                          "noWrap": "MuiTypography-noWrap",
+                          "overline": "MuiTypography-overline",
+                          "paragraph": "MuiTypography-paragraph",
+                          "root": "MuiTypography-root",
+                          "srOnly": "MuiTypography-srOnly",
+                          "subtitle1": "MuiTypography-subtitle1",
+                          "subtitle2": "MuiTypography-subtitle2",
+                        }
+                      }
+                      color="primary"
+                      component="a"
+                      data-test-id="import-wallet-link"
+                      href="#"
+                      onBlur={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      variant="inherit"
+                    >
+                      <a
+                        className="MuiTypography-root MuiLink-root MuiLink-underlineHover makeStyles-link-1 MuiTypography-colorPrimary"
+                        data-test-id="import-wallet-link"
+                        href="#"
+                        onBlur={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                      >
+                        Or import an existing one
+                      </a>
+                    </ForwardRef(Typography)>
+                  </WithStyles(ForwardRef(Typography))>
+                </ForwardRef(Link)>
+              </WithStyles(ForwardRef(Link))>
+            </div>
+          </Styled(MuiBox)>
+        </div>
+      </Styled(MuiBox)>
+    </Layout>
+  </Welcome>
+</Provider>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CopyButton /> should render component 1`] = `
+<WithStyles(ForwardRef(Tooltip))
+  title="Copy address!"
+>
+  <WithStyles(ForwardRef(Button))
+    onClick={[Function]}
+    variant="text"
+  >
+    test-children
+  </WithStyles(ForwardRef(Button))>
+</WithStyles(ForwardRef(Tooltip))>
+`;

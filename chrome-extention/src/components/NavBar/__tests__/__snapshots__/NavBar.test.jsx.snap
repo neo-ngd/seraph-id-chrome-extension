@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavBar /> should render component 1`] = `
+<WithStyles(ForwardRef(AppBar))
+  className="makeStyles-barStyle-1"
+  color="default"
+  position="static"
+>
+  <WithStyles(ForwardRef(Toolbar))>
+    <Styled(MuiBox)
+      display="flex"
+      flex={1}
+      flexDirection="column"
+    >
+      <Styled(MuiBox)
+        color="text.primary"
+        fontSize="11px"
+        textAlign="center"
+      >
+        test
+      </Styled(MuiBox)>
+      <Styled(MuiBox)
+        color="text.secondary"
+        fontSize="10px"
+        pt={0.6}
+        textAlign="center"
+      >
+        test
+      </Styled(MuiBox)>
+      <WithStyles(ForwardRef(ButtonBase))
+        className="makeStyles-imageContainer-2"
+        disableRipple={true}
+      >
+        <img
+          alt="logo-img"
+          className="makeStyles-img-3"
+          src="test-file-stub"
+        />
+      </WithStyles(ForwardRef(ButtonBase))>
+    </Styled(MuiBox)>
+  </WithStyles(ForwardRef(Toolbar))>
+</WithStyles(ForwardRef(AppBar))>
+`;

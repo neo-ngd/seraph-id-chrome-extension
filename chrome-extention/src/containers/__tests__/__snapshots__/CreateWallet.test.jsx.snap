@@ -1,0 +1,280 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CreateWallet /> should render component 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <CreateWallet>
+    <Layout>
+      <Styled(MuiBox)
+        display="flex"
+        flex="0 0 100%"
+        flexDirection="column"
+        height="100%"
+        justifyContent="space-between"
+        maxWidth="100%"
+        overflow="hidden"
+      >
+        <div
+          className="MuiBox-root MuiBox-root-2"
+        >
+          <Styled(MuiBox)
+            display="flex"
+            flexDirection="column"
+          >
+            <div
+              className="MuiBox-root MuiBox-root-3"
+            >
+              <Styled(MuiBox)
+                color="text.primary"
+                fontSize={24}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-4"
+                >
+                  Please choose a secure password
+                  ;
+                </div>
+              </Styled(MuiBox)>
+              <Styled(MuiBox)
+                color="text.secondary"
+                fontSize={14}
+                lineHeight="22px"
+                mt={2}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-5"
+                >
+                  The password will be used to lock the extension after you close the browser and to encrypt the wallet if you decide to export it... so don’t forget it!
+                  ;
+                </div>
+              </Styled(MuiBox)>
+            </div>
+          </Styled(MuiBox)>
+          <Styled(MuiBox)>
+            <div
+              className="MuiBox-root MuiBox-root-6"
+            >
+              <PasswordInput
+                handleChange={
+                  [MockFunction] {
+                    "calls": Array [
+                      Array [
+                        "password",
+                      ],
+                    ],
+                    "results": Array [
+                      Object {
+                        "type": "return",
+                        "value": undefined,
+                      },
+                    ],
+                  }
+                }
+                value="test123"
+              >
+                <WithStyles(ForwardRef(InputBase))
+                  className="makeStyles-textField-8"
+                  id="outlined-adornment-password"
+                  placeholder="Password"
+                  type="password"
+                  value="test123"
+                >
+                  <ForwardRef(InputBase)
+                    className="makeStyles-textField-8"
+                    classes={
+                      Object {
+                        "adornedEnd": "MuiInputBase-adornedEnd",
+                        "adornedStart": "MuiInputBase-adornedStart",
+                        "disabled": "Mui-disabled",
+                        "error": "Mui-error",
+                        "focused": "Mui-focused",
+                        "formControl": "MuiInputBase-formControl",
+                        "fullWidth": "MuiInputBase-fullWidth",
+                        "input": "MuiInputBase-input",
+                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd",
+                        "inputAdornedStart": "MuiInputBase-inputAdornedStart",
+                        "inputHiddenLabel": "MuiInputBase-inputHiddenLabel",
+                        "inputMarginDense": "MuiInputBase-inputMarginDense",
+                        "inputMultiline": "MuiInputBase-inputMultiline",
+                        "inputSelect": "MuiInputBase-inputSelect",
+                        "inputTypeSearch": "MuiInputBase-inputTypeSearch",
+                        "marginDense": "MuiInputBase-marginDense",
+                        "multiline": "MuiInputBase-multiline",
+                        "root": "MuiInputBase-root",
+                      }
+                    }
+                    id="outlined-adornment-password"
+                    placeholder="Password"
+                    type="password"
+                    value="test123"
+                  >
+                    <div
+                      className="MuiInputBase-root makeStyles-textField-8"
+                      onClick={[Function]}
+                    >
+                      <input
+                        className="MuiInputBase-input"
+                        id="outlined-adornment-password"
+                        onAnimationStart={[Function]}
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        placeholder="Password"
+                        type="password"
+                        value="test123"
+                      />
+                    </div>
+                  </ForwardRef(InputBase)>
+                </WithStyles(ForwardRef(InputBase))>
+              </PasswordInput>
+              <Styled(MuiBox)
+                color="text.secondary"
+                fontSize="10px"
+                mt={1}
+              >
+                <div
+                  className="MuiBox-root MuiBox-root-29"
+                >
+                  Chose a password of at least 5 characters
+                  ;
+                </div>
+              </Styled(MuiBox)>
+            </div>
+          </Styled(MuiBox)>
+          <Styled(MuiBox)
+            display="flex"
+            flexDirection="column"
+            mt={2}
+            pb={2}
+          >
+            <div
+              className="MuiBox-root MuiBox-root-30"
+            >
+              <BaseButton
+                disabled={false}
+                fullWidth={false}
+                handleClick={[Function]}
+                icon={false}
+                reject={false}
+                small={false}
+                testID="create-wallet-button"
+                text="Create a Wallet"
+              >
+                <WithStyles(ForwardRef(Button))
+                  className="makeStyles-button-31"
+                  color="inherit"
+                  data-test-id="create-wallet-button"
+                  disabled={false}
+                  onClick={[Function]}
+                  style={Object {}}
+                  variant="contained"
+                >
+                  <ForwardRef(Button)
+                    className="makeStyles-button-31"
+                    classes={
+                      Object {
+                        "colorInherit": "MuiButton-colorInherit",
+                        "contained": "MuiButton-contained",
+                        "containedPrimary": "MuiButton-containedPrimary",
+                        "containedSecondary": "MuiButton-containedSecondary",
+                        "disabled": "Mui-disabled",
+                        "focusVisible": "Mui-focusVisible",
+                        "fullWidth": "MuiButton-fullWidth",
+                        "label": "MuiButton-label",
+                        "outlined": "MuiButton-outlined",
+                        "outlinedPrimary": "MuiButton-outlinedPrimary",
+                        "outlinedSecondary": "MuiButton-outlinedSecondary",
+                        "root": "MuiButton-root",
+                        "sizeLarge": "MuiButton-sizeLarge",
+                        "sizeSmall": "MuiButton-sizeSmall",
+                        "text": "MuiButton-text",
+                        "textPrimary": "MuiButton-textPrimary",
+                        "textSecondary": "MuiButton-textSecondary",
+                      }
+                    }
+                    color="inherit"
+                    data-test-id="create-wallet-button"
+                    disabled={false}
+                    onClick={[Function]}
+                    style={Object {}}
+                    variant="contained"
+                  >
+                    <WithStyles(ForwardRef(ButtonBase))
+                      className="MuiButton-root makeStyles-button-31 MuiButton-contained MuiButton-colorInherit"
+                      component="button"
+                      data-test-id="create-wallet-button"
+                      disabled={false}
+                      focusRipple={true}
+                      focusVisibleClassName="Mui-focusVisible"
+                      onClick={[Function]}
+                      style={Object {}}
+                      type="button"
+                    >
+                      <ForwardRef(ButtonBase)
+                        className="MuiButton-root makeStyles-button-31 MuiButton-contained MuiButton-colorInherit"
+                        classes={
+                          Object {
+                            "disabled": "Mui-disabled",
+                            "focusVisible": "Mui-focusVisible",
+                            "root": "MuiButtonBase-root",
+                          }
+                        }
+                        component="button"
+                        data-test-id="create-wallet-button"
+                        disabled={false}
+                        focusRipple={true}
+                        focusVisibleClassName="Mui-focusVisible"
+                        onClick={[Function]}
+                        style={Object {}}
+                        type="button"
+                      >
+                        <button
+                          className="MuiButtonBase-root MuiButton-root makeStyles-button-31 MuiButton-contained MuiButton-colorInherit"
+                          data-test-id="create-wallet-button"
+                          disabled={false}
+                          onBlur={[Function]}
+                          onClick={[Function]}
+                          onDragLeave={[Function]}
+                          onFocus={[Function]}
+                          onKeyDown={[Function]}
+                          onKeyUp={[Function]}
+                          onMouseDown={[Function]}
+                          onMouseLeave={[Function]}
+                          onMouseUp={[Function]}
+                          onTouchEnd={[Function]}
+                          onTouchMove={[Function]}
+                          onTouchStart={[Function]}
+                          style={Object {}}
+                          tabIndex={0}
+                          type="button"
+                        >
+                          <span
+                            className="MuiButton-label"
+                          >
+                            Create a Wallet
+                          </span>
+                          <NoSsr />
+                        </button>
+                      </ForwardRef(ButtonBase)>
+                    </WithStyles(ForwardRef(ButtonBase))>
+                  </ForwardRef(Button)>
+                </WithStyles(ForwardRef(Button))>
+              </BaseButton>
+            </div>
+          </Styled(MuiBox)>
+        </div>
+      </Styled(MuiBox)>
+    </Layout>
+  </CreateWallet>
+</Provider>
+`;

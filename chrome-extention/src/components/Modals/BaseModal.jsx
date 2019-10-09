@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, ClickAwayListener } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
@@ -38,7 +39,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
-const BaseModal = ({ isOpen, onClose, children, HeaderCompoennt, style }) => {
+const BaseModal = ({ isOpen, onClose, children, HeaderComponent, style }) => {
   const classes = useStyles();
 
   return (
@@ -50,7 +51,7 @@ const BaseModal = ({ isOpen, onClose, children, HeaderCompoennt, style }) => {
             className={classes.container}
           >
             <Box className={classes.header}>
-              {HeaderCompoennt()}
+              {HeaderComponent()}
             </Box>
             <Box className={classes.content}>
               {children}
@@ -60,6 +61,17 @@ const BaseModal = ({ isOpen, onClose, children, HeaderCompoennt, style }) => {
       </Box>
     )
   );
-}
+};
+
+BaseModal.propTypes = {
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+  children: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.arrayOf(PropTypes.node),
+  ]),
+  HeaderComponent: PropTypes.elementType,
+  style: PropTypes.object,
+};
 
 export default BaseModal;

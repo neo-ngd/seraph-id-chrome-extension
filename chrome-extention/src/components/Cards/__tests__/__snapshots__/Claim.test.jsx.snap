@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Claim /> should render component 1`] = `
+<WithStyles(ForwardRef(Card))
+  className="makeStyles-card-1"
+>
+  <WithStyles(ForwardRef(CardHeader))
+    action={
+      <ForwardRef(StyledComponent)>
+        <ForwardRef(WithStyles)
+          aria-expanded={false}
+          aria-label="show more"
+          className="makeStyles-expand-3"
+          data-test-id="claim-expand-button"
+          disableRipple={true}
+          onClick={[Function]}
+        >
+          <Memo(ExpandMoreIcon)
+            color="inherit"
+            fontSize="inherit"
+          />
+        </ForwardRef(WithStyles)>
+        <ForwardRef(WithStyles)
+          aria-expanded={false}
+          aria-label="show more"
+          className="makeStyles-removeIcon-8"
+          data-test-id="claim-remove-button"
+          disableRipple={true}
+          onClick={[Function]}
+        >
+          <Memo(CloseIcon)
+            color="inherit"
+            fontSize="inherit"
+          />
+        </ForwardRef(WithStyles)>
+      </ForwardRef(StyledComponent)>
+    }
+    classes={
+      Object {
+        "action": "makeStyles-action-10",
+        "root": "makeStyles-root-9",
+        "subheader": "makeStyles-subheader-7",
+        "title": "makeStyles-title-6",
+      }
+    }
+    subheader={11}
+    title="test"
+  />
+  <WithStyles(ForwardRef(Collapse))
+    in={false}
+    timeout="auto"
+    unmountOnExit={true}
+  >
+    <WithStyles(ForwardRef(CardContent))
+      className="makeStyles-cardContent-2"
+    >
+      <t
+        collapseStringsAfterLength={false}
+        collapsed={false}
+        defaultValue={null}
+        displayDataTypes={false}
+        displayObjectSize={false}
+        enableClipboard={false}
+        groupArraysAfterLength={100}
+        iconStyle="triangle"
+        indentWidth={4}
+        name="root"
+        onAdd={false}
+        onDelete={false}
+        onEdit={false}
+        onSelect={false}
+        shouldCollapse={false}
+        sortKeys={false}
+        src={
+          Object {
+            "test": "test",
+          }
+        }
+        style={Object {}}
+        theme="rjv-default"
+        validationMessage="Validation Error"
+      />
+    </WithStyles(ForwardRef(CardContent))>
+  </WithStyles(ForwardRef(Collapse))>
+</WithStyles(ForwardRef(Card))>
+`;

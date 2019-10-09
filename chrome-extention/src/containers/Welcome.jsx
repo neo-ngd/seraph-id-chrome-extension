@@ -1,13 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
-
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box, Link, makeStyles } from '@material-ui/core';
 import Layout from '../components/Layout/Layout';
-import { setExportedWallet } from '../pages/Background/actions';
-import { createFileInput } from '../commons/walletUtils';
-import { sendErrorToCS, unknownError } from '../commons/errors';
-import {IMPORT_SUCCESS_MSG} from "../commons/constants";
+import dictionary from "../commons/dictionary";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   link: {
@@ -17,7 +13,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
-function Welcome({ onGoTopage }) {
+const Welcome = ({ onGoToPage }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,25 +24,29 @@ function Welcome({ onGoTopage }) {
   return (
     <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
-        <Box fontSize={24} color="text.primary">Welcome to Seraph ID</Box>
+        <Box fontSize={24} color="text.primary">{dictionary.welcome.title}</Box>
 
         <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
-          Seraph ID chrome extention allows you to manage your claims in a user-frielndly way
+          {dictionary.welcome.info}
         </Box>
         <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
-          To start to use Seraph ID please create a wallet or import an existing one
+          {dictionary.welcome.more}
         </Box>
       </Box>
 
       <Box flexDirection="column" display="flex">
         <BaseButton
-          handleClick={onGoTopage}
-          text={'Create a Wallet'}
+          handleClick={onGoToPage}
+          text={dictionary.welcome.button}
         />
-        <Link href="#" onClick={openFormTab} className={classes.link}>Or import an existing one</Link>
+        <Link data-test-id={'import-wallet-link'} href="#" onClick={openFormTab} className={classes.link}>{dictionary.welcome.link}</Link>
       </Box>
     </Layout>
   );
-}
+};
+
+Welcome.propTypes = {
+  onGoToPage: PropTypes.func.isRequired,
+};
 
 export default Welcome;

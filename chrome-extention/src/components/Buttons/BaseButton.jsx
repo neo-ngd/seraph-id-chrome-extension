@@ -1,20 +1,19 @@
 import React from 'react';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
 import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
-
-import { useStyles } from './Styles';
 import clsx from 'clsx';
+import { useStyles } from './Styles';
 
-export default function BaseButton(
+const BaseButton = (
     { handleClick,
       text,
-      small = false,
-      disabled = false,
-      icon = false,
-      fullWidth = true,
-      reject = false,
-      component = undefined }) {
+      small,
+      disabled,
+      icon,
+      fullWidth,
+      reject,
+      component, testID}) => {
   const classes = useStyles();
 
   const style = {};
@@ -27,6 +26,7 @@ export default function BaseButton(
 
   return (
     <Button
+      data-test-id={testID}
       component={component}
       disabled={disabled}
       onClick={handleClick}
@@ -37,8 +37,34 @@ export default function BaseButton(
     >
       {text}
       {icon && (
-        <ArrowRight className={clsx(classes.arrowRight, classes.smallArrowRight)} />
+        <ArrowRight style={{opacity: disabled ? .5 : 1}} className={clsx(classes.arrowRight, small && classes.smallArrowRight)} />
       )}
     </Button>
   );
-}
+};
+
+BaseButton.defaultProps = {
+    small: false,
+    disabled: false,
+    icon: false,
+    fullWidth: false,
+    reject: false,
+    component: undefined,
+    testID: 'base-button',
+};
+
+BaseButton.propTypes = {
+    handleClick: PropTypes.func,
+    text: PropTypes.string,
+    small: PropTypes.bool,
+    disabled: PropTypes.bool,
+    icon: PropTypes.bool,
+    fullWidth: PropTypes.bool,
+    reject: PropTypes.bool,
+    component: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.elementType,
+    ])
+};
+
+export default BaseButton;

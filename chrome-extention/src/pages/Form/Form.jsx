@@ -5,6 +5,7 @@ import RotationLogo from "../../components/RotatingLogo/RotatingLogo";
 import {useDispatch} from "react-redux";
 import {IMPORT_ERROR_MSG, IMPORT_SUCCESS_MSG, SUCCESS, ERROR, WALLET_NAME} from "../../commons/constants";
 import {importWalletAlias, setSession} from "../Background/actions";
+import dictionary from "../../commons/dictionary";
 
 const useStyles = makeStyles(({palette, spacing}) => ({
     container: {
@@ -91,19 +92,19 @@ const Form = () => {
         <Box className={classes.container}>
             <RotationLogo maxWidth={'320px'}/>
             {!status && <Typography className={classes.text}>
-                Please select a wallet to import.
+                {dictionary.form.info}
             </Typography>}
             {status === SUCCESS && <Typography className={classes.textSuccess}>
-                Your wallet has been imported.
+                {dictionary.form.success}
             </Typography>}
             {status === ERROR && <Typography className={classes.textError}>
-                Something went wrong! Try again.
+                {dictionary.form.error}
             </Typography>}
             {<form className={classes.form}>
                 <input ref={fileInput} id={'import-input'} className={classes.input} type={'file'} accept={'.json'}
                        onChange={importWallet}/>
                 {!isUploading ? <label htmlFor={'import-input'} className={classes.inputLabel}>
-                        <BaseButton component={'span'} text={`import ${status === SUCCESS ? 'another' : ''} wallet`}
+                        <BaseButton component={'span'} text={`${dictionary.commons.import} ${status === SUCCESS ? dictionary.commons.another : ''} ${dictionary.commons.wallet}`}
                                     fullWidth={false}/>
                     </label> : <CircularProgress variant={'indeterminate'} className={classes.loader} /> }
             </form>}

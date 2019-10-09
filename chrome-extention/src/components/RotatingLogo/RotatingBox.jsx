@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class React3DRotationBox extends Component {
   constructor(props) {
@@ -64,6 +65,13 @@ React3DRotationBox.defaultProps = {
   perspective: '200px',
   minWidth: 'auto',
   minHeight: '150px',
+};
+
+React3DRotationBox.propTypes = {
+  rotateForce: PropTypes.number,
+  perspective: PropTypes.string,
+  minWidth: PropTypes.string,
+  minHeight: PropTypes.string,
 };
 
 export default React3DRotationBox;

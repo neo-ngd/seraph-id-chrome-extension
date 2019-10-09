@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dialogs /> should render <DialogHeader> component 1`] = `
+<Styled(MuiBox)
+  pl={1.2}
+  pt={0.8}
+>
+  <Icon />
+</Styled(MuiBox)>
+`;
+
+exports[`<Dialogs /> should render ASK_CLAIM component 1`] = `
+<BaseModal
+  HeaderComponent={[Function]}
+  isOpen={true}
+  onClose={[MockFunction]}
+  style={
+    Object {
+      "maxWidth": "300px",
+    }
+  }
+>
+  <Styled(MuiBox)
+    color="text.primary"
+    fontSize="16px"
+    pb={2}
+    textAlign="center"
+  >
+    test wants to access your test. Do you want to share it?
+  </Styled(MuiBox)>
+  <Styled(MuiBox)
+    overflow="auto"
+  >
+    <t
+      collapseStringsAfterLength={false}
+      collapsed={false}
+      defaultValue={null}
+      displayDataTypes={false}
+      displayObjectSize={false}
+      enableClipboard={false}
+      groupArraysAfterLength={100}
+      iconStyle="triangle"
+      indentWidth={4}
+      name="root"
+      onAdd={false}
+      onDelete={false}
+      onEdit={false}
+      onSelect={false}
+      shouldCollapse={false}
+      sortKeys={false}
+      src={
+        Object {
+          "test": "test",
+        }
+      }
+      style={Object {}}
+      theme="rjv-default"
+      validationMessage="Validation Error"
+    />
+  </Styled(MuiBox)>
+  <Styled(MuiBox)
+    alignSelf="flex-end"
+    display="flex"
+    pb={1}
+    pt={2}
+  >
+    <BaseButton
+      disabled={false}
+      fullWidth={false}
+      handleClick={[MockFunction]}
+      icon={false}
+      reject={true}
+      small={true}
+      testID="base-button"
+      text="No"
+    />
+    <BaseButton
+      disabled={false}
+      fullWidth={false}
+      handleClick={[MockFunction]}
+      icon={false}
+      reject={false}
+      small={true}
+      testID="base-button"
+      text="Yes"
+    />
+  </Styled(MuiBox)>
+</BaseModal>
+`;
+
+exports[`<Dialogs /> should render GET_CLAIM component 1`] = `
+<BaseModal
+  HeaderComponent={[Function]}
+  isOpen={true}
+  onClose={[MockFunction]}
+  style={
+    Object {
+      "maxWidth": "300px",
+    }
+  }
+>
+  <Styled(MuiBox)
+    color="text.primary"
+    fontSize="16px"
+    pb={2}
+    textAlign="center"
+  >
+    Do you want to accept this claim?
+  </Styled(MuiBox)>
+  <Styled(MuiBox)
+    overflow="auto"
+  >
+    <t
+      collapseStringsAfterLength={false}
+      collapsed={false}
+      defaultValue={null}
+      displayDataTypes={false}
+      displayObjectSize={false}
+      enableClipboard={false}
+      groupArraysAfterLength={100}
+      iconStyle="triangle"
+      indentWidth={4}
+      name="root"
+      onAdd={false}
+      onDelete={false}
+      onEdit={false}
+      onSelect={false}
+      shouldCollapse={false}
+      sortKeys={false}
+      src={
+        Object {
+          "test": "test",
+        }
+      }
+      style={Object {}}
+      theme="rjv-default"
+      validationMessage="Validation Error"
+    />
+  </Styled(MuiBox)>
+  <Styled(MuiBox)
+    alignSelf="flex-end"
+    display="flex"
+    pb={1}
+    pt={2}
+  >
+    <BaseButton
+      disabled={false}
+      fullWidth={false}
+      handleClick={[MockFunction]}
+      icon={false}
+      reject={true}
+      small={true}
+      testID="base-button"
+      text="No"
+    />
+    <BaseButton
+      disabled={false}
+      fullWidth={false}
+      handleClick={[MockFunction]}
+      icon={false}
+      reject={false}
+      small={true}
+      testID="base-button"
+      text="Yes"
+    />
+  </Styled(MuiBox)>
+</BaseModal>
+`;

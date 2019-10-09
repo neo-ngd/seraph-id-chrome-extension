@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import RotationBox from './RotatingBox';
 
-const RotationLogo = ({maxWidth = '230px'}) => {
+const RotationLogo = ({ maxWidth }) => {
   return (
     <RotationBox perspective="200px" rotateForce={20} minWidth="auto">
       <img
@@ -11,6 +12,14 @@ const RotationLogo = ({maxWidth = '230px'}) => {
       />
     </RotationBox>
   );
-}
+};
+
+RotationLogo.defaultProps = {
+    maxWidth: '230px'
+};
+
+RotationLogo.propTypes = {
+    maxWidth: PropTypes.string,
+};
 
 export default RotationLogo;

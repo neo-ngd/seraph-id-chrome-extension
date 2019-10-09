@@ -33,7 +33,7 @@ function Popup() {
 
   const selectComponent = () => {
     if (page === PAGES.WELCOME) {
-      return (<Welcome onGoTopage={() => goToPage(PAGES.CREATE_WALLET)} />)
+      return (<Welcome onGoToPage={() => goToPage(PAGES.CREATE_WALLET)} />)
     }
 
     if (page === PAGES.CREATE_WALLET) {

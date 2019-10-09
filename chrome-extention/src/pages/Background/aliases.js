@@ -37,6 +37,7 @@ import {
   SHARE_ACCOUNT_MSG, SHARE_CLAIM_ERROR_MSG, SHARE_CLAIM_SUCCESS_MSG
 } from "../../commons/constants";
 import icon from '../../assets/icons/icon64.png';
+import dictionary from "../../commons/dictionary";
 
 const addClaimResultEvent = success => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -103,7 +104,6 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
     const decryptedWallet = await decrypt(wallet, pwService.password);
     if (!!decryptedWallet) {
       const claim = createClaim(schemaName, data, decryptedWallet);
-      // TODO the claim is always adding to the first account!!
       decryptedWallet.addClaim(claim);
       const encryption = decryptedWallet.accounts.map(acc => acc.encrypt(pwService.password));
       await Promise.all(encryption);
@@ -112,7 +112,7 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
         type: 'basic',
         iconUrl: icon,
         title: '',
-        message: 'The claim has been saved'});
+        message: dictionary.events.saveClaimSuccess});
       addClaimResultEvent(true);
       return dispatch(setExportedWallet(exportedWalletJSON));
     }
@@ -156,7 +156,7 @@ const importWalletAlias = ({wallet}) => async (dispatch) => {
       type: 'basic',
       iconUrl: icon,
       title: '',
-      message: 'Your wallet has been imported'});
+      message: dictionary.events.importWalletSuccess});
   } catch (error) {
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
       chrome.tabs.sendMessage(tabs[0].id, {msg: IMPORT_ERROR_MSG});

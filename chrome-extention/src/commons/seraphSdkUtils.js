@@ -1,7 +1,6 @@
 import { DIDNetwork, SeraphIDWallet, SeraphIDIssuer, SeraphIDVerifier } from '@sbc/seraph-id-sdk';
 import env from '../environments/environment';
 import { v4 as uuid } from 'uuid';
-
 const { GOVERNMENT_SCRIPT_HASH, NEO_RPC_URL, NEOSCAN_URL } = env;
 
 /**

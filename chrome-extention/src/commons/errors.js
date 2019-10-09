@@ -1,3 +1,5 @@
+import dictionary from "./dictionary";
+
 /**
  * Error message string
  * @type {string}
@@ -38,7 +40,7 @@ export const sendErrorToPopup = error => {
  */
 export const unknownError = error => ({
     code: UNKNOWN,
-    message: 'unknown error',
+    message: dictionary.errors.unknown,
     error
 });
 
@@ -48,8 +50,8 @@ export const unknownError = error => ({
  */
 export const invalidPwError = () => ({
     code: INVALID_PW,
-    message: "Invalid password",
-    error: new Error("Invalid password")
+    message: dictionary.errors.invalidPassword,
+    error: new Error(dictionary.errors.invalidPassword)
 });
 
 /**
@@ -58,8 +60,8 @@ export const invalidPwError = () => ({
  */
 export const claimNotFoundError = () => ({
     code: NOT_FOUND,
-    message: "credential doesn't exists",
-    error: new Error("credential doesn't exists")
+    message: dictionary.errors.noCredentials,
+    error: new Error(dictionary.errors.noCredentials)
 });
 
 /**
@@ -68,8 +70,8 @@ export const claimNotFoundError = () => ({
  */
 export const walletNotFoundError = () => ({
     code: NO_WALLET,
-    message: 'cannot find any wallet',
-    error: new Error('cannot find any wallet')
+    message: dictionary.errors.noWallet,
+    error: new Error(dictionary.errors.noWallet)
 });
 
 /**
@@ -78,6 +80,6 @@ export const walletNotFoundError = () => ({
  */
 export const claimDeclineError = () => ({
     code: CLAIM_DECLINE,
-    message: 'user didn\'t accept to share the credential',
-    error: new Error('user didn\'t accept to share the credential')
+    message: dictionary.errors.claimDecline,
+    error: new Error(dictionary.errors.claimDecline)
 });

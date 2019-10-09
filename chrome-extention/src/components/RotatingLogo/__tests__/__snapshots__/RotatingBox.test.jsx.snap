@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RotatingBox /> should render component 1`] = `
+<div
+  className="motion-box "
+  style={
+    Object {
+      "minHeight": "150px",
+      "minWidth": "auto",
+      "perspective": "200px",
+      "textAlign": "center",
+    }
+  }
+>
+  <div
+    style={
+      Object {
+        "transform": "rotateX(0deg) rotateY(0deg)",
+        "transformStyle": "preserve-3d",
+      }
+    }
+  />
+</div>
+`;
