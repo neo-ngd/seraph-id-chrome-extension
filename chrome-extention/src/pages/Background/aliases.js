@@ -51,18 +51,18 @@ const shareClaimResultEvent = success => {
   });
 };
 
-const sendErrorToCSAlias = ({error}) =>
+export const sendErrorToCSAlias = ({error}) =>
     () => sendErrorToCS(error);
 
-const sendErrorToPopupAlias = ({error}) =>
+export const sendErrorToPopupAlias = ({error}) =>
     () => sendErrorToPopup(error);
 
-const setPasswordAlias = ({password}) => (dispatch) =>  {
+export const setPasswordAlias = ({password}) => (dispatch) =>  {
   pwService.password = password;
   return dispatch(setSession(true));
 };
 
-const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
+export const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
     const decrypted = await decrypt(wallet, password);
@@ -79,26 +79,26 @@ const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
   }
 };
 
-const getEncryptedPasswordAlias = () => (dispatch, getState) => {
+export const getEncryptedPasswordAlias = () => (dispatch, getState) => {
   const { wallet, activeAccount } = getState();
   chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet, activeAccount});
 };
 
-const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
+export const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
   const { wallet, activeAccount } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, {msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet, activeAccount});
   });
 };
 
-const shareActiveAccountAlias = () => (dispatch, getState) => {
+export const shareActiveAccountAlias = () => (dispatch, getState) => {
   const { activeAccount } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, {msg: SHARE_ACCOUNT_MSG, activeAccount });
   });
 };
 
-const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
+export const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
     const decryptedWallet = await decrypt(wallet, pwService.password);
@@ -124,7 +124,7 @@ const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
   }
 };
 
-const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch, getState) => {
+export const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
     const decryptedWallet = await decrypt(wallet, pwService.password);
@@ -146,7 +146,7 @@ const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch
   }
 };
 
-const importWalletAlias = ({wallet}) => async (dispatch) => {
+export const importWalletAlias = ({wallet}) => async (dispatch) => {
   try {
     dispatch(setExportedWallet(wallet));
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {

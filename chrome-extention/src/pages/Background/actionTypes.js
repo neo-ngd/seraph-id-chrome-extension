@@ -15,5 +15,5 @@ export const SET_CLAIM = 'SET_CLAIM';
 export const DESTROY_CLAIM = 'DESTROY_CLAIM';
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG';
 export const SET_SESSION = 'SET_SESSION';
-export const DESTROY_SESSION = 'SET_SESSION';
+export const DESTROY_SESSION = 'DESTROY_SESSION';
 export const SET_ACTIVE_ACCOUNT = 'SET_ACTIVE_ACCOUNT';

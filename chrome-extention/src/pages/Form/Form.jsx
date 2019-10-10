@@ -104,7 +104,7 @@ const Form = () => {
                 <input ref={fileInput} id={'import-input'} className={classes.input} type={'file'} accept={'.json'}
                        onChange={importWallet}/>
                 {!isUploading ? <label htmlFor={'import-input'} className={classes.inputLabel}>
-                        <BaseButton component={'span'} text={`${dictionary.commons.import} ${status === SUCCESS ? dictionary.commons.another : ''} ${dictionary.commons.wallet}`}
+                        <BaseButton data-test-id={'file-input-button'} component={'span'} text={`${dictionary.commons.import} ${status === SUCCESS ? dictionary.commons.another : ''} ${dictionary.commons.wallet}`}
                                     fullWidth={false}/>
                     </label> : <CircularProgress variant={'indeterminate'} className={classes.loader} /> }
             </form>}

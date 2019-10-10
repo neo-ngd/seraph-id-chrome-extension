@@ -36,6 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-syntax-throw-expressions": "^7.2.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.3",
@@ -79,7 +80,9 @@
       "<rootDir>/src/**/__tests__/**/*.js?(x)"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "src/**/*.{js,jsx}",
+      "!src/pages/Content/**",
+      "!src/pages/**/index.{js,jsx}"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

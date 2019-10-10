@@ -20,7 +20,7 @@ import {
   SHARE_CLAIM_SUCCESS_MSG, SHARE_CLAIM_ERROR_MSG
 } from "../../../commons/constants";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [isListener, setIsListener] = useState(false);
@@ -61,12 +61,10 @@ function App() {
   };
 
   const injectScript = () => {
-    const script = document.createElement('script'),
-      code = document.createTextNode('(' + seraphIdInjected + ')();');
+    const script = document.createElement('script');
+    const code = document.createTextNode('(' + seraphIdInjected + ')();');
     script.appendChild(code);
-    (document.body || document.head || document.documentElement).appendChild(
-      script
-    );
+    (document.body || document.head || document.documentElement).appendChild(script);
   };
 
   const getClaimListener = ({detail: claim}) => {
@@ -204,6 +202,6 @@ function App() {
       {...dialog}
       />
   );
-}
+};
 
 export default App;
