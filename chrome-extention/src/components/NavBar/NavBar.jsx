@@ -1,9 +1,16 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, Box, ButtonBase} from '@material-ui/core';
 import image from '../../assets/icons/fingerprint.png';
 
+/**
+ * Component styles
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 const useStyles = makeStyles(({ palette, spacing }) => ({
   barStyle: {
     background: palette.primary.dark,
@@ -23,6 +30,15 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   }
 }));
 
+/**
+ * <NavBar />
+ * The navigation bar which shows the current account address and allows for opening the accounts dialog modal.
+ * @param address
+ * @param name
+ * @param onOpenAccountsModal
+ * @return {*}
+ * @constructor
+ */
 const NavBar = ({ address, name, onOpenAccountsModal }) => {
   const classes = useStyles();
 

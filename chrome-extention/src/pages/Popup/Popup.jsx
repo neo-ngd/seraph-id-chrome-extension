@@ -7,6 +7,10 @@ import WalletInfo from '../../containers/WalletInfo';
 import UnlockWallet from '../../containers/UnlockWallet';
 import Welcome from '../../containers/Welcome';
 
+/**
+ * The page slugs.
+ * @type {{CREATE_WALLET: string, CLAIMS: string, WELCOME: string, UNLOCK_WALLET: string}}
+ */
 const PAGES = {
   WELCOME: 'welcome',
   CREATE_WALLET: 'create_wallet',
@@ -14,7 +18,13 @@ const PAGES = {
   CLAIMS: 'claims',
 };
 
-function Popup() {
+/**
+ * <Popup />
+ * Base popup container.
+ * @return {*}
+ * @constructor
+ */
+const Popup = () => {
   const [page, setPage] = useState(PAGES.WELCOME);
   const { session, wallet: accountFromStore } = useSelector(state => state);
   const goToPage = page => setPage(page);
@@ -31,6 +41,10 @@ function Popup() {
     }
   }, [accountFromStore, session]);
 
+  /**
+   * Select proper container based on the set page slug.
+   * @return {*}
+   */
   const selectComponent = () => {
     if (page === PAGES.WELCOME) {
       return (<Welcome onGoToPage={() => goToPage(PAGES.CREATE_WALLET)} />)

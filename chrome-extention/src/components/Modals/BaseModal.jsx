@@ -1,8 +1,15 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, ClickAwayListener } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
+/**
+ * Component styles
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 const useStyles = makeStyles(({ palette, spacing }) => ({
   wrapper: {
     position: 'absolute',
@@ -39,6 +46,17 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
+/**
+ * <BaseModal />
+ * The base dialog modal component.
+ * @param isOpen
+ * @param onClose
+ * @param children
+ * @param HeaderComponent
+ * @param style
+ * @return {*}
+ * @constructor
+ */
 const BaseModal = ({ isOpen, onClose, children, HeaderComponent, style }) => {
   const classes = useStyles();
 

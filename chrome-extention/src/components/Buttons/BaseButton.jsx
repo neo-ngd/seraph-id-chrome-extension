@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@material-ui/core';
@@ -5,6 +8,21 @@ import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import clsx from 'clsx';
 import { useStyles } from './Styles';
 
+/**
+ * <BaseButton />
+ * Primary button component.
+ * @param handleClick
+ * @param text
+ * @param small
+ * @param disabled
+ * @param icon
+ * @param fullWidth
+ * @param reject
+ * @param component
+ * @param testID
+ * @return {*}
+ * @constructor
+ */
 const BaseButton = (
     { handleClick,
       text,

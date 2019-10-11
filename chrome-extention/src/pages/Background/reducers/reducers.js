@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import {
   DESTROY_CLAIM,
   SET_CLAIM,
@@ -7,6 +10,12 @@ import {
   DESTROY_SESSION, SET_ACTIVE_ACCOUNT
 } from '../actionTypes';
 
+/**
+ * Set the wallet or exported wallet in JSON.
+ * @param state
+ * @param action
+ * @return {*|{test}|string}
+ */
 export const wallet = (state = null, action) => {
   switch (action.type) {
     case SET_WALLET:
@@ -16,6 +25,12 @@ export const wallet = (state = null, action) => {
   }
 };
 
+/**
+ * Set or destroy the claim
+ * @param state
+ * @param action
+ * @return {Fixed8 | number | string | {test} | props.claim | {test} | * | (() => Promise<void>)|null}
+ */
 export const claim = (state = null, action) => {
   switch (action.type) {
     case SET_CLAIM:
@@ -32,6 +47,12 @@ const initDialogState = {
   verifierName: null,
   schemaName: null,
 };
+/**
+ * Set the dialog state.
+ * @param {{context: string, verifierName: string, schemaName: string}} state - context may be "GET_CLAIM" or "ASK_CLAIM"
+ * @param action
+ * @return {{context: null, verifierName: null, schemaName: null}|*}
+ */
 export const dialog = (state = initDialogState, action) => {
   switch (action.type) {
     case TOGGLE_DIALOG:
@@ -41,6 +62,12 @@ export const dialog = (state = initDialogState, action) => {
   }
 };
 
+/**
+ * Set or destroy the session
+ * @param {boolean} state
+ * @param action
+ * @return {Boolean|boolean}
+ */
 export const session = (state = false, action) => {
   switch (action.type) {
     case SET_SESSION:
@@ -52,6 +79,12 @@ export const session = (state = false, action) => {
   }
 };
 
+/**
+ * Set the active account label
+ * @param state
+ * @param action
+ * @return {*}
+ */
 export const activeAccount = (state = null, action) => {
   switch (action.type) {
     case SET_ACTIVE_ACCOUNT:

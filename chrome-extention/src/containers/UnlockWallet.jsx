@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, {useEffect, useState} from 'react';
 import { Box } from '@material-ui/core/';
 import {useDispatch } from 'react-redux';
@@ -10,6 +13,12 @@ import {  checkPassword } from "../pages/Background/actions";
 import {ERROR_MSG, INVALID_PW} from "../commons/errors";
 import dictionary from "../commons/dictionary";
 
+/**
+ * <UnlockWallet />
+ * Base view which is shown when the user has some encrypted wallets but doesn't have the password in the password service.
+ * @return {*}
+ * @constructor
+ */
 const UnlockWallet = () => {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
@@ -25,11 +34,15 @@ const UnlockWallet = () => {
         });
     }, []);
 
-  const unlock = async () => {
-      setError(null);
-      setDisabled(true);
-      dispatch(checkPassword(password));
-  };
+    /**
+     * Check the password and set it in the password service.
+     * @return {Promise<void>}
+     */
+      const unlock = async () => {
+          setError(null);
+          setDisabled(true);
+          dispatch(checkPassword(password));
+      };
 
   return (
     <Layout>

@@ -1,6 +1,13 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ * <React3DRotationBox />
+ * 3D rotation box. It rotates the passed element based on the mouse position.
+ */
 class React3DRotationBox extends Component {
   constructor(props) {
     super(props);

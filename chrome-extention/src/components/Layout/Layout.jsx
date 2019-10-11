@@ -1,7 +1,21 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, CircularProgress } from '@material-ui/core';
 
+/**
+ * <Layout />
+ * Base layout component.
+ * It adds the flexbox container and handle the loading state.
+ * @param children
+ * @param justifyStart
+ * @param padding
+ * @param isLoading
+ * @return {*}
+ * @constructor
+ */
 const Layout = ({ children, justifyStart, padding, isLoading }) => {
   return (
     <Box

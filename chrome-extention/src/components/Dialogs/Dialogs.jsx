@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
@@ -8,12 +11,33 @@ import {DIALOG_TYPES} from "../../commons/constants";
 import Icon from '../Icon/Icon';
 import dictionary from "../../commons/dictionary";
 
+/**
+ * <DialogHeader />
+ * Header for the modal dialog
+ * @return {*}
+ * @constructor
+ */
 const DialogHeader = () => (
     <Box pl={1.2} pt={0.8}>
       <Icon />
     </Box>
 );
 
+/**
+ * <Dialogs />
+ * Modal dialog for the content script.
+ * It accept two context: GET_CLAIM and ASK_CLAIM.
+ * Based on the passed context, the dialog should be render in the issuer or the verifier dialog variant.
+ * @param open
+ * @param handleClose
+ * @param claim
+ * @param handleClaim
+ * @param context
+ * @param schemaName
+ * @param verifierName
+ * @return {*}
+ * @constructor
+ */
 const Dialogs = ({ open, handleClose, claim, handleClaim, context, schemaName, verifierName }) => {
   return (
     <BaseModal

@@ -1,5 +1,14 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from "react";
 
+/**
+ * <Icon />
+ * The SeraphID logo image.
+ * @return {*}
+ * @constructor
+ */
 const Icon = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"

@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, {createRef, useEffect, useState} from 'react';
 import {makeStyles, Box, Typography, CircularProgress} from "@material-ui/core";
 import BaseButton from "../../components/Buttons/BaseButton";
@@ -7,6 +10,10 @@ import {IMPORT_ERROR_MSG, IMPORT_SUCCESS_MSG, SUCCESS, ERROR, WALLET_NAME} from 
 import {importWalletAlias, setSession} from "../Background/actions";
 import dictionary from "../../commons/dictionary";
 
+/**
+ * Component styles
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 const useStyles = makeStyles(({palette, spacing}) => ({
     container: {
         height: '100vh',
@@ -40,6 +47,12 @@ const useStyles = makeStyles(({palette, spacing}) => ({
     }
 }));
 
+/**
+ * <Form />
+ * The import wallet form. It could be open in the new browser tab as a form.html.
+ * @return {*}
+ * @constructor
+ */
 const Form = () => {
     const dispatch = useDispatch();
     const [isUploading, setIsUploading] = useState(false);
@@ -60,12 +73,20 @@ const Form = () => {
         })
     }, []);
 
+    /**
+     * Simple validation if the file has the proper structure.
+     * @param json
+     * @return {boolean}
+     */
     const validfile = json => {
         const parsed = JSON.parse(json);
         return !!parsed.accounts && !!parsed.name && parsed.name === WALLET_NAME;
     };
 
-    const importWallet = e => {
+    /**
+     * Create and open the file browser, then valid and send the selected file to the extension.
+     */
+    const importWallet = () => {
         setIsUploading(true);
         const file = fileInput.current.files[0];
 

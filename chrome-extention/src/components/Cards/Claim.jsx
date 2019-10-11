@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +9,10 @@ import { Card, CardHeader, CardContent, Collapse, IconButton, Box } from '@mater
 import { Close, ExpandMore } from '@material-ui/icons';
 import ReactJson from 'react-json-view';
 
+/**
+ * Claim styles
+ * @type {StylesHook<Styles<Theme, {}, string>>}
+ */
 const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: 'transparent',
@@ -16,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '100%',
         overflow: 'auto',
     },
-
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -55,6 +61,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/**
+ * <Claim />
+ * The collapsible claim item.
+ * @param id
+ * @param schema
+ * @param content
+ * @param onRemoveClaim
+ * @return {*}
+ * @constructor
+ */
 const Claim = ({ id, schema, content, onRemoveClaim }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);

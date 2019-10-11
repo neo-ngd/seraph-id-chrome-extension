@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 export const CREATE_CLAIM_ALIAS = 'CREATE_CLAIM_ALIAS';
 export const ASK_CLAIM_ALIAS = 'ASK_CLAIM_ALIAS';
 export const SET_PASSWORD_ALIAS = 'SET_PASSWORD_ALIAS';

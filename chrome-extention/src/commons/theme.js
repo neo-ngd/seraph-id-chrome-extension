@@ -1,5 +1,12 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import {createMuiTheme} from "@material-ui/core";
 
+/**
+ * Return @material-ui theme
+ * @type {Theme}
+ */
 const theme = createMuiTheme({
     palette: {
         text: {

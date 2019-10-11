@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, { useState } from 'react';
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box } from '@material-ui/core';
@@ -17,11 +20,24 @@ import {WALLET_NAME} from "../commons/constants";
 import {createWallet} from "../commons/seraphSdkUtils";
 import dictionary from "../commons/dictionary";
 
+/**
+ * <CreateWallet />
+ * The CreateWallet container.
+ * Base view witch is shown when the user does not yet have any wallets.
+ * User could open this view from the <Welcome /> component.
+ * @return {*}
+ * @constructor
+ */
 const CreateWallet = () => {
   const dispatch = useDispatch();
   const { password, handleChange } = useText();
   const [isLoading, setIsLoading] = useState();
 
+  /**
+   * Create and set the new wallet.
+   * Set the first account in the wallet as the active.
+   * @return {Promise<void>}
+   */
   const createAndSetWallet = async () => {
     setIsLoading(true);
     const wallet = createWallet({name: WALLET_NAME});
@@ -32,6 +48,13 @@ const CreateWallet = () => {
     setWallet(exportedWalletJSON);
   };
 
+  /**
+   * Dispatch the new wallet to the redux store.
+   * Set the password in the password service.
+   * Send active account label to the active tab.
+   * Send the wallet data to the content script.
+   * @param wallet
+   */
   const setWallet = (wallet) => {
     dispatch(setExportedWallet(wallet));
     dispatch(setPassword(password));

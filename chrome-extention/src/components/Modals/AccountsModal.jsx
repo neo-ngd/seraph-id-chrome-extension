@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Box, ButtonBase, IconButton} from '@material-ui/core';
@@ -18,6 +21,10 @@ import { downloadFile } from '../../commons/walletUtils';
 import {ENCRYPTED_PW_MSG} from "../../commons/constants";
 import dictionary from "../../commons/dictionary";
 
+/**
+ * Component styles
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 const useStyles = makeStyles(({ palette, spacing }) => ({
   addIcon: {
     position: 'absolute',
@@ -65,6 +72,18 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
+/**
+ * <AccountsModal />
+ * The dialog modal which is showing the account list and also allowed for the accounts management.
+ * !!!
+ * The accounts management features are temporarily disabled (comments in the code).
+ * !!!
+ * @param isOpen
+ * @param onClose
+ * @param wallet
+ * @return {*}
+ * @constructor
+ */
 const AccountsModal = ({ isOpen, onClose, wallet }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -86,6 +105,13 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
     downloadFile(accountFromStore, 'wallet.json', 'text/json');
   };
 
+  /**
+   * Header component.
+   * The <AddCircle /> button adds new account.
+   * !!!
+   * The <AddCircle /> button is temporary disabled.
+   * !!!
+   */
   const header = () => (
       <Box pt={0.6}>
         <Box className={classes.headerText}>{dictionary.commons.accounts}</Box>
@@ -96,11 +122,19 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
       </Box>
   );
 
+  /**
+   * Open a new tab with the import wallet form.
+   */
   const openFormTab = () => {
     chrome.tabs.create({url: 'form.html'})
   };
 
-  // Temporary disabled
+  /**
+   * Add a new account to the wallet.
+   * !!!
+   * Temporary disabled.
+   * !!!
+   */
   // const addAccount = async () => {
   //   if (!!password) {
   //     setIsAdding(true);
@@ -113,7 +147,12 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
   //   }
   // };
 
-  // Temporary disabled
+  /**
+   * Remove the account from the wallet.
+   * !!!
+   * Temporary disabled
+   * !!!
+   */
   // const handleRemoveAccount = async (event, accountLabel) => {
   //   event.stopPropagation();
   //   if (!!password) {
@@ -141,6 +180,9 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
   //   }
   // };
 
+  /**
+   * Change the active account.
+   */
   const changeAccount = (event, accountLabel) => {
     event.stopPropagation();
     dispatch(setActiveAccount(accountLabel));

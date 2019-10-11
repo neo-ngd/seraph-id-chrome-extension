@@ -1,11 +1,11 @@
 {
-  "name": "chrome-extension-webpack",
-  "version": "0.0.1",
-  "description": "A chrome extension boilerplate built with React 16 and Webpack 4",
+  "name": "seraphid-wallet",
+  "version": "1.0.0",
+  "description": "The chrome extension to interact with Seraph ID on the NEO blockchain.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lxieyang/chrome-extension-webpack-boilerplate-with-react-16.git"
+    "url": "https://github.com/swisscom-blockchain/seraph-id-chrome-extention/tree/master/chrome-extention"
   },
   "scripts": {
     "build": "node utils/build.js",

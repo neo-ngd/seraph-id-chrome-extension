@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, { useState, useEffect } from 'react';
 import {Box} from '@material-ui/core';
 import Claim from '../components/Cards/Claim';
@@ -12,6 +15,12 @@ import {ENCRYPTED_PW_MSG} from "../commons/constants";
 import dictionary from "../commons/dictionary";
 import env from '../environments/environment';
 
+/**
+ * <WalletInfo />
+ * Base view which is shown when the user is logged in.
+ * @return {*}
+ * @constructor
+ */
 const WalletInfo = () => {
   const dispatch = useDispatch();
   const [wallet, setWallet] = useState(null);
@@ -27,6 +36,11 @@ const WalletInfo = () => {
     return () => chrome.runtime.onMessage.removeListener(listener);
   }, []);
 
+  /**
+   * The listener which decrypt the wallet using the provided data.
+   * @param request
+   * @return {Promise<void>}
+   */
   const listener = async request =>  {
     if (request.msg === ENCRYPTED_PW_MSG) {
       setPw(request.password);
@@ -34,6 +48,12 @@ const WalletInfo = () => {
     }
   };
 
+  /**
+   * Decrypt the wallet
+   * @param password
+   * @param accountFromStore
+   * @return {Promise<void>}
+   */
   const decryptAccount = async (password, accountFromStore) => {
     const wallet = await decrypt(accountFromStore, password);
     if (!!wallet) {
@@ -42,6 +62,11 @@ const WalletInfo = () => {
     }
   };
 
+  /**
+   * Remove the claim for the wallet.
+   * @param id
+   * @return {Promise<void>}
+   */
   const removeClaim = async (id) => {
     delete wallet.accounts[0].claims[id];
     setWallet(wallet);
@@ -51,6 +76,11 @@ const WalletInfo = () => {
     dispatch(setExportedWallet(exportedWalletJSON));
   };
 
+  /**
+   * Return claim list.
+   * @param claims
+   * @return {*}
+   */
   const showAllClaims = (claims) => {
     return claims.map((claim) => (
       <Claim
@@ -63,14 +93,23 @@ const WalletInfo = () => {
     ));
   };
 
+  /**
+   * Open accounts modal.
+   */
   const openAccountsModal = () => {
     setModalVisibility(true);
   };
 
+  /**
+   * Close accounts modal
+   */
   const handleCloseAccountsModal = () => {
     setModalVisibility(false);
   };
 
+  /**
+   * Open the new browser tab with the external demo site.
+   */
   const openDemo = () => {
     chrome.tabs.create({url: env.DEMO_URL})
   };

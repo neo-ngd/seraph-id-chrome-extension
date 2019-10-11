@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import dictionary from "./dictionary";
 
 /**
@@ -34,7 +37,7 @@ export const sendErrorToPopup = error => {
 };
 
 /**
- * Unknown error
+ * Return the unknown error
  * @param error
  * @return {{code: *, message: string, error: *}}
  */
@@ -45,7 +48,7 @@ export const unknownError = error => ({
 });
 
 /**
- * Invalid password error
+ * Return the invalid password error
  * @return {{code: *, message: string, error: *}}
  */
 export const invalidPwError = () => ({
@@ -55,7 +58,7 @@ export const invalidPwError = () => ({
 });
 
 /**
- * Claim not found error
+ * Return the claim not found error
  * @return {{code: *, message: string, error: *}}
  */
 export const claimNotFoundError = () => ({
@@ -65,7 +68,7 @@ export const claimNotFoundError = () => ({
 });
 
 /**
- * Wallet not found error
+ * Return the wallet not found error
  * @return {{code: *, message: string, error: *}}
  */
 export const walletNotFoundError = () => ({
@@ -75,7 +78,7 @@ export const walletNotFoundError = () => ({
 });
 
 /**
- * Claim decline error
+ * Return the claim decline error
  * @return {{code: *, message: string, error: *}}
  */
 export const claimDeclineError = () => ({

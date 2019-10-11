@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -5,6 +8,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { InputBase } from '@material-ui/core';
 import dictionary from "../../commons/dictionary";
 
+/**
+ * Component styles
+ * @type {StylesHook<Styles<Theme, {}, string>>}
+ */
 const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
@@ -25,6 +32,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/**
+ * <PasswordInput />
+ * The password input.
+ * @param value
+ * @param handleChange
+ * @param hasError
+ * @return {*}
+ * @constructor
+ */
 const PasswordInput = ({ value, handleChange, hasError }) => {
   const classes = useStyles();
 

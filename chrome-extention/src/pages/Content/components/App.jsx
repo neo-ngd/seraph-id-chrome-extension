@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, { useState, useEffect } from 'react';
 import Dialog from '../../../components/Dialogs/Dialogs';
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,6 +23,12 @@ import {
   SHARE_CLAIM_SUCCESS_MSG, SHARE_CLAIM_ERROR_MSG
 } from "../../../commons/constants";
 
+/**
+ * <App />
+ * Mount the dialog modal inside the targeted page.
+ * @return {*}
+ * @constructor
+ */
 const App = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -39,6 +48,10 @@ const App = () => {
     }
   }, []);
 
+  /**
+   * Based on provided request it call the proper methods.
+   * @param request
+   */
   const onMessageListener = request => {
     if (request.msg === SHARE_CLAIM_SUCCESS_MSG) {
       dispatchShareClaimSuccessEvent()
@@ -60,6 +73,9 @@ const App = () => {
     }
   };
 
+  /**
+   * Inject the script inside the targeted page.
+   */
   const injectScript = () => {
     const script = document.createElement('script');
     const code = document.createTextNode('(' + seraphIdInjected + ')();');
@@ -67,15 +83,29 @@ const App = () => {
     (document.body || document.head || document.documentElement).appendChild(script);
   };
 
+  /**
+   * set passed claim in the redux store.
+   * @param claim
+   */
   const getClaimListener = ({detail: claim}) => {
     dispatch(setClaim(claim));
     handleClickOpen(DIALOG_TYPES.GET_CLAIM);
   };
 
+  /**
+   * Trigger the sharing of active account event.
+   */
   const getAddressListener = () => dispatch(shareActiveAccountAlias());
 
+  /**
+   * Trigger the asking about the claim event.
+   * @param detail
+   */
   const askClaimListener = ({detail}) => dispatch(askClaim(detail));
 
+  /**
+   * Register the listeners.
+   */
   const registerListeners = () => {
     document.addEventListener(EVENT_NAMES.SEND_CLAIM, getClaimListener);
     document.addEventListener(EVENT_NAMES.GET_ADDRESS, getAddressListener);
@@ -83,6 +113,9 @@ const App = () => {
     setIsListener(true);
   };
 
+  /**
+   * Unregister the listeners.
+   */
   const unregisterListeners = () => {
     document.removeEventListener(EVENT_NAMES.SEND_CLAIM, getClaimListener);
     document.removeEventListener(EVENT_NAMES.GET_ADDRESS, getAddressListener);
@@ -90,16 +123,26 @@ const App = () => {
     setIsListener(false);
   };
 
+  /**
+   * Open the modal dialog with the proper context.
+   * @param context
+   */
   const handleClickOpen = context => {
     dispatch(toggleDialog({context}));
     setOpen(true);
   };
 
+  /**
+   * Close the modal dialog.
+   */
   const handleClose = () => {
     dispatch(toggleDialog({context: null}));
     setOpen(false);
   };
 
+  /**
+   * Handle the decline action.
+   */
   const handleDecline = () => {
     dispatch(sendErrorToCSAlias(claimDeclineError()));
     dispatch(toggleDialog({context: null}));
@@ -107,17 +150,27 @@ const App = () => {
     setOpen(false);
   };
 
+  /**
+   * Add the claim to the wallet.
+   */
   const addClaim = () => {
     dispatch(createClaim(claim, claim.schema));
     handleClose();
   };
 
+  /**
+   * Share the asked claim with the page.
+   */
   const shareClaim = () =>{
     dispatchShareClaimSuccessEvent(claim);
     dispatch(destroyClaim());
     handleClose()
   };
 
+  /**
+   * The script to inject on the issuer or verifier page.
+   * It adds the seraphID object to the window global object.
+   */
   const seraphIdInjected = () => {
     window.seraphID = {
       /**
@@ -165,11 +218,10 @@ const App = () => {
 
   /**
    * Dispatch shareClaimError event.
-   * @param claim
    * @return {boolean}
    */
-  const dispatchShareClaimErrorEvent = claim =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_ERROR, { detail: claim}));
+  const dispatchShareClaimErrorEvent = () =>
+      document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_ERROR));
 
   /**
    * Dispatch addClaimSuccess event.

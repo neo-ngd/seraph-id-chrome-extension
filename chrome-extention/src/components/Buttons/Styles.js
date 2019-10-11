@@ -1,5 +1,12 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import { makeStyles } from '@material-ui/core';
 
+/**
+ * Button styles
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 export const useStyles = makeStyles(({ spacing, palette }) => ({
   button: {
     borderRadius: '20px',

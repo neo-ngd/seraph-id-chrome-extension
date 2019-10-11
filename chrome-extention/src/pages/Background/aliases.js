@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import {
   ASK_CLAIM_ALIAS,
   CREATE_CLAIM_ALIAS,
@@ -39,29 +42,57 @@ import {
 import icon from '../../assets/icons/icon64.png';
 import dictionary from "../../commons/dictionary";
 
+/**
+ * Send the status of adding the new claim to the wallet to the content script in the active browser tab.
+ * @param success
+ */
 const addClaimResultEvent = success => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, {msg: success ? ADD_CLAIM_SUCCESS_MSG : ADD_CLAIM_ERROR_MSG });
   });
 };
 
+/**
+ * Send the status of asking about sharing the claim to the wallet to the content script in the active browser tab.
+ * @param success
+ */
 const shareClaimResultEvent = success => {
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, {msg: success ? SHARE_CLAIM_SUCCESS_MSG : SHARE_CLAIM_ERROR_MSG });
   });
 };
 
+/**
+ * Send an error to the content script.
+ * @param error
+ * @return {function(): void}
+ */
 export const sendErrorToCSAlias = ({error}) =>
     () => sendErrorToCS(error);
 
+/**
+ * Send an error to the popup.
+ * @param error
+ * @return {function(): void}
+ */
 export const sendErrorToPopupAlias = ({error}) =>
     () => sendErrorToPopup(error);
 
+/**
+ * Set the password in the password service and set the session.
+ * @param password
+ * @return {function(*): *}
+ */
 export const setPasswordAlias = ({password}) => (dispatch) =>  {
   pwService.password = password;
   return dispatch(setSession(true));
 };
 
+/**
+ * Valid the password and eventually decrypt the wallet.
+ * @param password
+ * @return {Function}
+ */
 export const checkPasswordAlias = ({password}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
@@ -79,11 +110,19 @@ export const checkPasswordAlias = ({password}) => async (dispatch, getState) => 
   }
 };
 
+/**
+ * Share the password, wallet and active account with the popup and background script.
+ * @return {Function}
+ */
 export const getEncryptedPasswordAlias = () => (dispatch, getState) => {
   const { wallet, activeAccount } = getState();
   chrome.runtime.sendMessage({msg: ENCRYPTED_PW_MSG, password: pwService.password, wallet, activeAccount});
 };
 
+/**
+ * Share the password, wallet and active account with the content script.
+ * @return {Function}
+ */
 export const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
   const { wallet, activeAccount } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -91,6 +130,10 @@ export const getEncryptedPasswordCSAlias = () => (dispatch, getState) => {
   });
 };
 
+/**
+ * Share the active account with the content script.
+ * @return {Function}
+ */
 export const shareActiveAccountAlias = () => (dispatch, getState) => {
   const { activeAccount } = getState();
   chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -98,6 +141,12 @@ export const shareActiveAccountAlias = () => (dispatch, getState) => {
   });
 };
 
+/**
+ * Create and add the claim to the current account.
+ * @param data
+ * @param schemaName
+ * @return {Function}
+ */
 export const createClaimAlias = ({data, schemaName}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
@@ -124,6 +173,13 @@ export const createClaimAlias = ({data, schemaName}) => async (dispatch, getStat
   }
 };
 
+/**
+ * Find and eventually share the asked claim with the content script.
+ * @param schemaName
+ * @param issuerDID
+ * @param verifierName
+ * @return {Function}
+ */
 export const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (dispatch, getState) => {
   try {
     const { wallet } = getState();
@@ -146,6 +202,11 @@ export const askClaimAlias = ({schemaName, issuerDID, verifierName}) => async (d
   }
 };
 
+/**
+ * Import the wallet and replace the current one.
+ * @param wallet
+ * @return {Function}
+ */
 export const importWalletAlias = ({wallet}) => async (dispatch) => {
   try {
     dispatch(setExportedWallet(wallet));

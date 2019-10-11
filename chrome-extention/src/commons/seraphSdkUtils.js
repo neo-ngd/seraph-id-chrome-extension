@@ -1,4 +1,7 @@
-import { DIDNetwork, SeraphIDWallet, SeraphIDIssuer, SeraphIDVerifier } from '@sbc/seraph-id-sdk';
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
+import { DIDNetwork, SeraphIDWallet, SeraphIDIssuer } from '@sbc/seraph-id-sdk';
 import env from '../environments/environment';
 import { v4 as uuid } from 'uuid';
 const { GOVERNMENT_SCRIPT_HASH, NEO_RPC_URL, NEOSCAN_URL } = env;
@@ -28,7 +31,7 @@ export const decrypt = async (accountFromStore, password) => {
 };
 
 /**
- * Generate new DID for private network
+ * Generate new DID for the private network
  * @param wallet
  */
 export const createDid = wallet => wallet.createDID(DIDNetwork.PrivateNet);
@@ -48,7 +51,7 @@ export const createIssuer = () =>
   new SeraphIDIssuer(GOVERNMENT_SCRIPT_HASH, NEO_RPC_URL, NEOSCAN_URL);
 
 /**
- * Create a claim
+ * Create new claim
  * @param schemaName
  * @param data
  * @param wallet

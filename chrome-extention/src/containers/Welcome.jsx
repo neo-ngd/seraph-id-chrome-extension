@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import BaseButton from '../components/Buttons/BaseButton';
@@ -5,6 +8,10 @@ import { Box, Link, makeStyles } from '@material-ui/core';
 import Layout from '../components/Layout/Layout';
 import dictionary from "../commons/dictionary";
 
+/**
+ * Component styles.
+ * @type {StylesHook<Styles<{readonly spacing?: *, readonly palette?: *}, {}, string>>}
+ */
 const useStyles = makeStyles(({ palette, spacing }) => ({
   link: {
     color: palette.text.secondary,
@@ -13,10 +20,20 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
+/**
+ * <Welcome />
+ * Base view witch is shown when the user does not yet have any wallets.
+ * @param onGoToPage
+ * @return {*}
+ * @constructor
+ */
 const Welcome = ({ onGoToPage }) => {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+   * Open the new browser tab with the import wallet form page.
+   */
   const openFormTab = () => {
     chrome.tabs.create({url: 'form.html'})
   };

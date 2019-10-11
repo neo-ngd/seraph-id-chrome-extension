@@ -1,3 +1,6 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import '../../../assets/icons/icon128';
 
 import { combineReducers } from 'redux';
