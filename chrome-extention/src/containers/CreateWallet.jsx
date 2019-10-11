@@ -66,18 +66,18 @@ const CreateWallet = () => {
     <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
         <Box fontSize={24} color="text.primary">
-          {dictionary.createWallet.title};
+          {dictionary.createWallet.title}
         </Box>
 
         <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
-          {dictionary.createWallet.info};
+          {dictionary.createWallet.info}
         </Box>
       </Box>
 
       <Box>
         <PasswordInput value={password} handleChange={handleChange} />
         <Box mt={1} fontSize="10px" color="text.secondary">
-          {dictionary.createWallet.passwordInfo};
+          {dictionary.createWallet.passwordInfo}
         </Box>
       </Box>
 

@@ -42,7 +42,6 @@ exports[`<CreateWallet /> should render component 1`] = `
                   className="MuiBox-root MuiBox-root-4"
                 >
                   Please choose a secure password
-                  ;
                 </div>
               </Styled(MuiBox)>
               <Styled(MuiBox)
@@ -55,7 +54,6 @@ exports[`<CreateWallet /> should render component 1`] = `
                   className="MuiBox-root MuiBox-root-5"
                 >
                   The password will be used to lock the extension after you close the browser and to encrypt the wallet if you decide to export it... so don’t forget it!
-                  ;
                 </div>
               </Styled(MuiBox)>
             </div>
@@ -146,7 +144,6 @@ exports[`<CreateWallet /> should render component 1`] = `
                   className="MuiBox-root MuiBox-root-29"
                 >
                   Chose a password of at least 5 characters
-                  ;
                 </div>
               </Styled(MuiBox)>
             </div>
