@@ -16,7 +16,7 @@
 
 # Description
 
-This is the chrome extention to interact with Seraph ID on the NEO blockchain.
+This is the chrome extension to interact with Seraph ID on the NEO blockchain.
 
 Visit the [Seraph ID](http://www.seraphid.io/) official web page to learn more about self-sovereign identity!
 
@@ -64,7 +64,7 @@ The extension doesn't store any passwords. The provided password is handling wit
 
 ## Hot Reload
 
-Hot reloading is configured, you dont need to re-load the chrome extention. For some files doesnt work tho, ex. manifest.json
+Hot reloading is configured, you dont need to re-load the chrome extension. For some files doesnt work tho, ex. manifest.json
 
 ## Redux dev tools
 
