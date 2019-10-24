@@ -12,16 +12,16 @@
 
 *::-webkit-scrollbar-thumb {
   width: 5px;
-  background-color: #30363D;
+  background-color: #30363d;
   border-radius: 2px;
 }
 
 body {
-  width: 306px;
-  height: 514px;
+  width: 336px;
+  height: 544px;
   margin: 0;
   padding: 24px;
-  background-color:#3C444D;
+  background-color: #3c444d;
   box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   font-family: 'Zilla Slab', serif;

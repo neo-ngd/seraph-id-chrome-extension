@@ -4,12 +4,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@material-ui/core';
-import ReactJson from 'react-json-view';
 import BaseModal from '../Modals/BaseModal';
 import BaseButton from '../Buttons/BaseButton';
-import {DIALOG_TYPES} from "../../commons/constants";
+import { DIALOG_TYPES } from '../../commons/constants';
 import Icon from '../Icon/Icon';
-import dictionary from "../../commons/dictionary";
+import dictionary from '../../commons/dictionary';
+import JsonViewer from '../JsonViewer/JsonViewer';
 
 /**
  * <DialogHeader />
@@ -18,9 +18,9 @@ import dictionary from "../../commons/dictionary";
  * @constructor
  */
 const DialogHeader = () => (
-    <Box pl={1.2} pt={0.8}>
-      <Icon />
-    </Box>
+  <Box pl={1.2} pt={0.8}>
+    <Icon />
+  </Box>
 );
 
 /**
@@ -38,29 +38,31 @@ const DialogHeader = () => (
  * @return {*}
  * @constructor
  */
-const Dialogs = ({ open, handleClose, claim, handleClaim, context, schemaName, verifierName }) => {
+const Dialogs = ({
+  open,
+  handleClose,
+  claim,
+  handleClaim,
+  context,
+  schemaName,
+  verifierName,
+}) => {
   return (
     <BaseModal
       HeaderComponent={DialogHeader}
       isOpen={open}
       onClose={handleClose}
       style={{
-        maxWidth: '300px',
+        maxWidth: '400px',
       }}
     >
       <Box fontSize="16px" pb={2} textAlign="center" color="text.primary">
         {context === DIALOG_TYPES.GET_CLAIM
           ? dictionary.dialogs.askAccept
-          : `${verifierName} ${dictionary.dialogs.wantTo} ${schemaName}. ${dictionary.dialogs.askShare}`
-        }
+          : `${verifierName} ${dictionary.dialogs.wantTo} ${schemaName}. ${dictionary.dialogs.askShare}`}
       </Box>
-      <Box overflow="auto" >
-        <ReactJson
-            displayObjectSize={false}
-            displayDataTypes={false}
-            enableClipboard={false}
-            src={claim}
-          />
+      <Box overflow="auto">
+        <JsonViewer content={claim} />
       </Box>
 
       <Box alignSelf="flex-end" display="flex" pt={2} pb={1}>
@@ -88,10 +90,7 @@ Dialogs.propTypes = {
   handleClose: PropTypes.func.isRequired,
   claim: PropTypes.object,
   handleClaim: PropTypes.func,
-  context: PropTypes.oneOf([
-      DIALOG_TYPES.ASK_CLAIM,
-      DIALOG_TYPES.GET_CLAIM
-  ]),
+  context: PropTypes.oneOf([DIALOG_TYPES.ASK_CLAIM, DIALOG_TYPES.GET_CLAIM]),
   schemaName: PropTypes.string,
   verifierName: PropTypes.string,
 };

@@ -5,9 +5,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import { Card, CardHeader, CardContent, Collapse, IconButton, Box } from '@material-ui/core';
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  Collapse,
+  IconButton,
+  Box,
+} from '@material-ui/core';
 import { Close, ExpandMore } from '@material-ui/icons';
-import ReactJson from 'react-json-view';
+import JsonViewer from '../JsonViewer/JsonViewer';
 
 /**
  * Claim styles
@@ -17,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
   card: {
     backgroundColor: 'transparent',
     boxShadow: 'none',
-    borderBottom: 'solid 1px rgba(255, 255, 255, 0.1)'
+    borderBottom: 'solid 1px rgba(255, 255, 255, 0.1)',
   },
-    cardContent: {
-        maxWidth: '100%',
-        overflow: 'auto',
-    },
+  cardContent: {
+    maxWidth: '100%',
+    overflow: 'auto',
+  },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -58,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   action: {
     marginTop: theme.spacing(1.5),
     paddingRight: theme.spacing(1),
-  }
+  },
 }));
 
 /**
@@ -119,12 +126,7 @@ const Claim = ({ id, schema, content, onRemoveClaim }) => {
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.cardContent}>
-          <ReactJson
-            displayObjectSize={false}
-            displayDataTypes={false}
-            enableClipboard={false}
-            src={content}
-          />
+          <JsonViewer content={content} />
         </CardContent>
       </Collapse>
     </Card>
@@ -132,10 +134,10 @@ const Claim = ({ id, schema, content, onRemoveClaim }) => {
 };
 
 Claim.propTypes = {
-    id: PropTypes.number,
-    schema: PropTypes.string,
-    content: PropTypes.object,
-    onRemovalClaim: PropTypes.func,
+  id: PropTypes.number,
+  schema: PropTypes.string,
+  content: PropTypes.object,
+  onRemovalClaim: PropTypes.func,
 };
 
 export default Claim;

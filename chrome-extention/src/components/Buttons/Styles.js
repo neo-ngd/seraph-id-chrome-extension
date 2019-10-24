@@ -14,7 +14,7 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
     background: 'linear-gradient(90deg, #00BF0B 0%, #B5E200 100%)',
     boxShadow: 'none',
     color: palette.text.primary,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
     marginRight: spacing(1.5),
   },
@@ -22,16 +22,16 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
     background: 'linear-gradient(90deg, #90908D 0%, #F2F2F2 100%)',
   },
   arrowRight: {
-    fontSize: 24,
+    fontSize: 25.5,
     color: palette.text.primary,
   },
   smallButton: {
     height: '22px',
-    fontSize: '10px',
+    fontSize: '12px',
     marginBottom: spacing(1),
     padding: `0 ${spacing(1)}px`,
   },
   smallArrowRight: {
-    fontSize: '12px',
+    fontSize: '14px',
   },
 }));
