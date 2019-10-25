@@ -7,7 +7,7 @@ import {
   DID_NETWORK,
   PASSPORT_SCHEMA_NAME
 } from "./config";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 export const createClaim = async (values, address) => {
   const issuer = new SeraphIDIssuer(
@@ -16,7 +16,6 @@ export const createClaim = async (values, address) => {
     NEOSCAN_URL,
     DID_NETWORK
   );
-
   issuer
     .registerNewSchema(
       PASSPORT_SCHEMA_NAME,

@@ -1,14 +1,14 @@
-import React, {Fragment, useEffect, useState} from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "../components/Buttons/BaseButton";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { createClaim } from "../seraphUtils";
 
-const SUCCESS = 'SUCCESS';
-const ERROR = 'ERROR';
+const SUCCESS = "SUCCESS";
+const ERROR = "ERROR";
 
-export default function IssuerPage({address}) {
+export default function IssuerPage({ address }) {
   const [values, setValues] = React.useState({
     idNumber: "J12393496",
     firstName: "Edward",
@@ -25,12 +25,12 @@ export default function IssuerPage({address}) {
   const [status, setStatus] = useState(null);
 
   useEffect(() => {
-    document.addEventListener('addClaimSuccess', claimSuccessListener);
-    document.addEventListener('addClaimError', claimErrorListener);
+    document.addEventListener("addClaimSuccess", claimSuccessListener);
+    document.addEventListener("addClaimError", claimErrorListener);
     return () => {
-      document.removeEventListener('addClaimSuccess', claimSuccessListener);
-      document.removeEventListener('addClaimError', claimErrorListener);
-    }
+      document.removeEventListener("addClaimSuccess", claimSuccessListener);
+      document.removeEventListener("addClaimError", claimErrorListener);
+    };
   }, []);
 
   const claimSuccessListener = () => {
@@ -121,23 +121,33 @@ export default function IssuerPage({address}) {
             spacing={3}
           >
             <Grid item xs={12}>
-              {!status && <Typography style={{ color: "#ffffff" }}>
-                Your Claim is ready, you can now save it in to your Wallet{" "}
-              </Typography>}
-              {status === ERROR && <Typography style={{ color: "#FF6E6E" }}>
-                Something went wrong! Try again.{" "}
-              </Typography>}
-              {status === SUCCESS && <Typography style={{color: "#00BF0B"}}>
-                Your claim has been added.{" "}
-              </Typography>}
+              {!status && (
+                <Typography style={{ color: "#ffffff" }}>
+                  Your Claim is ready, you can now save it in to your Wallet
+                </Typography>
+              )}
+              {status === ERROR && (
+                <Typography style={{ color: "#FF6E6E" }}>
+                  Something went wrong! Try again.
+                </Typography>
+              )}
+              {status === SUCCESS && (
+                <Typography style={{ color: "#00BF0B" }}>
+                  Your claim has been added.
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={12}>
               <Button
-                handleClick={status === SUCCESS ? () => {
-                  setClaim(null);
-                  setStatus(null);
-                } : () => sendClaimToWallet()}
-                text={`Send ${status === SUCCESS ? 'another' : ''} request`}
+                handleClick={
+                  status === SUCCESS
+                    ? () => {
+                        setClaim(null);
+                        setStatus(null);
+                      }
+                    : () => sendClaimToWallet()
+                }
+                text={`Send ${status === SUCCESS ? "another" : ""} request`}
                 disabled={isSending}
               />
             </Grid>

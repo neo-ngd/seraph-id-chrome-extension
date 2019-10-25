@@ -1,69 +1,45 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import {AppBar, Toolbar, IconButton, Typography, Box} from "@material-ui/core";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import {Link} from "react-router-dom";
-import Address from "../Adress/Address";
+import "./NavBar.css";
+import { Link } from "react-router-dom";
+import {
+  Tooltip,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton
+} from "@material-ui/core";
+import HelpIcon from "@material-ui/icons/HelpOutline";
+import logoHorizontal from "../../assets/seraph-logo-horizontal.png";
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
-  barStyle: {
-    background: palette.primary.dark,
-    height: "56px",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-  toolbar: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  left: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-
-  },
-  links: {
-
-  },
-  link: {
-    color: 'white',
-    margin: spacing(1),
-    '&:hover': {
-      textDecoration: 'none',
-    }
-  }
-}));
-
-export default function NavBar({ address }) {
-  const classes = useStyles();
-
+function NavBar() {
   return (
-    <AppBar className={classes.barStyle} position="static" color="default">
-      <Toolbar className={classes.toolbar}>
-        <Box className={classes.left}>
-          <IconButton color="inherit" aria-label="Menu">
-            <AccountBalanceIcon className="GovernmentLogo" />
-          </IconButton>
-          <Typography
-            style={{ color: "#ffffffff" }}
-            variant="h6"
-            color="inherit"
-            className="NavBarTypography"
-          >
-            {" "}
-            Government Web Page{" "}
-          </Typography>
-        </Box>
-        <Address address={address} />
-        <Box className={classes.links}>
-          <Link className={classes.link} to={'/government'}>issuer</Link>
-          <Link className={classes.link} to={'/verifier'}>verifier</Link>
-        </Box>
-      </Toolbar>
-    </AppBar>
+    <div className="NavBarRoot">
+      <AppBar position="static" className="NavBarMain">
+        <Toolbar>
+          <Tooltip title="Go to Seraph ID landing page">
+            <a href="https://www.seraphid.io/">
+              <img
+                src={logoHorizontal}
+                alt="SeraphID logo"
+                className="navLogo"
+              />
+            </a>
+          </Tooltip>
+          <Typography className="NavBarTypography"> </Typography>
+          <Tooltip title="Help">
+            <Link to="/help" className="HelpButton">
+              <IconButton color="inherit" aria-label="Menu">
+                <HelpIcon className="HelpIconBar" />
+              </IconButton>
+            </Link>
+          </Tooltip>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }
+
+export default NavBar;
