@@ -56,7 +56,7 @@ const Dialogs = ({
         maxWidth: '400px',
       }}
     >
-      <Box fontSize="16px" pb={2} textAlign="center" color="text.primary">
+      <Box fontSize="16px" pb={2.5} textAlign="center" color="text.primary">
         {context === DIALOG_TYPES.GET_CLAIM
           ? dictionary.dialogs.askAccept
           : `${verifierName} ${dictionary.dialogs.wantTo} ${schemaName}. ${dictionary.dialogs.askShare}`}
@@ -65,7 +65,7 @@ const Dialogs = ({
         <JsonViewer content={claim} />
       </Box>
 
-      <Box alignSelf="flex-end" display="flex" pt={2} pb={1}>
+      <Box alignSelf="flex-end" display="flex" pt={3} pb={2}>
         <BaseButton
           handleClick={handleClose}
           small

@@ -11,17 +11,18 @@ import {
   sendErrorToCSAlias,
   setClaim,
   shareActiveAccountAlias,
-  toggleDialog
+  toggleDialog,
 } from '../../Background/actions';
-import {claimDeclineError, ERROR_MSG } from "../../../commons/errors";
+import { claimDeclineError, ERROR_MSG } from '../../../commons/errors';
 import {
   DIALOG_TYPES,
   EVENT_NAMES,
   SHARE_ACCOUNT_MSG,
   ADD_CLAIM_SUCCESS_MSG,
   ADD_CLAIM_ERROR_MSG,
-  SHARE_CLAIM_SUCCESS_MSG, SHARE_CLAIM_ERROR_MSG
-} from "../../../commons/constants";
+  SHARE_CLAIM_SUCCESS_MSG,
+  SHARE_CLAIM_ERROR_MSG,
+} from '../../../commons/constants';
 
 /**
  * <App />
@@ -33,7 +34,7 @@ const App = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [isListener, setIsListener] = useState(false);
-  const { dialog, claim } = useSelector(state => state);
+  const { dialog, claim } = useSelector((state) => state);
 
   useEffect(() => {
     injectScript();
@@ -45,19 +46,19 @@ const App = () => {
     return () => {
       chrome.runtime.onMessage.removeListener(onMessageListener);
       unregisterListeners();
-    }
+    };
   }, []);
 
   /**
    * Based on provided request it call the proper methods.
    * @param request
    */
-  const onMessageListener = request => {
+  const onMessageListener = (request) => {
     if (request.msg === SHARE_CLAIM_SUCCESS_MSG) {
-      dispatchShareClaimSuccessEvent()
+      dispatchShareClaimSuccessEvent();
     }
     if (request.msg === SHARE_CLAIM_ERROR_MSG) {
-      dispatchShareClaimErrorEvent()
+      dispatchShareClaimErrorEvent();
     }
     if (request.msg === ADD_CLAIM_SUCCESS_MSG) {
       dispatchAddClaimSuccessEvent();
@@ -80,14 +81,16 @@ const App = () => {
     const script = document.createElement('script');
     const code = document.createTextNode('(' + seraphIdInjected + ')();');
     script.appendChild(code);
-    (document.body || document.head || document.documentElement).appendChild(script);
+    (document.body || document.head || document.documentElement).appendChild(
+      script
+    );
   };
 
   /**
    * set passed claim in the redux store.
    * @param claim
    */
-  const getClaimListener = ({detail: claim}) => {
+  const getClaimListener = ({ detail: claim }) => {
     dispatch(setClaim(claim));
     handleClickOpen(DIALOG_TYPES.GET_CLAIM);
   };
@@ -101,7 +104,7 @@ const App = () => {
    * Trigger the asking about the claim event.
    * @param detail
    */
-  const askClaimListener = ({detail}) => dispatch(askClaim(detail));
+  const askClaimListener = ({ detail }) => dispatch(askClaim(detail));
 
   /**
    * Register the listeners.
@@ -127,8 +130,8 @@ const App = () => {
    * Open the modal dialog with the proper context.
    * @param context
    */
-  const handleClickOpen = context => {
-    dispatch(toggleDialog({context}));
+  const handleClickOpen = (context) => {
+    dispatch(toggleDialog({ context }));
     setOpen(true);
   };
 
@@ -136,7 +139,8 @@ const App = () => {
    * Close the modal dialog.
    */
   const handleClose = () => {
-    dispatch(toggleDialog({context: null}));
+    dispatchAddClaimErrorEvent();
+    dispatch(toggleDialog({ context: null }));
     setOpen(false);
   };
 
@@ -145,7 +149,7 @@ const App = () => {
    */
   const handleDecline = () => {
     dispatch(sendErrorToCSAlias(claimDeclineError()));
-    dispatch(toggleDialog({context: null}));
+    dispatch(toggleDialog({ context: null }));
     dispatchShareClaimErrorEvent();
     setOpen(false);
   };
@@ -155,16 +159,17 @@ const App = () => {
    */
   const addClaim = () => {
     dispatch(createClaim(claim, claim.schema));
-    handleClose();
+    dispatch(toggleDialog({ context: null }));
+    setOpen(false);
   };
 
   /**
    * Share the asked claim with the page.
    */
-  const shareClaim = () =>{
+  const shareClaim = () => {
     dispatchShareClaimSuccessEvent(claim);
     dispatch(destroyClaim());
-    handleClose()
+    handleClose();
   };
 
   /**
@@ -177,9 +182,8 @@ const App = () => {
        * Send the claim to content script
        * @param {object} claim
        */
-      sendClaim: claim => document.dispatchEvent(
-            new CustomEvent('sendClaim', { detail: claim })
-      ),
+      sendClaim: (claim) =>
+        document.dispatchEvent(new CustomEvent('sendClaim', { detail: claim })),
 
       /**
        * Ask for the claim
@@ -187,16 +191,17 @@ const App = () => {
        * @param {string} issuerDID
        * @param {string} verifierName
        */
-      askClaim: (schemaName, issuerDID, verifierName) => document.dispatchEvent(
-          new CustomEvent('askClaim', { detail: {schemaName, issuerDID, verifierName} })
-      ),
+      askClaim: (schemaName, issuerDID, verifierName) =>
+        document.dispatchEvent(
+          new CustomEvent('askClaim', {
+            detail: { schemaName, issuerDID, verifierName },
+          })
+        ),
 
       /**
        * Ask for the current account address
        */
-      shareAddress: () => document.dispatchEvent(
-          new CustomEvent('getAddress')
-      ),
+      shareAddress: () => document.dispatchEvent(new CustomEvent('getAddress')),
     };
   };
 
@@ -205,54 +210,68 @@ const App = () => {
    * @param {{error: Error, code: string, message: string}} error
    * @return {boolean}
    */
-  const dispatchClaimErrorEvent = error =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.CLAIM_ERROR, { detail: error}));
+  const dispatchClaimErrorEvent = (error) =>
+    document.dispatchEvent(
+      new CustomEvent(EVENT_NAMES.CLAIM_ERROR, { detail: error })
+    );
 
   /**
    * Dispatch shareClaimSuccess event.
    * @param claim
    * @return {boolean}
    */
-  const dispatchShareClaimSuccessEvent = claim =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_SUCCESS, { detail: claim}));
+  const dispatchShareClaimSuccessEvent = (claim) =>
+    document.dispatchEvent(
+      new CustomEvent(EVENT_NAMES.SHARE_CLAIM_SUCCESS, { detail: claim })
+    );
 
   /**
    * Dispatch shareClaimError event.
    * @return {boolean}
    */
   const dispatchShareClaimErrorEvent = () =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_ERROR));
+    document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_ERROR));
 
   /**
    * Dispatch addClaimSuccess event.
    * @return {boolean}
    */
-  const dispatchAddClaimSuccessEvent = () =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_SUCCESS));
+  const dispatchAddClaimSuccessEvent = () => {
+    console.log('success');
+    document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_SUCCESS));
+  };
 
   /**
    * Dispatch addClaimError event.
    * @return {boolean}
    */
-  const dispatchAddClaimErrorEvent = () =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_ERROR));
+  const dispatchAddClaimErrorEvent = () => {
+    console.log('errorrrrr');
+    document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_ERROR));
+  };
 
   /**
    * Dispatch shareAccount event.
    * @param account
    * @return {boolean}
    */
-  const dispatchShareAccountEvent = account =>
-      document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_ACCOUNT, { detail: account }));
+  const dispatchShareAccountEvent = (account) =>
+    document.dispatchEvent(
+      new CustomEvent(EVENT_NAMES.SHARE_ACCOUNT, { detail: account })
+    );
 
   return (
     <Dialog
-      handleClose={dialog.context === DIALOG_TYPES.ASK_CLAIM ? handleDecline : handleClose}
+      handleClose={
+        dialog.context === DIALOG_TYPES.ASK_CLAIM ? handleDecline : handleClose
+      }
       claim={claim}
-      handleClaim={dialog.context === DIALOG_TYPES.ASK_CLAIM ? shareClaim : addClaim}
+      handleClaim={
+        dialog.context === DIALOG_TYPES.ASK_CLAIM ? shareClaim : addClaim
+      }
       open={open}
       {...dialog}
-      />
+    />
   );
 };
 

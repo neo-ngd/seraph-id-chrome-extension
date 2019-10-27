@@ -43,14 +43,25 @@ const AccommodationPage = ({ address }) => {
       receivedClaimSuccessListener
     );
     document.addEventListener("shareClaimError", claimErrorListener);
+    document.addEventListener("addClaimSuccess", addClaimSuccessListener);
+    document.addEventListener("addClaimError", addClaimErrorListener);
     return () => {
       document.removeEventListener(
         "shareClaimSuccess",
         receivedClaimSuccessListener
       );
       document.removeEventListener("shareClaimError", claimErrorListener);
+      document.removeEventListener("addClaimSuccess", addClaimSuccessListener);
+      document.removeEventListener("addClaimError", addClaimErrorListener);
     };
   }, []);
+
+  const addClaimSuccessListener = () => {
+    setStatus(SUCCESS);
+  };
+  const addClaimErrorListener = () => {
+    setIsSending(false);
+  };
 
   const receivedClaimSuccessListener = () => {
     setIssuing(true);
@@ -65,7 +76,9 @@ const AccommodationPage = ({ address }) => {
     if (window.seraphID === undefined) {
       setError("No wallet detected, please retry");
     } else {
-      const claim = await createClaim(booking, address);
+      setIsSending(true);
+
+      const claim = await createClaim("accessKey", booking, address);
       window.seraphID.sendClaim(claim);
     }
   };
@@ -84,24 +97,33 @@ const AccommodationPage = ({ address }) => {
       if (issuing) {
         return (
           <div className="PageContainer">
-            {status === "SUCCESS" ? (
-              <h1>Thank you</h1>
+            {status !== SUCCESS ? (
+              <span>
+                {isSending ? (
+                  <CircularProgress></CircularProgress>
+                ) : (
+                  <React.Fragment>
+                    <h1>
+                      Thank you! Your keys are ready, please store it in your
+                      wallet
+                    </h1>
+
+                    <Fab
+                      onClick={createAndSetClaim}
+                      variant="extended"
+                      color="secondary"
+                      disabled={isSending}
+                    >
+                      Get Claim
+                    </Fab>
+                  </React.Fragment>
+                )}
+              </span>
             ) : (
-              <React.Fragment>
-                {" "}
-                <h1>
-                  {" "}
-                  Thank you! Your keys are ready, please store it in your wallet{" "}
-                </h1>
-                <Fab
-                  onClick={createAndSetClaim}
-                  variant="extended"
-                  color="secondary"
-                  disabled={isSending}
-                >
-                  Get Claim
-                </Fab>{" "}
-              </React.Fragment>
+              <h1>
+                Thank you, use the access key to unlock the door of your
+                accommodation
+              </h1>
             )}
           </div>
         );

@@ -25,20 +25,18 @@ import ActiveAgent from "../../components/ActiveAgent/ActiveAgent";
 import { createClaim } from "../../seraphUtils";
 
 const SUCCESS = "SUCCESS";
-const ERROR = "ERROR";
 
 const GovernmentPage = ({ address }) => {
   const [fields, setFields] = useState({
     idNumber: "J12393496",
     firstName: "Oliver",
-    secondName: "Test",
+    secondName: "Liang",
     birthDate: "02.07.1989",
-    citizenship: "Swiss",
+    citizenship: "French",
     city: "Zurich"
   });
 
   const [claim, setClaim] = useState(null);
-  const [error, setError] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const [status, setStatus] = useState(null);
   const [ready, setReady] = useState(false);
@@ -54,10 +52,8 @@ const GovernmentPage = ({ address }) => {
 
   const claimSuccessListener = () => {
     setStatus(SUCCESS);
-    setIsSending(false);
   };
   const claimErrorListener = () => {
-    setStatus(ERROR);
     setIsSending(false);
   };
 
@@ -71,18 +67,13 @@ const GovernmentPage = ({ address }) => {
   }
 
   const createAndSetClaim = async () => {
-    if (window.seraphID === undefined) {
-      setError("No wallet detected, please retry");
-    } else {
-      const claim = await createClaim(fields, address);
+    const claim = await createClaim("passport", fields, address);
 
-      setClaim(claim);
-      setTimeout(function() {
-        setReady(true);
-      }, 2500);
-    }
+    setClaim(claim);
+    setTimeout(function() {
+      setReady(true);
+    }, 2500);
   };
-  console.log(status === SUCCESS);
 
   return (
     <span>
@@ -182,7 +173,12 @@ const GovernmentPage = ({ address }) => {
                   <FormControl className="GenderRadioButton">
                     <p className="GenderRadioLabel"> Gender </p>
 
-                    <RadioGroup aria-label="gender" name="gender" row>
+                    <RadioGroup
+                      value={"male"}
+                      aria-label="gender"
+                      name="gender"
+                      row
+                    >
                       <FormControlLabel
                         value="female"
                         control={<Radio color="secondary" />}
@@ -215,15 +211,21 @@ const GovernmentPage = ({ address }) => {
                     <h1>
                       Your Passport is ready! Please store it in your Wallet{" "}
                     </h1>
-                    {status === null ? (
-                      <Fab
-                        onClick={() => sendClaimToWallet()}
-                        variant="extended"
-                        color="secondary"
-                        disabled={isSending}
-                      >
-                        Get Claim
-                      </Fab>
+                    {status !== SUCCESS ? (
+                      <span>
+                        {isSending ? (
+                          <CircularProgress></CircularProgress>
+                        ) : (
+                          <Fab
+                            onClick={() => sendClaimToWallet()}
+                            variant="extended"
+                            color="secondary"
+                            disabled={isSending}
+                          >
+                            Get Claim
+                          </Fab>
+                        )}
+                      </span>
                     ) : (
                       "Claim Saved!"
                     )}

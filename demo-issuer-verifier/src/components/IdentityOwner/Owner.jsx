@@ -4,27 +4,33 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Owner.css";
-import { Fab, CardHeader, Avatar, Grid, Tooltip } from "@material-ui/core";
+import {
+  Fab,
+  CardHeader,
+  Avatar,
+  Grid,
+  CircularProgress
+} from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 const OWNER_GOV_BTN_LABEL = "Apply for Passport";
 const OWNER_AGENCY_BTN_LABEL = "Book a flat";
 const OWNER_DOOR_BTN_LABEL = "Open the door";
 
-const Owner = ({ address }) => {
+const Owner = ({ address, openDoor, isWaiting }) => {
   return (
     <span>
       <CardHeader
         avatar={
           <Avatar aria-label="Recipe">
-            <AccountCircleIcon className="OwnerIcon" />{" "}
+            <AccountCircleIcon className="OwnerIcon" />
           </Avatar>
         }
         title={
           <div className="AgentCardTitle">
             <div>{address ? <h3>{address}</h3> : null}</div>
             <div>
-              <h2> Identity Owner </h2>{" "}
+              <h2> Identity Owner </h2>
             </div>
           </div>
         }
@@ -46,11 +52,15 @@ const Owner = ({ address }) => {
                 <Grid item className="OwnerGridItem">
                   <div>
                     <p>Ask the to issue a digital Passport. </p>
-                    <Link to="/government" className="ButtonLink">
-                      <Fab variant="extended" color="primary">
-                        {OWNER_GOV_BTN_LABEL}
-                      </Fab>
-                    </Link>
+                    {isWaiting ? (
+                      <CircularProgress></CircularProgress>
+                    ) : (
+                      <Link to="/government" className="ButtonLink">
+                        <Fab variant="extended" color="primary">
+                          {OWNER_GOV_BTN_LABEL}
+                        </Fab>
+                      </Link>
+                    )}
                   </div>
                 </Grid>
 
@@ -61,11 +71,15 @@ const Owner = ({ address }) => {
                       the accomodation dApp to get another credential: the
                       access key.{" "}
                     </p>
-                    <Link to="/accommodation" className="ButtonLink">
-                      <Fab variant="extended" color="primary">
-                        {OWNER_AGENCY_BTN_LABEL}
-                      </Fab>
-                    </Link>
+                    {isWaiting ? (
+                      <CircularProgress></CircularProgress>
+                    ) : (
+                      <Link to="/accommodation" className="ButtonLink">
+                        <Fab variant="extended" color="primary">
+                          {OWNER_AGENCY_BTN_LABEL}
+                        </Fab>
+                      </Link>
+                    )}
                   </div>
                 </Grid>
 
@@ -75,14 +89,20 @@ const Owner = ({ address }) => {
                       Use the access key provided from the Agency,
                       <br /> to open the door of the accommodation.{" "}
                     </p>
-                    <Tooltip title={" didn't book any flat yet"}>
-                      <div>
-                        <Fab disabled variant="extended">
+                    <div>
+                      {isWaiting ? (
+                        <CircularProgress></CircularProgress>
+                      ) : (
+                        <Fab
+                          onClick={openDoor}
+                          variant="extended"
+                          color="primary"
+                        >
                           {OWNER_DOOR_BTN_LABEL}
                         </Fab>
-                      </div>
-                    </Tooltip>
-                  </div>{" "}
+                      )}
+                    </div>
+                  </div>
                 </Grid>
               </React.Fragment>
             ) : (
