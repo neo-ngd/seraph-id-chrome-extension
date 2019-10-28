@@ -5,7 +5,7 @@ This is a demo on how the Agent-to-Agent protocol can work, it contains some exa
 ## Communication between the extension and pages
 
 The extension is communicating with the external pages with the use of the events and the seraphID injected object.
-A developer needs to access the window.seraphID object to interact with the chrome extension.
+A webpage needs to access the window.seraphID object to interact with the chrome extension.
 
 ### seraphID Object
 
