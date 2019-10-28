@@ -68,8 +68,8 @@ class React3DRotationBox extends Component {
 }
 
 React3DRotationBox.defaultProps = {
-  rotateForce: 10,
-  perspective: '200px',
+  rotateForce: 20,
+  perspective: '300px',
   minWidth: 'auto',
   minHeight: '150px',
 };

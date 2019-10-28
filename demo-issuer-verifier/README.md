@@ -1,4 +1,4 @@
-# Agent-to-Agent Demo
+# Agent-to-Agent Protocol
 
 This is a demo on how the Agent-to-Agent protocol can work, it contains some examples on how to establish a communication between the webpage and the chrome extension.
 

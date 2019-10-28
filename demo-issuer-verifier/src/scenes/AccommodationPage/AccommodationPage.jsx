@@ -77,7 +77,6 @@ const AccommodationPage = ({ address }) => {
       setError("No wallet detected, please retry");
     } else {
       setIsSending(true);
-
       const claim = await createClaim("accessKey", booking, address);
       window.seraphID.sendClaim(claim);
     }
