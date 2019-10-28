@@ -1,0 +1,201 @@
+<svg version="1.1" baseProfile="full" width="662.25" height="1525" viewbox="0 0 662.25 1525" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events" style="font-weight:bold; font-size:12pt; font-family:'Calibri', Helvetica, sans-serif;;stroke-width:3;stroke-linejoin:round;stroke-linecap:round">
+  <title >nomnoml</title>
+  <desc >[&lt;actor&gt;user]
+
+[seraphId-ui|
+   [tools|
+     react
+     material-ui
+   ]
+   [scenes|
+      Welcome
+     CreateWallet
+     UnlockWallet
+     WalletInfo
+   ]
+   [reducers|
+     wallet
+     claim
+     session
+   ]
+   [actions|
+     [ProxyStore]
+   ]
+   [scenes]:-&gt;[actions]
+   [actions]:-&gt;[reducers]
+   [reducers]:-&gt;[scenes]
+]
+
+[web dapp|
+  [ui code]
+  [seraphId]
+  [Injected Dialog]
+  
+  [&lt;actor&gt;ui developer]
+  [ui developer]-&gt;[ui code]
+  [ui code]&lt;-&gt;[seraphId]
+  [seraphId]&lt;-&gt;[Injected Dialog]
+]
+
+[seraphId-background|
+  [tools|
+     redux
+     webext-redux
+     redux-persist
+     thunk
+   ]
+  [Wrapper Storage|
+    [claims]
+    [encrypted keys]
+    [wallet]
+  ]
+]
+
+[user]&lt;-&gt;[seraphId-ui]
+
+[user]&lt;:--:&gt;[web dapp]
+
+[seraphId-contentscript|
+
+  [seraphId + dialog Injector]
+  [events]
+     [reducers|
+     wallet
+     claim
+     session
+   ]
+   [actions|
+     [ProxyStore]
+   ]
+   
+    [seraphId + dialog Injector]:-&gt;[events]
+   [events]:-&gt;[actions]
+   [actions]:-&gt;[reducers]
+   [reducers]:-&gt;[seraphId + dialog Injector]
+]
+
+[web dapp]&lt;:--:&gt;[seraphId-contentscript]
+[seraphId-contentscript]&lt;-&gt;[seraphId-background]
+[seraphId-background]&lt;-&gt;[seraphId-ui]
+[seraphId-background]
+</desc>
+  <path d="M147.5 34.6 L2.8 64.5 L2.8 235 L2.8 235 L2.8 405.5 L2.8 405.5 L2.8 635 L2.8 635 L2.8 864.5 L2.8 864.5 L2.8 966.5 L2.8 966.5 L2.8 1068.5 L2.8 1068.5 L17.6 1088.5 L17.6 1088.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M5.3 1081 L13.6 1083.1 L13.9 1074.6 L17.6 1088.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M135.5 42.5 L141 35.9 L133.4 32.1 L147.5 34.6 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M201.5 34.6 L346.3 64.5 L346.3 84.5 L346.3 84.5 " style="stroke:#33322E;fill:none;stroke-dasharray:6 6;"></path>
+  <path d="M340.9 71.2 L346.3 71.2 L351.6 71.2 L346.3 84.5 Z" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></path>
+  <path d="M215.6 32.1 L214.6 37.3 L213.5 42.5 L201.5 34.6 Z" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></path>
+  <path d="M346.3 385.5 L346.3 405.5 L346.3 425.5 L346.3 425.5 " style="stroke:#33322E;fill:none;stroke-dasharray:6 6;"></path>
+  <path d="M340.9 412.2 L346.3 412.2 L351.6 412.2 L346.3 425.5 Z" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></path>
+  <path d="M351.6 398.8 L346.3 398.8 L340.9 398.8 L346.3 385.5 Z" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></path>
+  <path d="M346.3 844.5 L346.3 864.5 L346.3 884.5 L346.3 884.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M340.9 871.2 L346.3 877.8 L351.6 871.2 L346.3 884.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M351.6 857.8 L346.3 851.2 L340.9 857.8 L346.3 844.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M346.3 1048.5 L346.3 1068.5 L331.4 1088.5 L331.4 1088.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M335.1 1074.6 L335.4 1083.1 L343.7 1081 L331.4 1088.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M351.6 1061.8 L346.3 1055.2 L340.9 1061.8 L346.3 1048.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <rect x="13.5" y="1088.5" height="424" width="322" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="174.5" y="1110" style="text-anchor: middle;">seraphId-ui</text>
+  <path d="M13.5 1119.5 L335.5 1119.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M215.5 1239.5 L200.8 1259.5 L200.8 1279.5 L200.8 1279.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M195.4 1266.2 L200.8 1272.8 L206.1 1266.2 L200.8 1279.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M200.8 1367.5 L200.8 1387.5 L217.2 1407.5 L217.2 1407.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M204.6 1400.6 L213 1402.3 L212.8 1393.8 L217.2 1407.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M292.8 1407.5 L309.3 1387.5 L309.3 1323.5 L309.3 1323.5 L309.3 1259.5 L309.3 1259.5 L294.5 1239.5 L294.5 1239.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M306.7 1247.1 L298.4 1244.9 L298.1 1253.4 L294.5 1239.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <rect x="26.5" y="1147.5" height="77" width="121" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="87" y="1169" style="text-anchor: middle;">tools</text>
+  <path d="M26.5 1178.5 L147.5 1178.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="34.5" y="1200" style="font-weight:normal;">react</text>
+  <text x="34.5" y="1215" style="font-weight:normal;">material-ui</text>
+  <rect x="187.5" y="1132.5" height="107" width="135" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="255" y="1154" style="text-anchor: middle;">scenes</text>
+  <path d="M187.5 1163.5 L322.5 1163.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="195.5" y="1185" style="font-weight:normal;">Welcome</text>
+  <text x="195.5" y="1200" style="font-weight:normal;">CreateWallet</text>
+  <text x="195.5" y="1215" style="font-weight:normal;">UnlockWallet</text>
+  <text x="195.5" y="1230" style="font-weight:normal;">WalletInfo</text>
+  <rect x="209.5" y="1407.5" height="92" width="92" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="255.5" y="1429" style="text-anchor: middle;">reducers</text>
+  <path d="M209.5 1438.5 L301.5 1438.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="217.5" y="1460" style="font-weight:normal;">wallet</text>
+  <text x="217.5" y="1475" style="font-weight:normal;">claim</text>
+  <text x="217.5" y="1490" style="font-weight:normal;">session</text>
+  <rect x="132.5" y="1279.5" height="88" width="137" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="201" y="1301" style="text-anchor: middle;">actions</text>
+  <path d="M132.5 1310.5 L269.5 1310.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <rect x="145.5" y="1323.5" height="31" width="111" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="201" y="1345" style="text-anchor: middle;">ProxyStore</text>
+  <rect x="253.5" y="84.5" height="301" width="185" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="346" y="106" style="text-anchor: middle;">web dapp</text>
+  <path d="M253.5 115.5 L438.5 115.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M346 159.5 L346 179.5 L346 199.5 L346 199.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M340.7 186.2 L346 192.8 L351.3 186.2 L346 199.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M346 230.5 L346 250.5 L346 270.5 L346 270.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M340.7 257.2 L346 263.8 L351.3 257.2 L346 270.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M351.3 243.8 L346 237.2 L340.7 243.8 L346 230.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M346 301.5 L346 321.5 L346 341.5 L346 341.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M340.7 328.2 L346 334.8 L351.3 328.2 L346 341.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M351.3 314.8 L346 308.2 L340.7 314.8 L346 301.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <rect x="304.5" y="199.5" height="31" width="83" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="346" y="221" style="text-anchor: middle;">ui code</text>
+  <rect x="300.5" y="270.5" height="31" width="92" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="346.5" y="292" style="text-anchor: middle;">seraphId</text>
+  <rect x="266.5" y="341.5" height="31" width="159" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="346" y="363" style="text-anchor: middle;">Injected Dialog</text>
+  <circle r="4" cx="346" cy="126.5" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></circle>
+  <path d="M346 130.5 L346 138.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M342 134.5 L350 134.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M342 142.5 L346 138.5 L350 142.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="346.5" y="156" style="font-weight:normal;text-anchor: middle;">ui developer</text>
+  <rect x="42.5" y="884.5" height="164" width="607" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="346" y="906" style="text-anchor: middle;">seraphId-background</text>
+  <path d="M42.5 915.5 L649.5 915.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <rect x="55.5" y="928.5" height="107" width="140" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="125.5" y="950" style="text-anchor: middle;">tools</text>
+  <path d="M55.5 959.5 L195.5 959.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="63.5" y="981" style="font-weight:normal;">redux</text>
+  <text x="63.5" y="996" style="font-weight:normal;">webext-redux</text>
+  <text x="63.5" y="1011" style="font-weight:normal;">redux-persist</text>
+  <text x="63.5" y="1026" style="font-weight:normal;">thunk</text>
+  <rect x="235.5" y="938.5" height="88" width="401" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="436" y="960" style="text-anchor: middle;">Wrapper Storage</text>
+  <path d="M235.5 969.5 L636.5 969.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <rect x="248.5" y="982.5" height="31" width="73" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="285" y="1004" style="text-anchor: middle;">claims</text>
+  <rect x="361.5" y="982.5" height="31" width="149" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="436" y="1004" style="text-anchor: middle;">encrypted keys</text>
+  <rect x="550.5" y="982.5" height="31" width="73" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="587" y="1004" style="text-anchor: middle;">wallet</text>
+  <rect x="190.5" y="425.5" height="419" width="311.75" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="346.4" y="447" style="text-anchor: middle;">seraphId-contentscript</text>
+  <path d="M190.5 456.5 L502.3 456.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M335 632.5 L335 652.5 L335 672.5 L335 672.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M329.7 659.2 L335 665.8 L340.3 659.2 L335 672.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M335 703.5 L335 723.5 L361.8 743.5 L361.8 743.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M347.9 739.8 L356.5 739.5 L354.3 731.3 L361.8 743.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M479.7 743.5 L506.5 723.5 L506.5 688 L506.5 688 L506.5 652.5 L506.5 652.5 L506.5 617 L506.5 617 L506.5 581.5 L506.5 581.5 L466.8 550.9 L466.8 550.9 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M480.6 554.8 L472 555 L474.1 563.3 L466.8 550.9 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <path d="M374.8 550.9 L335 581.5 L335 601.5 L335 601.5 " style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M329.7 588.2 L335 594.8 L340.3 588.2 L335 601.5 Z" style="stroke:#33322E;fill:#33322E;stroke-dasharray:none;"></path>
+  <rect x="374.5" y="469.5" height="92" width="92" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="420.5" y="491" style="text-anchor: middle;">reducers</text>
+  <path d="M374.5 500.5 L466.5 500.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="382.5" y="522" style="font-weight:normal;">wallet</text>
+  <text x="382.5" y="537" style="font-weight:normal;">claim</text>
+  <text x="382.5" y="552" style="font-weight:normal;">session</text>
+  <rect x="352.5" y="743.5" height="88" width="137" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="421" y="765" style="text-anchor: middle;">actions</text>
+  <path d="M352.5 774.5 L489.5 774.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <rect x="365.5" y="787.5" height="31" width="111" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></rect>
+  <text x="421" y="809" style="text-anchor: middle;">ProxyStore</text>
+  <rect x="203.5" y="601.5" height="31" width="263" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="335" y="623" style="text-anchor: middle;">seraphId + dialog Injector</text>
+  <rect x="298.5" y="672.5" height="31" width="73" style="stroke:#33322E;fill:#fdf6e3;stroke-dasharray:none;"></rect>
+  <text x="335" y="694" style="text-anchor: middle;">events</text>
+  <circle r="4" cx="174.5" cy="11.5" style="stroke:#33322E;fill:#eee8d5;stroke-dasharray:none;"></circle>
+  <path d="M174.5 15.5 L174.5 23.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M170.5 19.5 L178.5 19.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <path d="M170.5 27.5 L174.5 23.5 L178.5 27.5" style="stroke:#33322E;fill:none;stroke-dasharray:none;"></path>
+  <text x="174.5" y="41" style="font-weight:normal;text-anchor: middle;">user</text>
+</svg>

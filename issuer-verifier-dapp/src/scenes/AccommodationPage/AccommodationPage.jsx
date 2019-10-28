@@ -37,6 +37,9 @@ const AccommodationPage = ({ address }) => {
   const themeColor = theme.palette.error.main;
   const style = { backgroundColor: themeColor, color: "white" };
 
+  // Events to handle success, reject or error after sharing or asking a claim.
+  // After the unmount of the component are removed.
+
   useEffect(() => {
     document.addEventListener(
       "shareClaimSuccess",
@@ -56,17 +59,23 @@ const AccommodationPage = ({ address }) => {
     };
   }, []);
 
+  // Handler for the success after adding a claim
   const addClaimSuccessListener = () => {
     setStatus(SUCCESS);
   };
+
+  // Handler for the error after adding a claim
   const addClaimErrorListener = () => {
     setIsSending(false);
   };
 
+  // Handler for the success after asking for a claim
   const receivedClaimSuccessListener = () => {
     setIssuing(true);
     setIsSending(false);
   };
+
+  // Handler for the error after asking for a claim
   const claimErrorListener = () => {
     setStatus(ERROR);
     setIsSending(false);
@@ -78,11 +87,13 @@ const AccommodationPage = ({ address }) => {
     } else {
       setIsSending(true);
       const claim = await createClaim("accessKey", booking, address);
+      // SeraphID method to ask to share a specific claim
       window.seraphID.sendClaim(claim);
     }
   };
 
   function askClaim() {
+    // SeraphID method to ask for a specific claim
     window.seraphID.askClaim(
       "Passport",
       `did:neoid:priv:${address}`,
@@ -107,14 +118,18 @@ const AccommodationPage = ({ address }) => {
                       wallet
                     </h1>
 
-                    <Fab
-                      onClick={createAndSetClaim}
-                      variant="extended"
-                      color="secondary"
-                      disabled={isSending}
-                    >
-                      Get Claim
-                    </Fab>
+                    {error === null || false ? (
+                      <Fab
+                        onClick={createAndSetClaim}
+                        variant="extended"
+                        color="secondary"
+                        disabled={isSending}
+                      >
+                        Get Claim
+                      </Fab>
+                    ) : (
+                      error
+                    )}
                   </React.Fragment>
                 )}
               </span>

@@ -41,6 +41,8 @@ const GovernmentPage = ({ address }) => {
   const [status, setStatus] = useState(null);
   const [ready, setReady] = useState(false);
 
+  // Events to handle success, reject or error after sharing a claim.
+  // After the unmount of the component are removed.
   useEffect(() => {
     document.addEventListener("addClaimSuccess", claimSuccessListener);
     document.addEventListener("addClaimError", claimErrorListener);
@@ -50,9 +52,12 @@ const GovernmentPage = ({ address }) => {
     };
   }, []);
 
+  // Handler for the event triggered after the storing of the claim in the user wallet (Success)
   const claimSuccessListener = () => {
     setStatus(SUCCESS);
   };
+
+  // Handler for the event triggered after the user decline or error during the storing of the claim
   const claimErrorListener = () => {
     setIsSending(false);
   };
@@ -63,6 +68,7 @@ const GovernmentPage = ({ address }) => {
 
   function sendClaimToWallet() {
     setIsSending(true);
+
     window.seraphID.sendClaim(claim);
   }
 
