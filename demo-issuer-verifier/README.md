@@ -11,6 +11,8 @@ A webpage needs to access the window.seraphID object to interact with the chrome
 
 The content script injects the seraphID object into the `window` global, so the client page has access to the following methods:
 
+#### sendClaim
+
 ```javascript
    @param {object} claim
 sendClaim(claim)
@@ -19,13 +21,17 @@ sendClaim(claim)
 Send to the chrome extension a specific claim. In the demo the issuer create a claim for the user and send it to the chrome extension
 Through events it manages errors, success and rejection (Next section)
 
+#### askClaim
+
 ```javascript
    @param {string} schemaName
     @param {string} issuerDID
     @param {string} verifierName
 
-  askClaim: (schemaName, issuerDID, verifierName)
+  askClaim(schemaName, issuerDID, verifierName)
 ```
+
+#### shareAddress
 
 Requests extension to share a specific claim. Through events it manages errors, success and rejection (Next section)
 
