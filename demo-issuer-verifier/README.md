@@ -31,9 +31,9 @@ Through events it manages errors, success and rejection (Next section)
   askClaim(schemaName, issuerDID, verifierName)
 ```
 
-#### shareAddress
-
 Requests extension to share a specific claim. Through events it manages errors, success and rejection (Next section)
+
+#### shareAddress
 
 ```javascript
 shareAddress();
@@ -142,7 +142,7 @@ const claimErrorListener = () => {
 };
 ```
 
-In React can be done after at the mounting of the component with the useEffect hook:
+In React can be done after the mounting of the component with the useEffect hook:
 
 ```javascript
 useEffect(() => {
@@ -155,7 +155,7 @@ useEffect(() => {
 }, []);
 ```
 
-In this way you can remove the event listeners in the cleanup funcion (componentDidUnmount).
+In this way you can remove the event listeners in the cleanup funcion.
 
 After adding methods to manage extension responses the Issuer Page can access to the seraphId object to send the claim to the extension.
 
@@ -183,7 +183,7 @@ const claimErrorListener = () => {
 };
 ```
 
-In React can be done after at the mounting of the component with the useEffect hook, same as the previous exemple.
+In React can be done after the mounting of the component with the useEffect hook, same as the previous exemple.
 
 After adding methods to manage extension responses the Verifier Page can access to the seraphId object and ask for the specific claim:
 
