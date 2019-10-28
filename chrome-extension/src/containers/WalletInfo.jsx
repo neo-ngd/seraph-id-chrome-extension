@@ -2,17 +2,17 @@
 // Licensed under MIT License
 
 import React, { useState, useEffect } from 'react';
-import {Box} from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import Claim from '../components/Cards/Claim';
-import {decrypt} from '../commons/seraphSdkUtils';
+import { decrypt } from '../commons/seraphSdkUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../components/NavBar/NavBar';
 import Layout from '../components/Layout/Layout';
 import AccountsModal from '../components/Modals/AccountsModal';
 import { setExportedWallet } from '../pages/Background/actions';
-import { getEncryptedPassword } from "../pages/Background/actions";
-import {ENCRYPTED_PW_MSG} from "../commons/constants";
-import dictionary from "../commons/dictionary";
+import { getEncryptedPassword } from '../pages/Background/actions';
+import { ENCRYPTED_PW_MSG } from '../commons/constants';
+import dictionary from '../commons/dictionary';
 import env from '../environments/environment';
 
 /**
@@ -27,8 +27,8 @@ const WalletInfo = () => {
   const [pw, setPw] = useState(null);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [isLoading, setIsLoading] = useState();
-  const { activeAccount } = useSelector(state => state);
-  
+  const { activeAccount } = useSelector((state) => state);
+
   useEffect(() => {
     setIsLoading(true);
     chrome.runtime.onMessage.addListener(listener);
@@ -41,7 +41,7 @@ const WalletInfo = () => {
    * @param request
    * @return {Promise<void>}
    */
-  const listener = async request =>  {
+  const listener = async (request) => {
     if (request.msg === ENCRYPTED_PW_MSG) {
       setPw(request.password);
       await decryptAccount(request.password, request.wallet);
@@ -111,32 +111,50 @@ const WalletInfo = () => {
    * Open the new browser tab with the external demo site.
    */
   const openDemo = () => {
-    chrome.tabs.create({url: env.DEMO_URL})
+    chrome.tabs.create({ url: env.DEMO_URL });
   };
 
   if (!!wallet) {
-    const account = wallet.accounts.find(acc => acc.label === activeAccount);
+    const account = wallet.accounts.find((acc) => acc.label === activeAccount);
     const claimsArr = Object.entries(account.claims);
     const { label: address } = account;
 
     return (
       <Layout padding={'60px 0 0 0'} justifyStart isLoading={isLoading}>
-        <NavBar address={address} onOpenAccountsModal={openAccountsModal} name={`${dictionary.commons.account} ${wallet.accounts.indexOf(account) + 1}`} />
+        <NavBar
+          address={address}
+          onOpenAccountsModal={openAccountsModal}
+          name={`${dictionary.commons.account} ${wallet.accounts.indexOf(
+            account
+          ) + 1}`}
+        />
         <Box
-          display="flex" 
+          display="flex"
           flex="1"
           flexDirection="column"
           justifyContent={claimsArr.length > 0 ? 'flex-start' : 'space-between'}
           overflow="auto"
         >
-          <Box fontSize="24px" color="text.primary">{dictionary.commons.claims}</Box>
+          <Box fontSize="24px" color="text.primary">
+            {dictionary.commons.claims}
+          </Box>
           {claimsArr.length > 0 ? (
-            <Box>
-              {showAllClaims(claimsArr)}
-            </Box>
+            <Box>{showAllClaims(claimsArr)}</Box>
           ) : (
-            <Box color="text.primary" fontSize="16px" lineHeight="28px" textAlign="center">
-              {dictionary.walletInfo.info}<span data-test-id={'open-demo-link'} style={{cursor: 'pointer', textDecoration: 'underline'}} onClick={openDemo}>{dictionary.walletInfo.demo}</span>
+            <Box
+              color="text.primary"
+              fontSize="16px"
+              lineHeight="28px"
+              textAlign="center"
+            >
+              {dictionary.walletInfo.info}
+              <span
+                data-test-id={'open-demo-link'}
+                style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                onClick={openDemo}
+              >
+                {dictionary.walletInfo.website}
+              </span>
             </Box>
           )}
         </Box>

@@ -148,14 +148,16 @@ const Form = () => {
           />
           {!isUploading ? (
             <label htmlFor={'import-input'} className={classes.inputLabel}>
-              <BaseButton
-                data-test-id={'file-input-button'}
-                component={'span'}
-                text={`${dictionary.commons.import} ${
-                  status === SUCCESS ? dictionary.commons.another : ''
-                } ${dictionary.commons.wallet}`}
-                fullWidth={false}
-              />
+              {status === SUCCESS ? null : (
+                <BaseButton
+                  data-test-id={'file-input-button'}
+                  component={'span'}
+                  text={`${dictionary.commons.import} ${
+                    status === SUCCESS ? dictionary.commons.another : ''
+                  } ${dictionary.commons.wallet}`}
+                  fullWidth={false}
+                />
+              )}
             </label>
           ) : (
             <CircularProgress

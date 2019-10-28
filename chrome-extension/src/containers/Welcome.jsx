@@ -1,12 +1,12 @@
 // Copyright (c) 2019 Swisscom Blockchain AG
 // Licensed under MIT License
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BaseButton from '../components/Buttons/BaseButton';
 import { Box, Link, makeStyles } from '@material-ui/core';
 import Layout from '../components/Layout/Layout';
-import dictionary from "../commons/dictionary";
+import dictionary from '../commons/dictionary';
 
 /**
  * Component styles.
@@ -35,13 +35,15 @@ const Welcome = ({ onGoToPage }) => {
    * Open the new browser tab with the import wallet form page.
    */
   const openFormTab = () => {
-    chrome.tabs.create({url: 'form.html'})
+    chrome.tabs.create({ url: 'form.html' });
   };
 
   return (
     <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
-        <Box fontSize={24} color="text.primary">{dictionary.welcome.title}</Box>
+        <Box fontSize={24} color="text.primary">
+          {dictionary.welcome.title}
+        </Box>
 
         <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
           {dictionary.welcome.info}
@@ -52,11 +54,15 @@ const Welcome = ({ onGoToPage }) => {
       </Box>
 
       <Box flexDirection="column" display="flex">
-        <BaseButton
-          handleClick={onGoToPage}
-          text={dictionary.welcome.button}
-        />
-        <Link data-test-id={'import-wallet-link'} href="#" onClick={openFormTab} className={classes.link}>{dictionary.welcome.link}</Link>
+        <BaseButton handleClick={onGoToPage} text={dictionary.welcome.button} />
+        <Link
+          data-test-id={'import-wallet-link'}
+          href="#"
+          onClick={openFormTab}
+          className={classes.link}
+        >
+          {dictionary.welcome.link}
+        </Link>
       </Box>
     </Layout>
   );

@@ -1,68 +1,186 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Agent-to-Agent Demo
 
-## Available Scripts
+This is a demo on how the Agent-to-Agent protocol can work, it contains some examples on how to establish a communication between the webpage and the chrome extension.
 
-In the project directory, you can run:
+## Communication between the extension and pages
 
-### `npm start`
+The extension is communicating with the external pages with the use of the events and the seraphID injected object.
+A developer needs to access the window.seraphID object to interact with the chrome extension.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### seraphID Object
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The content script injects the seraphID object into the `window` global, so the client page has access to the following methods:
 
-### `npm test`
+```javascript
+   @param {object} claim
+sendClaim(claim)
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Send to the chrome extension a specific claim. In the demo the issuer create a claim for the user and send it to the chrome extension
+Through events it manages errors, success and rejection (Next section)
 
-### `npm run build`
+```javascript
+   @param {string} schemaName
+    @param {string} issuerDID
+    @param {string} verifierName
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  askClaim: (schemaName, issuerDID, verifierName)
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Requests extension to share a specific claim. Through events it manages errors, success and rejection (Next section)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+shareAddress();
+```
 
-### `npm run eject`
+Request extension to share the address of the user. Can be used by the issuer to create and issue a claim to the user.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Events
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The content script dispatch the following events which the client page may handle
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- `claimError` - passes the generic error thrown during the claim processing.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript
+/**
+ * Dispatch the claimError event.
+ * @param {{error: Error, code: string, message: string}} error
+ * @return {boolean}
+ */
+const dispatchClaimErrorEvent = error =>
+  document.dispatchEvent(
+    new CustomEvent(EVENT_NAMES.CLAIM_ERROR, { detail: error })
+  );
+```
 
-## Learn More
+- `shareClaimSuccess` - passes the claim, when the process of sharing is successful.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+/**
+ * Dispatch shareClaimSuccess event.
+ * @param claim
+ * @return {boolean}
+ */
+const dispatchShareClaimSuccessEvent = claim =>
+  document.dispatchEvent(
+    new CustomEvent(EVENT_NAMES.SHARE_CLAIM_SUCCESS, { detail: claim })
+  );
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `shareClaimError` - inform that the claim sharing process has been failed.
 
-### Code Splitting
+```javascript
+/**
+ * Dispatch shareClaimError event.
+ * @return {boolean}
+ */
+const dispatchShareClaimErrorEvent = () =>
+  document.dispatchEvent(new CustomEvent(EVENT_NAMES.SHARE_CLAIM_ERROR));
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- `addClaimSuccess` - inform that the claim adding process has been succeeded.
 
-### Analyzing the Bundle Size
+```javascript
+/**
+ * Dispatch addClaimSuccess event.
+ * @return {boolean}
+ */
+const dispatchAddClaimSuccessEvent = () =>
+  document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_SUCCESS));
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- `addClaimError` - inform that the claim adding process has been failed.
 
-### Making a Progressive Web App
+```javascript
+/**
+ * Dispatch addClaimError event.
+ * @return {boolean}
+ */
+const dispatchAddClaimErrorEvent = () =>
+  document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_ERROR));
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- `shareAccount` - passes the current active account label
 
-### Advanced Configuration
+```javascript
+/**
+ * Dispatch shareAccount event.
+ * @param account
+ * @return {boolean}
+ */
+const dispatchShareAccountEvent = account =>
+  document.dispatchEvent(
+    new CustomEvent(EVENT_NAMES.SHARE_ACCOUNT, { detail: account })
+  );
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### Exemples
 
-### Deployment
+#### Issuer
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+The Issuer webpage needs to add these events to handle success, reject and errors during the issuing phase to the chrome extension:
 
-### `npm run build` fails to minify
+```javascript
+document.addEventListener("addClaimSuccess", claimSuccessListener);
+document.addEventListener("addClaimError", claimErrorListener);
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+and the corresponding methods:
+
+```javascript
+const claimSuccessListener = () => {
+  console.log("success");
+};
+const claimErrorListener = () => {
+  console.log("error");
+};
+```
+
+In React can be done after at the mounting of the component with the useEffect hook:
+
+```javascript
+useEffect(() => {
+  document.addEventListener("addClaimSuccess", claimSuccessListener);
+  document.addEventListener("addClaimError", claimErrorListener);
+  return () => {
+    document.removeEventListener("addClaimSuccess", claimSuccessListener);
+    document.removeEventListener("addClaimError", claimErrorListener);
+  };
+}, []);
+```
+
+In this way you can remove the event listeners in the cleanup funcion (componentDidUnmount).
+
+After adding methods to manage extension responses the Issuer Page can access to the seraphId object to send the claim to the extension.
+
+```javascript
+window.seraphID.sendClaim(claim);
+```
+
+#### Verifier
+
+The Verifier webpage needs to add these events to handle success, reject and errors during the issuing phase to the chrome extension:
+
+```javascript
+document.addEventListener("shareClaimSuccess", receivedClaimSuccessListener);
+document.addEventListener("shareClaimError", claimErrorListener);
+```
+
+and the corresponding methods:
+
+```javascript
+const receivedClaimSuccessListener = () => {
+  console.log("success");
+};
+const claimErrorListener = () => {
+  console.log("error");
+};
+```
+
+In React can be done after at the mounting of the component with the useEffect hook, same as the previous exemple.
+
+After adding methods to manage extension responses the Verifier Page can access to the seraphId object and ask for the specific claim:
+
+```javascript
+const claim = await createClaim("accessKey", booking, address);
+```

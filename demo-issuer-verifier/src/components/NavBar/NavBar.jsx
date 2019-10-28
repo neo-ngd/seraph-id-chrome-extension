@@ -3,7 +3,6 @@
 
 import React from "react";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
 import {
   Tooltip,
   AppBar,
@@ -30,11 +29,9 @@ function NavBar() {
           </Tooltip>
           <Typography className="NavBarTypography"> </Typography>
           <Tooltip title="Help">
-            <Link to="/help" className="HelpButton">
-              <IconButton color="inherit" aria-label="Menu">
-                <HelpIcon className="HelpIconBar" />
-              </IconButton>
-            </Link>
+            <IconButton color="inherit" aria-label="Menu">
+              <HelpIcon className="HelpIconBar" />
+            </IconButton>
           </Tooltip>
         </Toolbar>
       </AppBar>

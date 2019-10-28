@@ -38,6 +38,7 @@ const App = () => {
 
   useEffect(() => {
     injectScript();
+
     if (!isListener) {
       registerListeners();
     }
@@ -237,7 +238,6 @@ const App = () => {
    * @return {boolean}
    */
   const dispatchAddClaimSuccessEvent = () => {
-    console.log('success');
     document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_SUCCESS));
   };
 
@@ -246,7 +246,6 @@ const App = () => {
    * @return {boolean}
    */
   const dispatchAddClaimErrorEvent = () => {
-    console.log('errorrrrr');
     document.dispatchEvent(new CustomEvent(EVENT_NAMES.ADD_CLAIM_ERROR));
   };
 

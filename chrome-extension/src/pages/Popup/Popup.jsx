@@ -26,8 +26,8 @@ const PAGES = {
  */
 const Popup = () => {
   const [page, setPage] = useState(PAGES.WELCOME);
-  const { session, wallet: accountFromStore } = useSelector(state => state);
-  const goToPage = page => setPage(page);
+  const { session, wallet: accountFromStore } = useSelector((state) => state);
+  const goToPage = (page) => setPage(page);
 
   useEffect(() => {
     if (accountFromStore) {
@@ -47,24 +47,22 @@ const Popup = () => {
    */
   const selectComponent = () => {
     if (page === PAGES.WELCOME) {
-      return (<Welcome onGoToPage={() => goToPage(PAGES.CREATE_WALLET)} />)
+      return <Welcome onGoToPage={() => goToPage(PAGES.CREATE_WALLET)} />;
     }
 
     if (page === PAGES.CREATE_WALLET) {
-      return (<CreateWallet />)
+      return <CreateWallet />;
     }
 
     if (page === PAGES.UNLOCK_WALLET) {
-      return (
-        <UnlockWallet />
-      )
+      return <UnlockWallet />;
     }
 
     if (page === PAGES.CLAIMS) {
-      return <WalletInfo />
+      return <WalletInfo />;
     }
 
-    return (<div>page error</div>)
+    return <div>page error</div>;
   };
 
   return (
@@ -72,6 +70,6 @@ const Popup = () => {
       {selectComponent()}
     </Box>
   );
-}
+};
 
 export default Popup;
