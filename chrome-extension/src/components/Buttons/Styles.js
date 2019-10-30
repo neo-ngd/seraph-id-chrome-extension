@@ -9,25 +9,26 @@ import { makeStyles } from '@material-ui/core';
  */
 export const useStyles = makeStyles(({ spacing, palette }) => ({
   button: {
-    borderRadius: '20px',
+    textTransform: 'none',
+    borderRadius: '0',
     height: '46px',
-    background: 'linear-gradient(90deg, #00BF0B 0%, #B5E200 100%)',
+    background: '#00E599',
     boxShadow: 'none',
-    color: palette.text.primary,
-    fontSize: 16,
+    color: palette.text.button,
+    fontSize: 19,
     fontWeight: 'bold',
     marginRight: spacing(1.5),
   },
   rejectButton: {
-    background: 'linear-gradient(90deg, #90908D 0%, #F2F2F2 100%)',
+    background: '#00E599',
   },
   arrowRight: {
-    fontSize: 25.5,
+    fontSize: 24.5,
     color: palette.text.primary,
   },
   smallButton: {
     height: '22px',
-    fontSize: '12px',
+    fontSize: '13px',
     marginBottom: spacing(1),
     padding: `0 ${spacing(1)}px`,
   },

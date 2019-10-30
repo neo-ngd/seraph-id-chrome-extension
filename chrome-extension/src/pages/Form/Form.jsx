@@ -53,7 +53,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     margin: spacing(3),
   },
   loader: {
-    color: palette.text.primary,
+    color: palette.text.title,
     margin: spacing(3),
   },
 }));
@@ -152,9 +152,7 @@ const Form = () => {
                 <BaseButton
                   data-test-id={'file-input-button'}
                   component={'span'}
-                  text={`${dictionary.commons.import} ${
-                    status === SUCCESS ? dictionary.commons.another : ''
-                  } ${dictionary.commons.wallet}`}
+                  text={dictionary.accountModal.importWallet}
                   fullWidth={false}
                 />
               )}

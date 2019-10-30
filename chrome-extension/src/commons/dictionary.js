@@ -42,7 +42,7 @@ export default {
     passwordInfo: 'Chose a password of at least 5 characters',
   },
   unlockWallet: {
-    title: 'Welcome back',
+    title: 'Welcome back!',
     error: 'Invalid password. Try again.',
     info: 'To continue, please unlock your wallet',
     unlock: 'Unlock Wallet',

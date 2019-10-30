@@ -4,7 +4,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import {AppBar, Toolbar, Box, ButtonBase} from '@material-ui/core';
+import { AppBar, Toolbar, Box, ButtonBase } from '@material-ui/core';
 import image from '../../assets/icons/fingerprint.png';
 
 /**
@@ -19,15 +19,17 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     top: 0,
     left: 0,
     right: 0,
+    background: 'transparent',
+    boxShadow: 'none',
   },
   imageContainer: {
     position: 'absolute',
     right: spacing(-2),
-    top: spacing(1)
+    top: spacing(1),
   },
   img: {
     maxWidth: '80px',
-  }
+  },
 }));
 
 /**
@@ -46,15 +48,24 @@ const NavBar = ({ address, name, onOpenAccountsModal }) => {
     <AppBar className={classes.barStyle} position="static" color="default">
       <Toolbar>
         <Box display="flex" flexDirection="column" flex={1}>
-          <Box textAlign="center" color="text.primary" fontSize="11px">
+          <Box textAlign="center" color="text.primary" fontSize="13px">
             {name}
           </Box>
 
-          <Box color="text.secondary" fontSize="10px" textAlign="center" pt={0.6}>
+          <Box
+            color="text.secondary"
+            fontSize="12px"
+            textAlign="center"
+            pt={0.6}
+          >
             {address}
           </Box>
 
-          <ButtonBase disableRipple onClick={onOpenAccountsModal} className={classes.imageContainer}>
+          <ButtonBase
+            disableRipple
+            onClick={onOpenAccountsModal}
+            className={classes.imageContainer}
+          >
             <img alt="logo-img" className={classes.img} src={image} />
           </ButtonBase>
         </Box>

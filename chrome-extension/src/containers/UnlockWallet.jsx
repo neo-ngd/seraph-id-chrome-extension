@@ -66,7 +66,7 @@ const UnlockWallet = () => {
   return (
     <Layout>
       <Box>
-        <Box fontSize={24} color="text.primary">
+        <Box fontWeight="bold" fontSize={28} color="text.title">
           {dictionary.unlockWallet.title}
         </Box>
       </Box>
@@ -82,11 +82,11 @@ const UnlockWallet = () => {
           hasError={!!error}
         />
         {!!error ? (
-          <Box mt={1} fontSize="10px" color="text.error">
+          <Box mt={1} fontSize="12px" color="text.error">
             {dictionary.unlockWallet.error}
           </Box>
         ) : (
-          <Box mt={1} fontSize="10px" color="text.secondary">
+          <Box mt={1} fontSize="12px" color="text.secondary">
             {dictionary.unlockWallet.info}{' '}
             <Link
               data-test-id={'import-wallet-link'}
@@ -111,7 +111,6 @@ const UnlockWallet = () => {
           disabled={disabled}
           handleClick={unlock}
           text={dictionary.unlockWallet.unlock}
-          icon
         />
       </Box>
     </Layout>

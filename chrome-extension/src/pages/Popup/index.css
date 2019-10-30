@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Zilla+Slab:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani&display=swap');
 
 * {
   box-sizing: border-box;
@@ -12,19 +12,19 @@
 
 *::-webkit-scrollbar-thumb {
   width: 5px;
-  background-color: #30363d;
+  background-color: FFFFF;
   border-radius: 2px;
 }
 
 body {
   width: 336px;
-  height: 544px;
+  height: 554px;
   margin: 0;
   padding: 24px;
-  background-color: #3c444d;
+  background-color: FFFFF;
   box-shadow: 0 30px 40px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
-  font-family: 'Zilla Slab', serif;
+  font-family: 'Rajdhani', regular;
 }
 
 #app-container {

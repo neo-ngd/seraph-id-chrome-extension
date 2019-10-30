@@ -135,7 +135,7 @@ const WalletInfo = () => {
           justifyContent={claimsArr.length > 0 ? 'flex-start' : 'space-between'}
           overflow="auto"
         >
-          <Box fontSize="24px" color="text.primary">
+          <Box fontWeight="bold" fontSize="26px" color="text.title">
             {dictionary.commons.claims}
           </Box>
           {claimsArr.length > 0 ? (
@@ -143,7 +143,7 @@ const WalletInfo = () => {
           ) : (
             <Box
               color="text.primary"
-              fontSize="16px"
+              fontSize="18px"
               lineHeight="28px"
               textAlign="center"
             >

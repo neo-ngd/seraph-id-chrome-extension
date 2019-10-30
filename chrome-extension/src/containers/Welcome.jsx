@@ -41,14 +41,14 @@ const Welcome = ({ onGoToPage }) => {
   return (
     <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
-        <Box fontSize={24} color="text.primary">
+        <Box fontWeight="bold" fontSize={26} color="text.primary">
           {dictionary.welcome.title}
         </Box>
 
-        <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
+        <Box lineHeight="22px" mt={2} fontSize={16} color="text.primary">
           {dictionary.welcome.info}
         </Box>
-        <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
+        <Box lineHeight="22px" mt={2} fontSize={16} color="text.primary">
           {dictionary.welcome.more}
         </Box>
       </Box>

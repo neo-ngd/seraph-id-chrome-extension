@@ -23,23 +23,25 @@ import { useStyles } from './Styles';
  * @return {*}
  * @constructor
  */
-const BaseButton = (
-    { handleClick,
-      text,
-      small,
-      disabled,
-      icon,
-      fullWidth,
-      reject,
-      component, testID}) => {
+const BaseButton = ({
+  handleClick,
+  text,
+  small,
+  disabled,
+  icon,
+  fullWidth,
+  reject,
+  component,
+  testID,
+}) => {
   const classes = useStyles();
 
   const style = {};
   if (disabled) {
-    style.opacity = .5;
+    style.opacity = 0.5;
   }
   if (fullWidth) {
-    style.width = '100%'
+    style.width = '100%';
   }
 
   return (
@@ -50,39 +52,43 @@ const BaseButton = (
       onClick={handleClick}
       variant="contained"
       color="inherit"
-      className={clsx(classes.button, small && classes.smallButton, reject && classes.rejectButton)}
+      className={clsx(
+        classes.button,
+        small && classes.smallButton,
+        reject && classes.rejectButton
+      )}
       style={style}
     >
       {text}
       {icon && (
-        <ArrowRight style={{opacity: disabled ? .5 : 1}} className={clsx(classes.arrowRight, small && classes.smallArrowRight)} />
+        <ArrowRight
+          style={{ opacity: disabled ? 0.5 : 1 }}
+          className={clsx(classes.arrowRight, small && classes.smallArrowRight)}
+        />
       )}
     </Button>
   );
 };
 
 BaseButton.defaultProps = {
-    small: false,
-    disabled: false,
-    icon: false,
-    fullWidth: false,
-    reject: false,
-    component: undefined,
-    testID: 'base-button',
+  small: false,
+  disabled: false,
+  icon: false,
+  fullWidth: false,
+  reject: false,
+  component: undefined,
+  testID: 'base-button',
 };
 
 BaseButton.propTypes = {
-    handleClick: PropTypes.func,
-    text: PropTypes.string,
-    small: PropTypes.bool,
-    disabled: PropTypes.bool,
-    icon: PropTypes.bool,
-    fullWidth: PropTypes.bool,
-    reject: PropTypes.bool,
-    component: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.elementType,
-    ])
+  handleClick: PropTypes.func,
+  text: PropTypes.string,
+  small: PropTypes.bool,
+  disabled: PropTypes.bool,
+  icon: PropTypes.bool,
+  fullWidth: PropTypes.bool,
+  reject: PropTypes.bool,
+  component: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 };
 
 export default BaseButton;

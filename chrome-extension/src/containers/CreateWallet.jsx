@@ -14,11 +14,11 @@ import {
   setActiveAccount,
   setExportedWallet,
   setPassword,
-  shareActiveAccountAlias
-} from "../pages/Background/actions";
-import {WALLET_NAME} from "../commons/constants";
-import {createWallet} from "../commons/seraphSdkUtils";
-import dictionary from "../commons/dictionary";
+  shareActiveAccountAlias,
+} from '../pages/Background/actions';
+import { WALLET_NAME } from '../commons/constants';
+import { createWallet } from '../commons/seraphSdkUtils';
+import dictionary from '../commons/dictionary';
 
 /**
  * <CreateWallet />
@@ -40,7 +40,7 @@ const CreateWallet = () => {
    */
   const createAndSetWallet = async () => {
     setIsLoading(true);
-    const wallet = createWallet({name: WALLET_NAME});
+    const wallet = createWallet({ name: WALLET_NAME });
     wallet.createDID(DIDNetwork.PrivateNet);
     dispatch(setActiveAccount(wallet.accounts[0].label));
     await wallet.accounts[0].encrypt(password);
@@ -59,24 +59,24 @@ const CreateWallet = () => {
     dispatch(setExportedWallet(wallet));
     dispatch(setPassword(password));
     dispatch(shareActiveAccountAlias());
-    dispatch(getEncryptedPasswordToCS())
+    dispatch(getEncryptedPasswordToCS());
   };
 
   return (
     <Layout isLoading={isLoading}>
       <Box display="flex" flexDirection="column">
-        <Box fontSize={24} color="text.primary">
+        <Box fontWeight="bold" fontSize={26} color="text.primary">
           {dictionary.createWallet.title}
         </Box>
 
-        <Box lineHeight="22px" mt={2} fontSize={14} color="text.secondary">
+        <Box lineHeight="22px" mt={2} fontSize={14} color="text.primary">
           {dictionary.createWallet.info}
         </Box>
       </Box>
 
       <Box>
         <PasswordInput value={password} handleChange={handleChange} />
-        <Box mt={1} fontSize="10px" color="text.secondary">
+        <Box mt={1} fontSize="11px" color="text.secondary">
           {dictionary.createWallet.passwordInfo}
         </Box>
       </Box>

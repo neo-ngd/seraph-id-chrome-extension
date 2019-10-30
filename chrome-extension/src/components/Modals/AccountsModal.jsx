@@ -1,9 +1,9 @@
 // Copyright (c) 2019 Swisscom Blockchain AG
 // Licensed under MIT License
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {Box, ButtonBase, IconButton} from '@material-ui/core';
+import { Box, ButtonBase, IconButton } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 // import { AddCircle, Close } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles';
@@ -14,12 +14,12 @@ import {
   getEncryptedPasswordToCS,
   setActiveAccount,
   // setExportedWallet,
-  shareActiveAccountAlias
+  shareActiveAccountAlias,
 } from '../../pages/Background/actions';
 import { downloadFile } from '../../commons/walletUtils';
 // import {DIDNetwork} from "@sbc/seraph-id-sdk";
-import {ENCRYPTED_PW_MSG} from "../../commons/constants";
-import dictionary from "../../commons/dictionary";
+import { ENCRYPTED_PW_MSG } from '../../commons/constants';
+import dictionary from '../../commons/dictionary';
 
 /**
  * Component styles
@@ -36,7 +36,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     textAlign: 'center',
     paddingTop: spacing(0.75),
     color: palette.text.primary,
-    fontSize: '16px',
+    fontSize: '18px',
   },
   accountRow: {
     padding: `${spacing(0.25)}px 0 ${spacing(0.5)}px`,
@@ -48,13 +48,13 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     alignItems: 'center',
     cursor: 'pointer',
     '&:hover': {
-      opacity: .33
-    }
+      opacity: 0.33,
+    },
   },
   removeIcon: {
     color: palette.text.secondary,
     padding: 0,
-    fontSize: '12px',
+    fontSize: '14px',
     marginLeft: spacing(1),
   },
   accountInfo: {
@@ -87,18 +87,20 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 const AccountsModal = ({ isOpen, onClose, wallet }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const {wallet: accountFromStore, activeAccount} = useSelector(state => state);
+  const { wallet: accountFromStore, activeAccount } = useSelector(
+    (state) => state
+  );
   const [password, setPassword] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
   const { accounts } = wallet;
 
   useEffect(() => {
-    chrome.runtime.onMessage.addListener(async request => {
+    chrome.runtime.onMessage.addListener(async (request) => {
       if (request.msg === ENCRYPTED_PW_MSG) {
         setPassword(request.password);
       }
     });
-    dispatch(getEncryptedPassword())
+    dispatch(getEncryptedPassword());
   }, []);
 
   const handleExportWallet = () => {
@@ -113,20 +115,20 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
    * !!!
    */
   const header = () => (
-      <Box pt={0.6}>
-        <Box className={classes.headerText}>{dictionary.commons.accounts}</Box>
-        {/* Temporary disabled */}
-        {/*<ButtonBase className={classes.addIcon} onClick={addAccount} disabled={isAdding}>*/}
-        {/*  <AddCircle />*/}
-        {/*</ButtonBase>*/}
-      </Box>
+    <Box pt={0.6}>
+      <Box className={classes.headerText}>{dictionary.commons.accounts}</Box>
+      {/* Temporary disabled */}
+      {/*<ButtonBase className={classes.addIcon} onClick={addAccount} disabled={isAdding}>*/}
+      {/*  <AddCircle />*/}
+      {/*</ButtonBase>*/}
+    </Box>
   );
 
   /**
    * Open a new tab with the import wallet form.
    */
   const openFormTab = () => {
-    chrome.tabs.create({url: 'form.html'})
+    chrome.tabs.create({ url: 'form.html' });
   };
 
   /**
@@ -191,46 +193,57 @@ const AccountsModal = ({ isOpen, onClose, wallet }) => {
   };
 
   return (
-      <BaseModal HeaderComponent={header} isOpen={isOpen} onClose={onClose}>
-        <Box style={{opacity: isAdding ? .33 : 1}}>
-          {accounts.map((account, index) => (
-              <Box data-test-id={'account-box'} key={account.label} className={classes.accountRow} onClick={e => changeAccount(e, account.label)}>
-                <Box>
-                  <Box color="text.primary" fontSize="14px">{`${dictionary.commons.address} ${index + 1}`}</Box>
-                  <Box color="text.primary" fontSize="6px">{account.label}</Box>
-                </Box>
-                <Box color="text.hint" className={classes.accountInfo}>
-                  {`${Object.keys(account.claims).length} ${dictionary.commons.claims}`}
-                  {/* Temporary disabled */}
-                  {/*<IconButton*/}
-                  {/*    data-test-id={'account-remove-button'}*/}
-                  {/*    className={classes.removeIcon}*/}
-                  {/*    disableRipple*/}
-                  {/*    onClick={handleRemoveAccount}*/}
-                  {/*    aria-label="remove"*/}
-                  {/*    disabled={isAdding}*/}
-                  {/*>*/}
-                  {/*  <Close color="inherit" fontSize="inherit" />*/}
-                  {/*</IconButton>*/}
-                </Box>
+    <BaseModal HeaderComponent={header} isOpen={isOpen} onClose={onClose}>
+      <Box style={{ opacity: isAdding ? 0.33 : 1 }}>
+        {accounts.map((account, index) => (
+          <Box
+            data-test-id={'account-box'}
+            key={account.label}
+            className={classes.accountRow}
+            onClick={(e) => changeAccount(e, account.label)}
+          >
+            <Box>
+              <Box color="text.primary" fontSize="16px">{`${
+                dictionary.commons.address
+              } ${index + 1}`}</Box>
+              <Box color="text.primary" fontSize="8px">
+                {account.label}
               </Box>
-          ))}
-        </Box>
-        <Box className={classes.buttonsContainer}>
-          <BaseButton
-              testID={'export-wallet-button'}
-              handleClick={handleExportWallet}
-              text={dictionary.accountModal.exportWallet}
-              small
-          />
-          <BaseButton
-              testID={'import-wallet-button'}
-              handleClick={openFormTab}
-              text={dictionary.accountModal.importWallet}
-              small
-          />
-        </Box>
-      </BaseModal>
+            </Box>
+            <Box color="text.hint" className={classes.accountInfo}>
+              {`${Object.keys(account.claims).length} ${
+                dictionary.commons.claims
+              }`}
+              {/* Temporary disabled */}
+              {/*<IconButton*/}
+              {/*    data-test-id={'account-remove-button'}*/}
+              {/*    className={classes.removeIcon}*/}
+              {/*    disableRipple*/}
+              {/*    onClick={handleRemoveAccount}*/}
+              {/*    aria-label="remove"*/}
+              {/*    disabled={isAdding}*/}
+              {/*>*/}
+              {/*  <Close color="inherit" fontSize="inherit" />*/}
+              {/*</IconButton>*/}
+            </Box>
+          </Box>
+        ))}
+      </Box>
+      <Box className={classes.buttonsContainer}>
+        <BaseButton
+          testID={'export-wallet-button'}
+          handleClick={handleExportWallet}
+          text={dictionary.accountModal.exportWallet}
+          small
+        />
+        <BaseButton
+          testID={'import-wallet-button'}
+          handleClick={openFormTab}
+          text={dictionary.accountModal.importWallet}
+          small
+        />
+      </Box>
+    </BaseModal>
   );
 };
 

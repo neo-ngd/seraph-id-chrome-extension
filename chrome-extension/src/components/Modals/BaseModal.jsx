@@ -14,7 +14,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   wrapper: {
     position: 'absolute',
     width: 'calc(100% - 48px)',
-    height: 'calc(100% - 48px)',
+    height: 'calc(100% - 40px)',
     top: spacing(2),
     left: '50%',
     transform: 'translateX(-50%)',
@@ -24,7 +24,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     position: 'absolute',
     top: 0,
     right: 0,
-    background: palette.primary.main,
+    background: palette.primary.light,
     zIndex: 99999,
     width: '100%',
     maxHeight: '100%',
@@ -34,7 +34,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     overflowY: 'auto',
   },
   header: {
-    backgroundColor: palette.primary.dark,
+    backgroundColor: 'transparent',
     height: '42px',
   },
   content: {
@@ -64,16 +64,9 @@ const BaseModal = ({ isOpen, onClose, children, HeaderComponent, style }) => {
     isOpen && (
       <Box className={classes.wrapper} style={style}>
         <ClickAwayListener onClickAway={onClose}>
-          <Box
-            onClose={onClose}
-            className={classes.container}
-          >
-            <Box className={classes.header}>
-              {HeaderComponent()}
-            </Box>
-            <Box className={classes.content}>
-              {children}
-            </Box>
+          <Box onClose={onClose} className={classes.container}>
+            <Box className={classes.header}>{HeaderComponent()}</Box>
+            <Box className={classes.content}>{children}</Box>
           </Box>
         </ClickAwayListener>
       </Box>
@@ -85,8 +78,8 @@ BaseModal.propTypes = {
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
   children: PropTypes.oneOfType([
-      PropTypes.node,
-      PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+    PropTypes.arrayOf(PropTypes.node),
   ]),
   HeaderComponent: PropTypes.elementType,
   style: PropTypes.object,

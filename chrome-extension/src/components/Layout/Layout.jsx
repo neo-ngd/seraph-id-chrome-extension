@@ -29,12 +29,16 @@ const Layout = ({ children, justifyStart, padding, isLoading }) => {
       maxWidth="100%"
     >
       {isLoading ? (
-        <Box style={{
-          margin: 'auto',
-        }}>
-          <CircularProgress style={{ color: 'white' }} />
+        <Box
+          style={{
+            margin: 'auto',
+          }}
+        >
+          <CircularProgress style={{ color: '#00e599' }} />
         </Box>
-      ) : children }
+      ) : (
+        children
+      )}
     </Box>
   );
 };
@@ -42,7 +46,7 @@ const Layout = ({ children, justifyStart, padding, isLoading }) => {
 Layout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]),
   justifyStart: PropTypes.bool,
   padding: PropTypes.string,

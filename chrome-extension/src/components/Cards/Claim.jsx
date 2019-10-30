@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.shortest,
     }),
     color: theme.palette.text.primary,
-    fontSize: '28px',
+    fontSize: '30px',
     padding: 0,
     marginRight: theme.spacing(1),
   },
@@ -46,17 +46,17 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {},
   title: {
-    fontSize: '14px',
+    fontSize: '16px',
   },
   subheader: {
-    fontSize: '8px',
+    fontSize: '10px',
     paddingTop: theme.spacing(0.5),
     color: theme.palette.text.hint,
   },
   removeIcon: {
     color: theme.palette.text.secondary,
     padding: 0,
-    fontSize: '12px',
+    fontSize: '14px',
   },
   root: {
     padding: `${theme.spacing(2)} 0 ${theme.spacing(1)}`,

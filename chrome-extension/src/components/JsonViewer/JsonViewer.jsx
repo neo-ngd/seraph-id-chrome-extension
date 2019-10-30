@@ -4,12 +4,13 @@ import viewerTheme from './theme';
 
 const JsonViewer = ({ content }) => (
   <ReactJson
-    theme={viewerTheme}
+    theme="bright:inverted"
     collapseStringsAfterLength={20}
     displayObjectSize={false}
     displayDataTypes={false}
     enableClipboard={false}
     src={content}
+    style={{ fontSize: '12px' }}
   />
 );
 

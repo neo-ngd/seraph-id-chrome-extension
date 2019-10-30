@@ -18,8 +18,8 @@ import JsonViewer from '../JsonViewer/JsonViewer';
  * @constructor
  */
 const DialogHeader = () => (
-  <Box pl={1.2} pt={0.8}>
-    <Icon />
+  <Box style={{ background: '#2b393f' }} pl={1.2} pt={0.8}>
+    <Icon style={{ color: 'black' }} />
   </Box>
 );
 
@@ -56,7 +56,7 @@ const Dialogs = ({
         maxWidth: '400px',
       }}
     >
-      <Box fontSize="16px" pb={2.5} textAlign="center" color="text.primary">
+      <Box fontSize="18px" pb={2.5} textAlign="center" color="text.primary">
         {context === DIALOG_TYPES.GET_CLAIM
           ? dictionary.dialogs.askAccept
           : `${verifierName} ${dictionary.dialogs.wantTo} ${schemaName}. ${dictionary.dialogs.askShare}`}

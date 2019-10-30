@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputBase } from '@material-ui/core';
-import dictionary from "../../commons/dictionary";
+import dictionary from '../../commons/dictionary';
 
 /**
  * Component styles
@@ -19,17 +19,19 @@ const useStyles = makeStyles((theme) => ({
   },
   textField: {
     display: 'flex',
-    backgroundColor: theme.palette.text.primary,
+    backgroundColor: theme.palette.text.button,
     borderRadius: '3px',
     height: '40px',
     color: theme.palette.text.light,
-    fontSize: 14,
-    paddingLeft: theme.spacing(1)
+    fontSize: 16,
+    paddingLeft: theme.spacing(1),
+    border: '1px solid',
+    borderColor: '#242424',
   },
   error: {
     border: '2px solid',
     borderColor: theme.palette.primary.error,
-  }
+  },
 }));
 
 /**
