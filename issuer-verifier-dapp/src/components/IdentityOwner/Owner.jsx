@@ -107,7 +107,7 @@ const Owner = ({ address, openDoor, isWaiting }) => {
               </React.Fragment>
             ) : (
               <h2>
-                No wallet detected, please install the Seraph ID Chrome
+                No wallet detected, please unlock your wallet or install the Seraph ID Chrome
                 Extension to continue
               </h2>
             )}

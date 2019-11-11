@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Owner from "../../components/IdentityOwner/Owner";
 import NavBar from "../../components/NavBar/NavBar";
+import hawaii from "../../assets/hawaii.jpg"; // Tell Webpack this JS file uses this image
 
 import {
   Dialog,
@@ -79,6 +80,17 @@ const Dashboard = ({ address }) => {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             The door is open, enjoy your vacations!
+            <img
+              style={{
+                maxHeight: "200px",
+                maxWidth: "300px",
+                marginLeft: "120px",
+                marginTop: "15px"
+              }}
+              src={hawaii}
+              alt="Logo"
+            />
+            ;
           </DialogContentText>
         </DialogContent>
       </Dialog>

@@ -1,3 +1,5 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
 import { SeraphIDIssuer } from "@sbc/seraph-id-sdk";
 import {
   GOVERNMENT_SCRIPT_HASH,
