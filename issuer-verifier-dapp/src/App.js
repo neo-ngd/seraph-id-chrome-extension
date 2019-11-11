@@ -77,7 +77,7 @@ export const theme = createMuiTheme({
         borderRadius: "30px !important",
         color: "white",
         textAlign: "center",
-        fontSize: "13pt"
+        fontSize: "13.5pt"
       }
     },
     MuiFab: {
