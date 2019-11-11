@@ -1,3 +1,5 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import GovernmentPage from "./scenes/GovernmentPage/GovernmentPage";

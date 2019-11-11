@@ -1,3 +1,5 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
 import React, { useState } from "react";
 import "./UserTips.css";
 import { Snackbar } from "@material-ui/core";

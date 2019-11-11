@@ -1,3 +1,5 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
 import React from "react";
 import Button from "@material-ui/core/Button";
 
