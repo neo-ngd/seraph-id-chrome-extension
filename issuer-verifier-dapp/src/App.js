@@ -1,3 +1,5 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import GovernmentPage from "./scenes/GovernmentPage/GovernmentPage";
@@ -77,7 +79,7 @@ export const theme = createMuiTheme({
         borderRadius: "30px !important",
         color: "white",
         textAlign: "center",
-        fontSize: "13pt"
+        fontSize: "13.5pt"
       }
     },
     MuiFab: {
