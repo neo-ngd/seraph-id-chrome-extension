@@ -64,6 +64,8 @@ The background script contains the redux store (based on webext-redux), that pro
 
 The content script injects an object in the current web page (SeraphID) and a React page (a Dialog to alter the state dispatching actions to the background script), the page that wants to communicate with the extension needs to access to the SeraphID object. The popup page is always in sync with the storage and updates the UI if the storage is updated. The communication between popup, content script and background is handling with the use of the chrome events. The communication between the extension and the page is handling with the use of javascript events. Triggering of the chrome native events is handling with the use of the webext-redux aliases, which are basically the redux action creators inside which application may trigger additional side effects.
 
+Architecture ispired by Metamask, react-extension boilerplate (https://github.com/lxieyang/chrome-extension-boilerplate-react) and webext-redux
+
 [![Architecture Diagram](./docs/architecture.svg)][1]
 
 ### Password storing
@@ -211,6 +213,7 @@ yarn test -u
 ```
 
 # References
+
 - Seraph ID official page: https://seraphid.io
 - Seraph ID demo application on
   [GitHub](https://github.com/swisscom-blockchain/seraph-id-demo)

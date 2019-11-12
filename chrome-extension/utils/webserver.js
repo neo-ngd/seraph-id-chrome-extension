@@ -1,6 +1,10 @@
+// Copyright (c) 2019 Swisscom Blockchain AG
+// Licensed under MIT License
+
 var remotedev = require('remotedev-server');
 
-// Do this as the first thing so that any code reading it knows the right env.
+const REDUX_REMOTE_TOOLS_PORT = 8000;
+
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
@@ -39,6 +43,7 @@ var server = new WebpackDevServer(compiler, {
   disableHostCheck: true,
 });
 
-remotedev({ hostname: 'localhost', port: 8000 });
+// change port to change redux remote dev tools port
+remotedev({ hostname: 'localhost', port: REDUX_REMOTE_TOOLS_PORT });
 
 server.listen(env.PORT);
